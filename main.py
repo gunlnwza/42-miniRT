@@ -7,23 +7,6 @@ from PIL import Image
 
 from Vector3 import Vector3
 
-ASPECT_RATIO = 16 / 9
-IMAGE_WIDTH = 500
-IMAGE_HEIGHT = max(1, int(IMAGE_WIDTH / ASPECT_RATIO))
-
-VIEWPORT_HEIGHT = 2
-VIEWPORT_WIDTH = VIEWPORT_HEIGHT * float(IMAGE_WIDTH / IMAGE_HEIGHT)
-viewport_u = Vector3(VIEWPORT_WIDTH, 0, 0)
-viewport_v = Vector3(0, VIEWPORT_HEIGHT, 0)
-pixel_delta_u = viewport_u / IMAGE_WIDTH
-pixel_delta_v = viewport_v / IMAGE_HEIGHT
-
-FOCAL_LENGTH = 1.0
-camera_center = Vector3(0, 0, 0)
-viewport_upper_left = camera_center - Vector3(0, 0, FOCAL_LENGTH) - viewport_u / 2 - viewport_v / 2
-
-pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v)
-
 # rendering module
 class Ray:
 	def __init__(self, origin: Vector3, direction: Vector3):
@@ -57,7 +40,7 @@ def ray_color(r: Ray):
 
 	return tuple(int(255.99 * c) for c in color)
 
-def render(image: Image):
+def render(image: Image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center):
 	time_start = time.time()
 	width, height = image.size
 
@@ -92,8 +75,25 @@ def save_image(image, show=True):
 
 # main
 def main():
+	ASPECT_RATIO = 16 / 9
+	IMAGE_WIDTH = 500
+	IMAGE_HEIGHT = max(1, int(IMAGE_WIDTH / ASPECT_RATIO))
+
+	VIEWPORT_HEIGHT = 2
+	VIEWPORT_WIDTH = VIEWPORT_HEIGHT * float(IMAGE_WIDTH / IMAGE_HEIGHT)
+	viewport_u = Vector3(VIEWPORT_WIDTH, 0, 0)
+	viewport_v = Vector3(0, VIEWPORT_HEIGHT, 0)
+	pixel_delta_u = viewport_u / IMAGE_WIDTH
+	pixel_delta_v = viewport_v / IMAGE_HEIGHT
+
+	FOCAL_LENGTH = 1.0
+	camera_center = Vector3(0, 0, 0)
+	viewport_upper_left = camera_center - Vector3(0, 0, FOCAL_LENGTH) - viewport_u / 2 - viewport_v / 2
+
+	pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v)
+
 	image = Image.new("RGB", (IMAGE_WIDTH, IMAGE_HEIGHT), "black")
-	render(image)
+	render(image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center
 	save_image(image)
 
 if __name__ == "__main__":
