@@ -10,54 +10,62 @@ from Vector3 import Vector3
 # rendering module
 class Ray:
 	def __init__(self, origin: Vector3, direction: Vector3):
-		self.orig = origin
-		self.dir = direction
-
-	def direction(self):
-		return self.dir
-
-	def origin(self):
-		return self.orig
+		self.origin = origin
+		self.direction = direction
 
 	def at(self, t):
-		return self.orig + t * self.dir
-
-def hit_sphere(center, radius, r: Ray):
-	oc = center - r.origin()
-	a = r.direction().norm2()
-	b = -2 * r.direction().dot(oc)
-	c = oc.norm2() - radius * radius
-	discriminant = b * b - 4 * a * c
-	return discriminant >= 0
-
-def ray_color(r: Ray):
-	if hit_sphere(Vector3(0, 0, -1), 0.5, r):
-		return (255, 0, 0)
+		return self.origin + t * self.direction
 	
-	unit_direction = r.direction().normalize()
-	a = 0.5 * (unit_direction[1] + 1)
-	color = (1 - a) * Vector3(1, 1, 1) + a * Vector3(0.5, 0.7, 1.0)
+class Sphere:
+	def __init__(self, center: Vector3, radius: float):
+		self.center = center
+		self.radius = radius
 
-	return tuple(int(255.99 * c) for c in color)
+	def is_hit(self, ray: Ray):
+		oc = self.center - ray.origin
+		a = ray.direction.norm2()
+		b = -2 * ray.direction.dot(oc)
+		c = oc.norm2() - self.radius ** 2
+		discriminant = b * b - 4 * a * c
+		return discriminant >= 0
+
+class Plane:
+	pass
+
+class Cylinder:
+	pass
+
+def trace_ray(ray: Ray, sphere: Sphere):
+	if sphere.is_hit(ray):
+		color = (255, 0, 0)
+	else:
+		unit_direction = ray.direction.normalize()
+		a = 0.5 * (unit_direction[1] + 1)
+		color = (1 - a) * Vector3(1, 1, 1) + a * Vector3(0.5, 0.7, 1.0)
+		color = tuple(int(255.99 * c) for c in color)
+	return color
 
 def render(image: Image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center):
 	time_start = time.time()
 	width, height = image.size
 
+	sphere = Sphere(Vector3(0, 0, -1), 0.5)
+
 	for j in range(height):
 		print(f"Rendering: y={j}/{height}", end="\r")
 
 		for i in range(width):
-			pixel_center = pixel00_loc + (i * pixel_delta_u) + (j * pixel_delta_v)
+			pixel_center = pixel00_loc + (j * pixel_delta_v) + (i * pixel_delta_u)
 			ray_direction = pixel_center - camera_center
-			r = Ray(camera_center, ray_direction)
+			ray = Ray(camera_center, ray_direction)
 
-			color = ray_color(r)
+			color = trace_ray(ray, sphere)
 			image.putpixel((i, j), color)
+
 
 	time_end = time.time() - time_start
 	print(" " * 80, end="\r")
-	print(f"Rendered for ({time_end:.3f}s)")
+	print(f"Rendered for {time_end:.3f}s")
 
 # debugging module
 def save_image(image, show=True):
@@ -76,7 +84,7 @@ def save_image(image, show=True):
 # main
 def main():
 	ASPECT_RATIO = 16 / 9
-	IMAGE_WIDTH = 500
+	IMAGE_WIDTH = 300
 	IMAGE_HEIGHT = max(1, int(IMAGE_WIDTH / ASPECT_RATIO))
 
 	VIEWPORT_HEIGHT = 2
@@ -93,7 +101,7 @@ def main():
 	pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v)
 
 	image = Image.new("RGB", (IMAGE_WIDTH, IMAGE_HEIGHT), "black")
-	render(image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center
+	render(image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center)
 	save_image(image)
 
 if __name__ == "__main__":
