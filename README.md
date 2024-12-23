@@ -1,5 +1,5 @@
 # demo-miniRT
 
 ## Dependency
-numpy
-pillow
+- numpy
+- pillow
