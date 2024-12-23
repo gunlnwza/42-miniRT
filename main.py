@@ -8,6 +8,9 @@ from PIL import Image
 from Vector3 import Vector3
 
 # rendering module
+def convert_to_rgb(color: Vector3):
+	return tuple(int(255.99 * c) for c in color)
+
 class Ray:
 	def __init__(self, origin: Vector3, direction: Vector3):
 		self.origin = origin
@@ -16,10 +19,14 @@ class Ray:
 	def at(self, t):
 		return self.origin + t * self.direction
 	
+class SceneObject:
+	pass
+
 class Sphere:
-	def __init__(self, center: Vector3, radius: float):
+	def __init__(self, center: Vector3, radius: float, color: Vector3):
 		self.center = center
 		self.radius = radius
+		self.color = color
 
 	def is_hit(self, ray: Ray):
 		oc = self.center - ray.origin
@@ -35,21 +42,32 @@ class Plane:
 class Cylinder:
 	pass
 
-def trace_ray(ray: Ray, sphere: Sphere):
-	if sphere.is_hit(ray):
-		color = (255, 0, 0)
-	else:
-		unit_direction = ray.direction.normalize()
-		a = 0.5 * (unit_direction[1] + 1)
-		color = (1 - a) * Vector3(1, 1, 1) + a * Vector3(0.5, 0.7, 1.0)
-		color = tuple(int(255.99 * c) for c in color)
+class Scene:
+	def __init__(self, objects):
+		self.objects = objects
+
+def trace_ray(ray: Ray, scene: Scene):
+	closest_object = None
+	for object in scene.objects:
+		if object.is_hit(ray):
+			color = object.color
+			# TODO: get closest object, by computing t
+			return color
+		
+	unit_direction = ray.direction.normalize()
+	a = 0.5 * (unit_direction[1] + 1)
+	color = (1 - a) * Vector3(1, 1, 1) + a * Vector3(0.5, 0.7, 1.0)
 	return color
 
 def render(image: Image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center):
 	time_start = time.time()
 	width, height = image.size
 
-	sphere = Sphere(Vector3(0, 0, -1), 0.5)
+	scene = Scene([
+		Sphere(Vector3(0, 0, -1), 0.5, Vector3(100, 100, 100)),
+		Sphere(Vector3(1, 0, -2), 0.5, Vector3(255, 100, 100)),
+		Sphere(Vector3(-1, 0, -1), 0.5, Vector3(100, 100, 255)),
+	])
 
 	for j in range(height):
 		print(f"Rendering: y={j}/{height}", end="\r")
@@ -59,8 +77,8 @@ def render(image: Image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_cente
 			ray_direction = pixel_center - camera_center
 			ray = Ray(camera_center, ray_direction)
 
-			color = trace_ray(ray, sphere)
-			image.putpixel((i, j), color)
+			color = trace_ray(ray, scene)
+			image.putpixel((i, j), convert_to_rgb(color))
 
 
 	time_end = time.time() - time_start
