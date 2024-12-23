@@ -61,10 +61,10 @@ class Vector3:
 
 	def cross(self, other: "Vector3"):
 		return np.linalg.cross(self.arr, other.arr)
-	
+
 	def normalize(self):
+		# normalizing 0-vector will result in error
 		norm = self.norm()
-		# check if norm == 0 ?
 		return self.arr / norm
 
 	def norm2(self):
