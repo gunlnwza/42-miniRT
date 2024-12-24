@@ -17,12 +17,13 @@ class SceneObject:
         else:
             self.radius = None
  
-        self.color = Vector3(color)
+        self.color = Vector3((c / 255 for c in color))
 
     # return first-hit t if actually hit, else -1
     # assume ray.direction is normalized
     def get_hit_t(self, ray: Ray):
         return -1
+
 
 class Sphere(SceneObject):
     def __init__(self, center, radius, color):

@@ -9,23 +9,37 @@ from Vector3 import Vector3
 
 from debug import log_error
 
-def trace_ray(ray: Ray, scene: Scene) -> tuple:
-	closest_t = 2147483647
-	closest_object = None
-	for object in scene.objects:
-		t = object.get_hit_t(ray)
+def trace_ray(ray: Ray, scene: Scene) -> Vector3:
+	closest_obj_t = 2147483647
+	closest_obj = None
+	closest_obj_normal = None
+
+	for obj in scene.objects:
+		t = obj.get_hit_t(ray)
 		if t == -1:
 			continue
 		t = float(t)
-		if t < closest_t:
-			closest_t = t
-			closest_object = object
+		if t < closest_obj_t:
+			closest_obj_t = t
+			closest_obj = obj
+			closest_obj_normal = ray.at(t) - obj.center
 
-	if not closest_object:
-		return (0, 0, 0)
+	if not closest_obj:
+		return Vector3(0, 0, 0)
 
-	color = tuple(map(int, closest_object.color))
-	return color
+	ambient_color = closest_obj.color * scene.ambient_light.intensity
+
+	N = closest_obj_normal.normalize()
+	P = ray.at(closest_obj_t)
+	L_pos = scene.light.center
+
+	L = L_pos - P
+	I = L.normalize()
+
+	diffuse_term = max(0, N.dot(I))
+	diffuse_color = closest_obj.color * scene.light.intensity * diffuse_term
+
+	return ambient_color + diffuse_color
 
 def render(image: Image, scene: Scene, camera: Camera):
     time_start = time.time()
@@ -41,6 +55,7 @@ def render(image: Image, scene: Scene, camera: Camera):
             ray = Ray(camera.center, ray_direction)
 
             color = trace_ray(ray, scene)
+            color = tuple(int(255.99 * c) for c in color)
             image.putpixel((i, j), color)
             
             pixel_center += camera.pixel_delta_u
