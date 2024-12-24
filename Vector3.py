@@ -12,10 +12,10 @@ class Vector3:
 				self.arr = xyz
 			else:
 				x, y, z = xyz
-				self.arr = np.array([x, y, z], dtype=np.float16) 
+				self.arr = np.array([x, y, z], dtype=np.float32) 
 		else:
 			x, y, z = args
-			self.arr = np.array([x, y, z], dtype=np.float16) 
+			self.arr = np.array([x, y, z], dtype=np.float32)
 
 	def __repr__(self):
 		return f"Vector3({self.arr[0]} {self.arr[1]} {self.arr[2]})"
