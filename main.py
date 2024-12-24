@@ -1,6 +1,8 @@
 import os
+import sys
 from datetime import datetime
 import time
+import math
 
 import numpy as np
 from PIL import Image
@@ -8,9 +10,6 @@ from PIL import Image
 from Vector3 import Vector3
 
 # rendering module
-def convert_to_rgb(color: Vector3):
-	return tuple(int(255.99 * c) for c in color)
-
 class Ray:
 	def __init__(self, origin: Vector3, direction: Vector3):
 		self.origin = origin
@@ -28,13 +27,18 @@ class Sphere:
 		self.radius = radius
 		self.color = color
 
-	def is_hit(self, ray: Ray):
+	def get_hit_t(self, ray: Ray):
+		# return first-hit t if actually hit, else -1
+		
 		oc = self.center - ray.origin
-		a = ray.direction.norm2()
-		b = -2 * ray.direction.dot(oc)
-		c = oc.norm2() - self.radius ** 2
-		discriminant = b * b - 4 * a * c
-		return discriminant >= 0
+		ray_dot_oc = ray.direction.dot(oc)
+
+		inside_sqrt = ray_dot_oc ** 2 - (oc.norm2() - self.radius ** 2)
+		if inside_sqrt < 0:
+			return -1
+
+		t = ray_dot_oc - math.sqrt(inside_sqrt)
+		return t
 
 class Plane:
 	pass
@@ -46,27 +50,38 @@ class Scene:
 	def __init__(self, objects):
 		self.objects = objects
 
-def trace_ray(ray: Ray, scene: Scene):
+def trace_ray(ray: Ray, scene: Scene) -> tuple:
+	closest_t = 2147483647
 	closest_object = None
 	for object in scene.objects:
-		if object.is_hit(ray):
-			color = object.color
-			# TODO: get closest object, by computing t
-			return color
-		
-	unit_direction = ray.direction.normalize()
-	a = 0.5 * (unit_direction[1] + 1)
-	color = (1 - a) * Vector3(1, 1, 1) + a * Vector3(0.5, 0.7, 1.0)
+		t = object.get_hit_t(ray)
+		if t == -1:
+			continue
+		t = float(t)
+		if t < closest_t:
+			closest_t = t
+			closest_object = object
+
+	if not closest_object:
+		return (0, 0, 0)
+
+	color = tuple(map(int, closest_object.color))
 	return color
+
+def convert_to_rgb(color: Vector3):
+	return tuple(int(255.99 * c) for c in color)
 
 def render(image: Image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_center):
 	time_start = time.time()
 	width, height = image.size
 
 	scene = Scene([
-		Sphere(Vector3(0, 0, -1), 0.5, Vector3(100, 100, 100)),
-		Sphere(Vector3(1, 0, -2), 0.5, Vector3(255, 100, 100)),
-		Sphere(Vector3(-1, 0, -1), 0.5, Vector3(100, 100, 255)),
+		Sphere(Vector3(0, 0, -1), 0.5, Vector3(50, 255, 50)),
+		Sphere(Vector3(1, 0, -2), 0.5, Vector3(255, 50, 50)),
+		Sphere(Vector3(-1, 0, -1), 0.5, Vector3(50, 50, 255)),
+		Sphere(Vector3(1, 1, 3), 2, Vector3(50, 255, 50)),
+		Sphere(Vector3(2, 0, -10), 0.5, Vector3(255, 50, 50)),
+		Sphere(Vector3(3, 0, -5), 0.5, Vector3(50, 50, 255)),
 	])
 
 	for j in range(height):
@@ -74,12 +89,13 @@ def render(image: Image, pixel00_loc, pixel_delta_u, pixel_delta_v, camera_cente
 
 		for i in range(width):
 			pixel_center = pixel00_loc + (j * pixel_delta_v) + (i * pixel_delta_u)
-			ray_direction = pixel_center - camera_center
+			# print("computing ray_direction", file=sys.stderr)
+			ray_direction = (pixel_center - camera_center).normalize()
+			# print(ray_direction, file=sys.stderr)
 			ray = Ray(camera_center, ray_direction)
 
 			color = trace_ray(ray, scene)
-			image.putpixel((i, j), convert_to_rgb(color))
-
+			image.putpixel((i, j), color)
 
 	time_end = time.time() - time_start
 	print(" " * 80, end="\r")

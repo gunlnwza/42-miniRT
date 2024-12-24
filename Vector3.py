@@ -23,6 +23,9 @@ class Vector3:
 	def __iter__(self):
 		return iter(self.arr)
 
+	def __getitem__(self, i):
+		return self.arr[i]
+
 	def __add__(self, other: "Vector3"):
 		return Vector3(self.arr + other.arr)
 	
@@ -65,7 +68,7 @@ class Vector3:
 	def normalize(self):
 		# normalizing 0-vector will result in error
 		norm = self.norm()
-		return self.arr / norm
+		return Vector3(self.arr / norm)
 
 	def norm2(self):
 		return self.dot(self)
