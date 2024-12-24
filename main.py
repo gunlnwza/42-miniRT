@@ -28,16 +28,16 @@ def save_image(image, show=True):
 def main():
 	image_size = (300, 300)
 
-	camera = Camera(Vector3(0, 0, 0), image_size)
+	camera = Camera(center=(1, 1, 0), dir=(0, 0, 1), image_size=image_size)
 	objects = [
 			Sphere(center=(0, -0.2, -1), radius=0.5, color=(0.8, 0.1, 0.1)),
 			Sphere(center=(0, 8, -6), radius=8, color=(0.1, 0.8, 0.1)),
-			Sphere(center=(-2, 0, -2), radius=1, color=(0.1, 0.1, 0.8)),
-			Sphere(center=(0, 0, 0), radius=3, color=(0, 0.5, 0.5))
+			# Sphere(center=(-2, 0, -2), radius=1, color=(0.1, 0.1, 0.8)),
+			# Sphere(center=(0, 0, 0), radius=3, color=(0, 0.5, 0.5))
 		]
 	scene = Scene(
 		AmbientLight(intensity=0.1, color=(0, 0, 0.8)),
-		Light(center=(2, 0, 0.4), intensity=0.5, color=(1, 1, 1)),
+		Light(center=(-0.6, -0.2, -0.1), intensity=1, color=(1, 1, 1)),
 		objects
 	)
 
