@@ -7,7 +7,7 @@ from Camera import Camera
 
 from Vector3 import Vector3
 from Scene import Scene
-from SceneObject import Sphere
+from SceneObject import Sphere, Plane, Cylinder
 
 from render import render
 
@@ -25,10 +25,11 @@ def save_image(image, show=True):
 		image.show()
 
 def main():
-	image_size = (300, 300)
+	image_size = (400, 300)
 	scene = Scene([
-		Sphere(Vector3(0, 0, -1), 0.5, Vector3(200, 50, 50)),
-		Sphere(Vector3(1, 1, -3), 2, Vector3(50, 50, 200)),
+		Sphere(center=(0, 0, -3), radius=0.5, color=(200, 50, 50)),
+		Plane(center=(0, -2, -0.5), normal=(0.42, -0.5, 0), color=(50, 200, 50))
+
 	])
 	camera = Camera(Vector3(0, 0, 0), image_size)
 
