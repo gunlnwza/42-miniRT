@@ -76,6 +76,7 @@ class Vector3:
 	def norm(self):
 		return math.sqrt(self.norm2())
 
+
 if __name__ == "__main__":
 	u = Vector3((1, 2, 3))
 	v = Vector3((0, 3, 7))

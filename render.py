@@ -6,6 +6,7 @@ from Camera import Camera
 from Scene import Scene
 from Ray import Ray
 from Vector3 import Vector3
+from Color import Color
 
 from debug import log_error
 
@@ -25,7 +26,7 @@ def trace_ray(ray: Ray, scene: Scene) -> Vector3:
 			closest_obj_normal = ray.at(t) - obj.center
 
 	if not closest_obj:
-		return Vector3(0, 0, 0)
+		return Color(0, 0, 0)
 
 	ambient_color = closest_obj.color * scene.ambient_light.intensity
 
@@ -48,16 +49,15 @@ def render(image: Image, scene: Scene, camera: Camera):
     pixel_start_left = Vector3(camera.pixel00_loc)
 
     for j in range(height):
-        print(f"Rendering: y={j}/{height}", end="\r")
+        print(f"Rendering: {(100 * j) // height}%", end="\r")
         pixel_center = Vector3(pixel_start_left)
         for i in range(width):
             ray_direction = (pixel_center - camera.center).normalize()
             ray = Ray(camera.center, ray_direction)
 
             color = trace_ray(ray, scene)
-            color = tuple(int(255.99 * c) for c in color)
-            image.putpixel((i, j), color)
-            
+            image.putpixel((i, j), color.to_255())
+
             pixel_center += camera.pixel_delta_u
 
         pixel_start_left += camera.pixel_delta_v

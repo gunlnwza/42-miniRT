@@ -1,5 +1,6 @@
 import math
 
+from Color import Color
 from Vector3 import Vector3
 from Ray import Ray
 
@@ -17,7 +18,7 @@ class SceneObject:
         else:
             self.radius = None
  
-        self.color = Vector3((c / 255 for c in color))
+        self.color = Color(color)
 
     # return first-hit t if actually hit, else -1
     # assume ray.direction is normalized
