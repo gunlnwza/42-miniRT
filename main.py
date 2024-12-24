@@ -31,11 +31,13 @@ def main():
 	camera = Camera(Vector3(0, 0, 0), image_size)
 	objects = [
 			Sphere(center=(0, -0.2, -1), radius=0.5, color=(0.8, 0.1, 0.1)),
-			Sphere(center=(0, 8, -6), radius=8, color=(0.1, 0.8, 0.1))
+			Sphere(center=(0, 8, -6), radius=8, color=(0.1, 0.8, 0.1)),
+			Sphere(center=(-2, 0, -2), radius=1, color=(0.1, 0.1, 0.8)),
+			Sphere(center=(0, 0, 0), radius=3, color=(0, 0.5, 0.5))
 		]
 	scene = Scene(
-		AmbientLight(intensity=0.4, color=(0, 0.8, 0.8)),
-		Light(intensity=1, color=(1, 1, 1), center=(0, 0, -4)),
+		AmbientLight(intensity=0.1, color=(0, 0, 0.8)),
+		Light(center=(2, 0, 0.4), intensity=0.5, color=(1, 1, 1)),
 		objects
 	)
 
