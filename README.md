@@ -1,5 +1,3 @@
-# demo-miniRT
+# 42-miniRT
 
-## Dependency
-- numpy
-- pillow
+Test test ...
