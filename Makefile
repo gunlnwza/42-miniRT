@@ -1,34 +1,43 @@
-NAME = miniRT
+NAME := miniRT
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-RM= rm -rf
+CC := cc
+CFLAGS := -Wall -Wextra -Werror
+RM := rm -rf
 
-HEADERS = mini_rt.h vector3.h
-SRCS = main.c vector3.c
-OBJS = $(SRCS:%.c=%.o)
+HEADERS := mini_rt.h vector3.h
+SRCS := main.c vector3.c
+OBJS := $(SRCS:%.c=%.o)
 
-LIBFT = libft/libft.a
+LIBFT := ./libft
+LIBMLX:= ./MLX42
 
-.PHONY: all clean fclean re
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-all: $(NAME)
+.PHONY: all, clean, fclean, re, libft, libmlx
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lm -o $(NAME)
+all: libft libmlx $(NAME)
 
-$(LIBFT):
-	make -C libft
+libft: $(LIBFT)/libft.a
+
+$(LIBFT)/libft.a:
+	make -C $(LIBFT)
+
+libmlx:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+
+$(NAME): $(OBJS) $(HEADERS)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make clean -C libft
+	make clean -C $(LIBFT)
+	$(RM) $(LIBMLX)/build
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(LIBFT)
+	$(RM) $(LIBFT)/libft.a
 	$(RM) $(NAME)
 
 re: fclean all
