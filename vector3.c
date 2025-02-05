@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 13:50:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:29:25 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	vector3_put(const t_vector3 *dest, const char *var_name)
 {
-	printf("%s(%i, %i, %i)", var_name, dest->x, dest->y, dest->z);
+	printf("%s(%f, %f, %f)", var_name, dest->x, dest->y, dest->z);
 }
 
 void	vector3_set_values_ip(t_vector3 *dest, float x, float y, float z)
@@ -53,7 +53,7 @@ t_vector3	*vector3_copy(const t_vector3 *src)
 	return (dest);
 }
 
-t_vector3	*vector3_operation(t_vector3 *dest, t_vector3 *src, void (*inplace_func)(t_vector3*, t_vector3*))
+t_vector3	*vector3_operation(t_vector3 *dest, const t_vector3 *src, void (*inplace_func)(t_vector3*, const t_vector3*))
 {
 	t_vector3	*new;
 
@@ -64,31 +64,31 @@ t_vector3	*vector3_operation(t_vector3 *dest, t_vector3 *src, void (*inplace_fun
 	return (new);
 }
 
-void	vector3_add_ip(t_vector3 *dest, t_vector3 *src)
+void	vector3_add_ip(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x += src->x;
 	dest->y += src->y;
 	dest->z += src->z;
 }
 
-t_vector3	*vector3_add(t_vector3 *dest, t_vector3 *src)
+t_vector3	*vector3_add(t_vector3 *dest, const t_vector3 *src)
 {
 	return (vector3_operation(dest, src, vector3_add_ip));
 }
 
-void	vector3_sub_ip(t_vector3 *dest, t_vector3 *src)
+void	vector3_sub_ip(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x -= src->x;
 	dest->y -= src->y;
 	dest->z -= src->z;
 }
 
-t_vector3	*vector3_sub(t_vector3 *dest, t_vector3 *src)
-{
+t_vector3	*vector3_sub(t_vector3 *dest, const t_vector3 *src)
+{ 
 	return (vector3_operation(dest, src, vector3_sub_ip));
 }
 
-float	vector3_dot(t_vector3 *dest, t_vector3 *src)
+float	vector3_dot(const t_vector3 *dest, const t_vector3 *src)
 {
 	float	value;
 
@@ -97,14 +97,14 @@ float	vector3_dot(t_vector3 *dest, t_vector3 *src)
 }
 
 // multiply element-wise
-void	vector3_element_mul_ip(t_vector3 *dest, t_vector3 *src)
+void	vector3_element_mul_ip(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x *= src->x;
 	dest->y *= src->y;
 	dest->z *= src->z;
 }
 
-t_vector3	*vector3_element_mul(t_vector3 *dest, t_vector3 *src)
+t_vector3	*vector3_element_mul(t_vector3 *dest, const t_vector3 *src)
 {
 	return (vector3_operation(dest, src, vector3_element_mul_ip));
 }
@@ -127,7 +127,7 @@ t_vector3	*vector3_scalar_mul(t_vector3 *dest, float scalar)
 	return (new);
 }
 
-void	vector3_cross_ip(t_vector3 *dest, t_vector3 *src)
+void	vector3_cross_ip(t_vector3 *dest, const t_vector3 *src)
 {
 	float	x;
 	float	y;
@@ -141,12 +141,12 @@ void	vector3_cross_ip(t_vector3 *dest, t_vector3 *src)
 	dest->z = z;
 }
 
-t_vector3	*vector3_cross(t_vector3 *dest, t_vector3 *src)
+t_vector3	*vector3_cross(t_vector3 *dest, const t_vector3 *src)
 {
 	return (vector3_operation(dest, src, vector3_cross_ip));
 }
 
-float	vector3_norm2(t_vector3 *dest)
+float	vector3_norm2(const t_vector3 *dest)
 {
 	float	norm2;
 
@@ -154,7 +154,7 @@ float	vector3_norm2(t_vector3 *dest)
 	return (norm2);
 }
 
-float	vector3_norm(t_vector3 *dest)
+float	vector3_norm(const t_vector3 *dest)
 {
 	float	norm2;
 	float	norm;
@@ -173,7 +173,7 @@ void	vector3_normalize_ip(t_vector3 *dest)
 	vector3_scalar_mul_ip(dest, 1.0f / norm);
 }
 
-t_vector3	*vector3_normalize(t_vector3 *dest)
+t_vector3	*vector3_normalize(const t_vector3 *dest)
 {
 	t_vector3	*new;
 

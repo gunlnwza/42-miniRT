@@ -8,7 +8,7 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 
-# include "vector3.h"
+# include "ray.h"
 # include "color.h"
 
 #endif

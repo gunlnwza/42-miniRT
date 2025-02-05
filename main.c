@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 13:51:09 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:31:08 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,32 @@ static void ft_hook(void* param)
 	(void) mlx;
 }
 
-int	ray_color(t_vector3 *ray_point, t_vector3 *ray_dir)
+int hit_sphere(const t_vector3 *center, float radius, const t_ray *ray)
 {
-	t_vector3	unit_dir;
+	t_vector3	oc;
+	vector3_copy_ip(&oc, center);
+	vector3_sub_ip(&oc, &ray->origin);
 
-	vector3_copy_ip(&unit_dir, ray_dir);
-	vector3_normalize_ip(&unit_dir);
+	float a = vector3_dot(&ray->direction, &ray->direction);
+	float b = -2.0 * vector3_dot(&ray->direction, &oc);
+	float c = vector3_dot(&oc, &oc) - radius * radius;
+	
+	float discriminant = b*b - 4*a*c;
+	return (discriminant >= 0);
+}
 
-	float a = 0.5 * (unit_dir.y + 1.0);
+int	ray_color(t_ray *ray)
+{
+	t_vector3	point;
+	vector3_set_values_ip(&point, -1, 1, 1);
+	if (hit_sphere(&point, 1, ray))
+		return (get_rgba(255, 0, 0, 255));
+
+	t_vector3	unit_direction;
+	vector3_copy_ip(&unit_direction, &ray->direction);
+	vector3_normalize_ip(&unit_direction);
+
+	float a = 0.5 * (unit_direction.y + 1.0);
 
 	int r;
 	int g;
@@ -48,8 +66,6 @@ int	ray_color(t_vector3 *ray_point, t_vector3 *ray_dir)
 	g = (1.0 - a) * 255 + a * 0.7 * 255;
 	b = (1.0 - a) * 255 + a * 1.0 * 255;
 
-	(void) ray_point;
-	(void) ray_dir;
 	return (get_rgba(r, g, b, 255));
 }
 
@@ -99,7 +115,11 @@ int32_t	main(void)
 	vector3_add_ip(pixel00_loc, temp_vector);
 
 	t_vector3	*pixel_center = vector3_copy(pixel00_loc);
-	t_vector3	*ray_direction = vector3_create(0, 0, 0);
+
+	t_ray		ray;
+	vector3_copy_ip(&ray.origin, pixel_center);
+	vector3_set_values_ip(&ray.direction, 0, 0, 0);
+
 	int			pixel_color;
 	int			x;
 	int			y;
@@ -118,11 +138,11 @@ int32_t	main(void)
 		ft_printf("Rendering: y=%i", y);
 		for (x = 0; x < WIDTH; x++)
 		{
-			vector3_copy_ip(ray_direction, pixel_center);
-			vector3_sub_ip(ray_direction, camera_center);
+			vector3_copy_ip(&ray.direction, pixel_center);
+			vector3_sub_ip(&ray.direction, camera_center);
 			
 			// ray is (point=camera_center, dir=ray_direction);  (ray_direction = pixel_center - camera_center)
-            pixel_color = ray_color(camera_center, ray_direction);
+            pixel_color = ray_color(&ray);
 			mlx_put_pixel(img, x, y, pixel_color);
 			
 			vector3_add_ip(pixel_center, pixel_delta_h);
