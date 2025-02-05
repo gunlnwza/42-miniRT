@@ -6,17 +6,24 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 11:32:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:58:46 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector3.h"
 
-void	vector3_set_values(t_vector3 *src, float x, float y, float z)
+void	vector3_set_values_ip(t_vector3 *dest, float x, float y, float z)
 {
-	src->x = x;
-	src->y = y;
-	src->z = z;
+	dest->x = x;
+	dest->y = y;
+	dest->z = z;
+}
+
+void	vector3_copy_ip(t_vector3 *dest, const t_vector3 *src)
+{
+	dest->x = src->x;
+	dest->y = src->y;
+	dest->z = src->z;
 }
 
 t_vector3	*vector3_create(float x, float y, float z)
@@ -26,7 +33,7 @@ t_vector3	*vector3_create(float x, float y, float z)
 	u = malloc(sizeof(t_vector3));
 	if (u == NULL)
 		return (NULL);
-	vector3_set_values(u, x, y, z);
+	vector3_set_values_ip(u, x, y, z);
 	return (u);
 }
 
