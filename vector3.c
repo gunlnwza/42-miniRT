@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 14:29:25 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:56:26 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	vector3_put(const t_vector3 *dest, const char *var_name)
 {
-	printf("%s(%f, %f, %f)", var_name, dest->x, dest->y, dest->z);
+	printf("%s(%f, %f, %f)\n", var_name, dest->x, dest->y, dest->z);
 }
 
 void	vector3_set_values_ip(t_vector3 *dest, float x, float y, float z)

@@ -11,4 +11,7 @@
 # include "ray.h"
 # include "color.h"
 
+# define WIDTH 800
+# define HEIGHT 600
+
 #endif
