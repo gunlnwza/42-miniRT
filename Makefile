@@ -1,7 +1,8 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+# CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra
 RM := rm -rf
 
 HEADERS := mini_rt.h vector3.h
