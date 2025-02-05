@@ -6,11 +6,17 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 11:58:46 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:50:45 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "vector3.h"
+
+void	vector3_put(const t_vector3 *dest, const char *var_name)
+{
+	printf("%s(%i, %i, %i)", var_name, dest->x, dest->y, dest->z);
+}
 
 void	vector3_set_values_ip(t_vector3 *dest, float x, float y, float z)
 {

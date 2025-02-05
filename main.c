@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 12:21:31 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:51:09 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,42 +139,3 @@ int32_t	main(void)
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
-
-// #include <stdlib.h>
-// #include <string.h>
-
-// // Bytes Per Pixel. Since each pixel is represented as an integer, it will be four bytes for four channels.
-// #define BPP sizeof(int32_t)
-
-// int32_t	main(void)
-// {
-//     // Init mlx with a canvas size of 256x256 and the ability to resize the window.
-//     mlx_t* mlx = mlx_init(256, 256, "MLX42", true);
-    
-//     if (!mlx) exit(EXIT_FAILURE);
-
-//     // Create a 128x128 image.
-//     mlx_image_t* img = mlx_new_image(mlx, 128, 128);
-
-//     // Set the channels of each pixel in our image to the maximum byte value of 255. 
-//     memset(img->pixels, 255, img->width * img->height * BPP);
-
-//     // Draw the image at coordinate (0, 0).
-//     mlx_image_to_window(mlx, img, 0, 0);
-
-//     // Run the main loop and terminate on quit.  
-//     mlx_loop(mlx);
-//     mlx_terminate(mlx);
-
-//     return (EXIT_SUCCESS);
-// }
-
-
-// int main(int argc, char **argv)
-// {
-// 	if (argc == 1)
-// 		return (1);
-
-// 	(void) argv;
-// 	return (0);
-// }

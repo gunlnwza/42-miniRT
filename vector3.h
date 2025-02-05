@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 11:58:49 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:50:54 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ typedef struct s_vector3
 	float	y;
 	float	z;
 }	t_vector3;
+
+void		vector3_put(const t_vector3 *dest, const char *var_name);
 
 void		vector3_set_values_ip(t_vector3 *dest, float x, float y, float z);
 t_vector3	*vector3_create(float x, float y, float z);
