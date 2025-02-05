@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 15:12:11 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:12:47 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,13 @@ float hit_sphere(const t_vector3 *center, float radius, const t_ray *ray)
 	float c = vector3_dot(&oc, &oc) - radius * radius;
 	
 	float discriminant = b*b - 4*a*c;
+	
+	if (discriminant < 0)
+		return (-1.0);
 
-	return (discriminant >= 0);
-	// if (discriminant < 0)
-		// return (-1.0);
-
-
-	// float t = (-b - sqrtf(discriminant)) / (2.0*a);
+	float t = (-b - sqrtf(discriminant)) / (2.0*a);
 	// printf("%f\n", t);
-
-	// return (t);
+	return (t);
 }
 
 int	ray_color(t_ray *ray)
