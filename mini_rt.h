@@ -10,6 +10,7 @@
 
 # include "ray.h"
 # include "color.h"
+# include "sphere.h"
 
 # define WIDTH 800
 # define HEIGHT 600

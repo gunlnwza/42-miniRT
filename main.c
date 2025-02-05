@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 15:20:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:52:08 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,68 +28,38 @@ static void ft_hook(void* param)
 	(void) mlx;
 }
 
-float hit_sphere(const t_vector3 *center, float radius, const t_ray *ray)
-{
-	t_vector3	oc;
-	vector3_copy_ip(&oc, center);
-	vector3_sub_ip(&oc, &ray->origin);
-
-	float a = vector3_dot(&ray->direction, &ray->direction);
-	float b = -2.0 * vector3_dot(&ray->direction, &oc);
-	float c = vector3_dot(&oc, &oc) - radius * radius;
-	
-	float discriminant = b*b - 4*a*c;
-	
-	if (discriminant < 0)
-		return (-1.0);
-
-	float t = (-b - sqrtf(discriminant)) / (2.0*a);
-	// printf("%f\n", t);
-	return (t);
-}
-
 int	ray_color(t_ray *ray)
 {
-	t_vector3	point;  // circle center
-	vector3_set_values_ip(&point, 0, 0, -1);
-	float t = hit_sphere(&point, 0.5, ray);
-	// printf("%f\n", t);
+	t_sphere sphere;
+	vector3_set_values_ip(&sphere.center, 0, 0, -1);
+	sphere.radius = 0.5;
 
-	if (t > 0.0)
+	t_hit_record	rec;
+
+	if (hit_sphere(&sphere, ray, 0, 999, &rec))
 	{
-		t_vector3 N;
-
-		/*
-		vec3 N = unit_vector(r.at(t) - vec3(0,0,-1));
-		return 0.5*color(N.x()+1, N.y()+1, N.z()+1);
-		*/
-	
-		ray_at(ray, t, &N);
-		vector3_sub_ip(&N, &point);
-		vector3_normalize_ip(&N);
-		
-		int r = (N.x + 1) * 0.5 * 255;
-		int g = (N.y + 1) * 0.5 * 255;
-		int b = (N.z + 1) * 0.5 * 255;
-	
+		int r = (rec.normal.x + 1) * 0.5 * 255;
+		int g = (rec.normal.y + 1) * 0.5 * 255;
+		int b = (rec.normal.z + 1) * 0.5 * 255;
 		return (get_rgba(r, g, b, 255));
 	}
+	
+	// background
 	t_vector3	unit_direction;
 	vector3_copy_ip(&unit_direction, &ray->direction);
 	vector3_normalize_ip(&unit_direction);
 
 	float a = 0.5 * (unit_direction.y + 1.0);
-
 	int r = (1.0 - a) * 255 + a * 0.5 * 255;
 	int g = (1.0 - a) * 255 + a * 0.7 * 255;
 	int b = (1.0 - a) * 255 + a * 1.0 * 255;
-
 	return (get_rgba(r, g, b, 255));
 }
 
 
 int32_t	main(void)
 {
+	// TODO: refactor the viewport setup into functions (implement camera class)
 	float	aspect_ratio = (float) WIDTH / HEIGHT;
 	printf("aspect_ratio = %f\n", aspect_ratio);
 
@@ -180,6 +150,7 @@ int32_t	main(void)
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
+	// render
 	for (y = 0; y < HEIGHT; y++)
 	{
 		ft_printf("Rendering: y=%i", y);
@@ -199,6 +170,7 @@ int32_t	main(void)
 		vector3_add_ip(pixel_center, pixel_delta_v);
 	}
 	ft_printf("Finish rendering\n");
+
 
 	// Register a hook and pass mlx as an optional param. NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
