@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 15:14:40 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:20:45 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,39 @@ float hit_sphere(const t_vector3 *center, float radius, const t_ray *ray)
 
 int	ray_color(t_ray *ray)
 {
-	t_vector3	point;
+	t_vector3	point;  // circle center
 	vector3_set_values_ip(&point, 0, 0, -1);
 	float t = hit_sphere(&point, 0.5, ray);
 	// printf("%f\n", t);
-	if (t > 0.0)
-		return (get_rgba(255, 0, 0, 255));
 
+	if (t > 0.0)
+	{
+		t_vector3 N;
+
+		/*
+		vec3 N = unit_vector(r.at(t) - vec3(0,0,-1));
+		return 0.5*color(N.x()+1, N.y()+1, N.z()+1);
+		*/
+	
+		ray_at(ray, t, &N);
+		vector3_sub_ip(&N, &point);
+		vector3_normalize_ip(&N);
+		
+		int r = (N.x + 1) * 0.5 * 255;
+		int g = (N.y + 1) * 0.5 * 255;
+		int b = (N.z + 1) * 0.5 * 255;
+	
+		return (get_rgba(r, g, b, 255));
+	}
 	t_vector3	unit_direction;
 	vector3_copy_ip(&unit_direction, &ray->direction);
 	vector3_normalize_ip(&unit_direction);
 
 	float a = 0.5 * (unit_direction.y + 1.0);
 
-	int r;
-	int g;
-	int b;
-
-	r = (1.0 - a) * 255 + a * 0.5 * 255;
-	g = (1.0 - a) * 255 + a * 0.7 * 255;
-	b = (1.0 - a) * 255 + a * 1.0 * 255;
+	int r = (1.0 - a) * 255 + a * 0.5 * 255;
+	int g = (1.0 - a) * 255 + a * 0.7 * 255;
+	int b = (1.0 - a) * 255 + a * 1.0 * 255;
 
 	return (get_rgba(r, g, b, 255));
 }
@@ -141,6 +154,7 @@ int32_t	main(void)
 	printf("\n");
 
 	t_vector3	*pixel_center = vector3_copy(pixel00_loc);
+/*   Updated: 2025/02/05 15:12:47 by nteechar         ###   ########.fr       */
 
 	vector3_put(pixel_center, "pixel_center");
 	printf("\n");
