@@ -31,7 +31,7 @@ static void ft_hook(void* param)
 int	ray_color(t_ray *ray)
 {
 	t_sphere sphere;
-	v_set(&sphere.center, 1, 0, -1);
+	v_set(&sphere.center, 0, 0, -1);
 	sphere.radius = 0.5;
 
 	t_hit_record	rec;
@@ -60,12 +60,10 @@ void render_loop(mlx_image_t *img)
 {
 	// TODO: refactor the viewport setup into functions (implement camera class)
 	float	aspect_ratio;
-	aspect_ratio = (float) WIDTH / HEIGHT;
-	printf("aspect_ratio = %f\n", aspect_ratio);
-
 	float	focal_length;
 	float	viewport_height;
 	float	viewport_width;
+	aspect_ratio = (float) WIDTH / HEIGHT;
 	focal_length = 1.0f;
 	viewport_height = 2.0f;
 	viewport_width = viewport_height * aspect_ratio;
@@ -73,63 +71,58 @@ void render_loop(mlx_image_t *img)
 	t_vector3	camera_center; // the scene camera
 	v_set(&camera_center, 0, 0, 0);
 
-	printf("focal_length = %f\n", focal_length);
-	printf("viewport_height = %f\nviewport_width = %f\n", viewport_height, viewport_width);
-	v_put(&camera_center, "camera_center");
-	printf("\n");
-	
 	t_vector3	viewport_h;
 	t_vector3	viewport_v;
-
 	v_set(&viewport_h, viewport_width, 0 ,0);
 	v_set(&viewport_v, 0, -viewport_height, 0);
 
-	v_put(&viewport_h, "viewport_h");
-	v_put(&viewport_v, "viewport_v");
-	printf("\n");
-
 	t_vector3	pixel_delta_h;
-	t_vector3	pixel_delta_v;
-
 	v_copy(&pixel_delta_h, &viewport_h);
 	v_scalar_mul(&pixel_delta_h, 1.0f / WIDTH);
 
+	t_vector3	pixel_delta_v;
 	v_copy(&pixel_delta_v, &viewport_v);
 	v_scalar_mul(&pixel_delta_v, 1.0f / HEIGHT);
-	
-	v_put(&pixel_delta_h, "pixel_delta_h");
-	v_put(&pixel_delta_v, "pixel_delta_v");
-	printf("\n");
 
 	t_vector3	temp_vector;
 	v_set(&temp_vector, 0, 0, 0);
 
 	t_vector3	viewport_upper_left;
 	v_copy(&viewport_upper_left, &camera_center);  // camera_center - vec3(0, 0, focal_length) - viewport_h/2 - viewport_v/2;
-	
 	v_sub(&viewport_upper_left, v_set(&temp_vector, 0, 0, focal_length));
 	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &viewport_h), 0.5f));
 	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &viewport_v), 0.5f));
-
-	v_put(&viewport_upper_left, "viewport_upper_left");
-	printf("\n");
 
 	t_vector3	pixel00_loc;
 	v_copy(&pixel00_loc, &viewport_upper_left);
 	v_add(&pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &pixel_delta_h), 0.5f));
 	v_add(&pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &pixel_delta_v), 0.5f));
 
-	v_put(&pixel00_loc, "pixel00_loc");
-	printf("\n");
-
 	t_vector3	pixel_center;
 	v_copy(&pixel_center, &pixel00_loc);
-	v_put(&pixel_center, "pixel_center");
-	printf("\n");
 
 	t_ray		ray;
 	v_copy(&ray.origin, &camera_center);
 	v_set(&ray.direction, 0, 0, 0);
+	
+	// debug
+	printf("aspect_ratio = %f\n", aspect_ratio);
+	printf("focal_length = %f\n", focal_length);
+	printf("viewport_height = %f\nviewport_width = %f\n", viewport_height, viewport_width);
+	v_put(&camera_center, "camera_center");
+	printf("\n");
+	v_put(&viewport_h, "viewport_h");
+	v_put(&viewport_v, "viewport_v");
+	printf("\n");
+	v_put(&pixel_delta_h, "pixel_delta_h");
+	v_put(&pixel_delta_v, "pixel_delta_v");
+	printf("\n");
+	v_put(&viewport_upper_left, "viewport_upper_left");
+	printf("\n");
+	v_put(&pixel00_loc, "pixel00_loc");
+	printf("\n");
+	v_put(&pixel_center, "pixel_center");
+	printf("\n");
 	v_put(&ray.origin, "ray.origin");
 	v_put(&ray.direction, "ray.direction");
 	printf("\n");
@@ -161,7 +154,6 @@ void render_loop(mlx_image_t *img)
 
 int32_t	main(void)
 {
-
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (!mlx)
