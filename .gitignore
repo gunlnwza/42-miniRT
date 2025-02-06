@@ -1,4 +1,19 @@
+# vscode
+.vscode
+
+# python
 venv/*
-pictures/*
 __pycache__
+
+# Mac
+.DS_Store
+
+# debug
+pictures/*
 log
+
+# binaries
+*.o
+*.a
+*.out
+miniRT
