@@ -31,7 +31,7 @@ static void ft_hook(void* param)
 int	ray_color(t_ray *ray)
 {
 	t_sphere sphere;
-	vector3_set_values_ip(&sphere.center, 0, 0, -1);
+	v_set(&sphere.center, 1, 0, -1);
 	sphere.radius = 0.5;
 
 	t_hit_record	rec;
@@ -46,8 +46,8 @@ int	ray_color(t_ray *ray)
 	
 	// background
 	t_vector3	unit_direction;
-	vector3_copy_ip(&unit_direction, &ray->direction);
-	vector3_normalize_ip(&unit_direction);
+	v_copy(&unit_direction, &ray->direction);
+	v_normalize(&unit_direction);
 
 	float a = 0.5 * (unit_direction.y + 1.0);
 	int r = (1.0 - a) * 255 + a * 0.5 * 255;

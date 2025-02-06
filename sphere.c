@@ -4,14 +4,14 @@
 int hit_sphere(t_sphere *sphere, const t_ray *ray, float ray_tmin, float ray_tmax, t_hit_record *rec)
 {
 	t_vector3	oc;
-	vector3_copy_ip(&oc, &sphere->center);
-	vector3_sub_ip(&oc, &ray->origin);
+	v_copy(&oc, &sphere->center);
+	v_sub(&oc, &ray->origin);
 
-	float a = vector3_norm2(&ray->direction);
-	float h = vector3_dot(&ray->direction, &oc);
-	float c = vector3_norm2(&oc) - sphere->radius * sphere->radius;
+	float a = v_norm2(&ray->direction);
+	float h = v_dot(&ray->direction, &oc);
+	float c = v_norm2(&oc) - (sphere->radius * sphere->radius);
 	
-	float discriminant = h*h - a*c;
+	float discriminant = h * h - a * c;
 	if (discriminant < 0)
 		return (0);
 
@@ -29,10 +29,10 @@ int hit_sphere(t_sphere *sphere, const t_ray *ray, float ray_tmin, float ray_tma
 	rec->t = root;
 
 	ray_at(ray, rec->t, &rec->point);
-	
-	vector3_copy_ip(&rec->normal, &rec->point);
-	vector3_sub_ip(&rec->normal, &sphere->center);
-	vector3_normalize_ip(&rec->normal);
+
+	v_copy(&rec->normal, &rec->point);
+	v_sub(&rec->normal, &sphere->center);
+	v_normalize(&rec->normal);
 
 	return (1);
 }

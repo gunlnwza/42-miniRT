@@ -14,10 +14,9 @@
 
 void	ray_at(const t_ray *ray, float t, t_vector3 *res_point)
 {
-	t_vector3	diff;
+	t_vector3	dir;
 
-	diff = ray->direction;
-	vector3_scalar_mul_ip(&diff, t);
-	vector3_copy_ip(res_point, &ray->origin);
-	vector3_add_ip(res_point, &diff);
+	v_copy(res_point, &ray->origin);
+	v_copy(&dir, &ray->direction);
+	v_add(res_point, v_scalar_mul(&dir, t));
 }
