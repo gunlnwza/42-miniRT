@@ -121,33 +121,14 @@ int32_t	main(void)
 	v_sub(&viewport_upper_left, v_set(&temp_vector, 0, 0, focal_length));
 	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &viewport_h), 0.5f));
 	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &viewport_v), 0.5f));
-	// vector3_set_values_ip(temp_vector, 0, 0, focal_length);
-	// vector3_sub_ip(viewport_upper_left, temp_vector);
-
-	// vector3_copy_ip(temp_vector, viewport_h);
-	// vector3_scalar_mul_ip(temp_vector, 0.5);
-	// vector3_sub_ip(viewport_upper_left, temp_vector);
-	
-	// vector3_copy_ip(temp_vector, viewport_v);
-	// vector3_scalar_mul_ip(temp_vector, 0.5);
-	// vector3_sub_ip(viewport_upper_left, temp_vector);
 
 	v_put(&viewport_upper_left, "viewport_upper_left");
 	printf("\n");
 
 	t_vector3	pixel00_loc;
 	v_copy(&pixel00_loc, &viewport_upper_left);
-
 	v_add(&pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &pixel_delta_h), 0.5f));
 	v_add(&pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &pixel_delta_v), 0.5f));
-
-	// vector3_copy_ip(temp_vector, pixel_delta_h);
-	// vector3_scalar_mul_ip(temp_vector, 0.5);
-	// vector3_add_ip(pixel00_loc, temp_vector);
-	
-	// vector3_copy_ip(temp_vector, pixel_delta_v);
-	// vector3_scalar_mul_ip(temp_vector, 0.5);
-	// vector3_add_ip(pixel00_loc, temp_vector);
 
 	v_put(&pixel00_loc, "pixel00_loc");
 	printf("\n");
