@@ -56,22 +56,11 @@ int	ray_color(t_ray *ray)
 	return (get_rgba(r, g, b, 255));
 }
 
-
-int32_t	main(void)
+void render_loop(mlx_image_t *img)
 {
-
-	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
-	if (!mlx)
-		ft_error();
-
-	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);  // create and display image
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
-
-
 	// TODO: refactor the viewport setup into functions (implement camera class)
-	float	aspect_ratio = (float) WIDTH / HEIGHT;
+	float	aspect_ratio;
+	aspect_ratio = (float) WIDTH / HEIGHT;
 	printf("aspect_ratio = %f\n", aspect_ratio);
 
 	float	focal_length;
@@ -168,6 +157,21 @@ int32_t	main(void)
 		v_add(&pixel_center, &pixel_delta_v);
 	}
 	ft_printf("Finish rendering\n");
+}
+
+int32_t	main(void)
+{
+
+	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	if (!mlx)
+		ft_error();
+
+	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);  // create and display image
+	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+		ft_error();
+
+	render_loop(img);
 
 	// Register a hook and pass mlx as an optional param. NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
