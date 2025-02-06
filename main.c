@@ -59,87 +59,6 @@ int	ray_color(t_ray *ray)
 
 int32_t	main(void)
 {
-	// TODO: refactor the viewport setup into functions (implement camera class)
-	float	aspect_ratio = (float) WIDTH / HEIGHT;
-	printf("aspect_ratio = %f\n", aspect_ratio);
-
-	float		focal_length = 1.0f;
-	float		viewport_height = 2.0f;
-	float		viewport_width = viewport_height * aspect_ratio;
-	t_vector3	*camera_center = vector3_create(0, 0, 0);  // the scene camera
-
-	printf("focal_length = %f\n", focal_length);
-	printf("viewport_height = %f\nviewport_width = %f\n", viewport_height, viewport_width);
-
-	vector3_put(camera_center, "camera_center");
-	printf("\n");
-	
-	t_vector3	*viewport_h = vector3_create(viewport_width, 0 ,0);
-	t_vector3	*viewport_v = vector3_create(0, -viewport_height ,0);
-
-	vector3_put(viewport_h, "viewport_h");
-	vector3_put(viewport_v, "viewport_v");
-	printf("\n");
-
-	t_vector3	*pixel_delta_h = vector3_copy(viewport_h);
-	vector3_scalar_mul_ip(pixel_delta_h, 1.0f / WIDTH);
-
-	vector3_put(pixel_delta_h, "pixel_delta_h");
-	
-	t_vector3	*pixel_delta_v = vector3_copy(viewport_v);
-	vector3_scalar_mul_ip(pixel_delta_v, 1.0f / HEIGHT);
-
-	vector3_put(pixel_delta_v, "pixel_delta_v");
-	printf("\n");
-
-	t_vector3	*temp_vector = vector3_create(0, 0, 0);
-
-	t_vector3	*viewport_upper_left = vector3_copy(camera_center);  // camera_center - vec3(0, 0, focal_length) - viewport_h/2 - viewport_v/2;
-	
-	vector3_set_values_ip(temp_vector, 0, 0, focal_length);
-	vector3_sub_ip(viewport_upper_left, temp_vector);
-
-	vector3_copy_ip(temp_vector, viewport_h);
-	vector3_scalar_mul_ip(temp_vector, 0.5);
-	vector3_sub_ip(viewport_upper_left, temp_vector);
-	
-	vector3_copy_ip(temp_vector, viewport_v);
-	vector3_scalar_mul_ip(temp_vector, 0.5);
-	vector3_sub_ip(viewport_upper_left, temp_vector);
-
-	vector3_put(viewport_upper_left, "viewport_upper_left");
-	printf("\n");
-
-	t_vector3	*pixel00_loc = vector3_copy(viewport_upper_left);
-
-	vector3_copy_ip(temp_vector, pixel_delta_h);
-	vector3_scalar_mul_ip(temp_vector, 0.5);
-	vector3_add_ip(pixel00_loc, temp_vector);
-	
-	vector3_copy_ip(temp_vector, pixel_delta_v);
-	vector3_scalar_mul_ip(temp_vector, 0.5);
-	vector3_add_ip(pixel00_loc, temp_vector);
-
-	vector3_put(pixel00_loc, "pixel00_loc");
-	printf("\n");
-
-	t_vector3	*pixel_center = vector3_copy(pixel00_loc);
-/*   Updated: 2025/02/05 15:12:47 by nteechar         ###   ########.fr       */
-
-	vector3_put(pixel_center, "pixel_center");
-	printf("\n");
-
-	t_ray		ray;
-	vector3_copy_ip(&ray.origin, camera_center);
-	vector3_set_values_ip(&ray.direction, 0, 0, 0);
-
-	vector3_put(&ray.origin, "ray.origin");
-	vector3_put(&ray.direction, "ray.direction");
-	printf("\n");
-
-	int			pixel_color;
-	int			x;
-	int			y;
 
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
@@ -150,27 +69,124 @@ int32_t	main(void)
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
+
+	// TODO: refactor the viewport setup into functions (implement camera class)
+	float	aspect_ratio = (float) WIDTH / HEIGHT;
+	printf("aspect_ratio = %f\n", aspect_ratio);
+
+	float	focal_length;
+	float	viewport_height;
+	float	viewport_width;
+	focal_length = 1.0f;
+	viewport_height = 2.0f;
+	viewport_width = viewport_height * aspect_ratio;
+
+	t_vector3	camera_center; // the scene camera
+	v_set(&camera_center, 0, 0, 0);
+
+	printf("focal_length = %f\n", focal_length);
+	printf("viewport_height = %f\nviewport_width = %f\n", viewport_height, viewport_width);
+	v_put(&camera_center, "camera_center");
+	printf("\n");
+	
+	t_vector3	viewport_h;
+	t_vector3	viewport_v;
+
+	v_set(&viewport_h, viewport_width, 0 ,0);
+	v_set(&viewport_v, 0, -viewport_height, 0);
+
+	v_put(&viewport_h, "viewport_h");
+	v_put(&viewport_v, "viewport_v");
+	printf("\n");
+
+	t_vector3	pixel_delta_h;
+	t_vector3	pixel_delta_v;
+
+	v_copy(&pixel_delta_h, &viewport_h);
+	v_scalar_mul(&pixel_delta_h, 1.0f / WIDTH);
+
+	v_copy(&pixel_delta_v, &viewport_v);
+	v_scalar_mul(&pixel_delta_v, 1.0f / HEIGHT);
+	
+	v_put(&pixel_delta_h, "pixel_delta_h");
+	v_put(&pixel_delta_v, "pixel_delta_v");
+	printf("\n");
+
+	t_vector3	temp_vector;
+	v_set(&temp_vector, 0, 0, 0);
+
+	t_vector3	viewport_upper_left;
+	v_copy(&viewport_upper_left, &camera_center);  // camera_center - vec3(0, 0, focal_length) - viewport_h/2 - viewport_v/2;
+	
+	v_sub(&viewport_upper_left, v_set(&temp_vector, 0, 0, focal_length));
+	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &viewport_h), 0.5f));
+	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &viewport_v), 0.5f));
+	// vector3_set_values_ip(temp_vector, 0, 0, focal_length);
+	// vector3_sub_ip(viewport_upper_left, temp_vector);
+
+	// vector3_copy_ip(temp_vector, viewport_h);
+	// vector3_scalar_mul_ip(temp_vector, 0.5);
+	// vector3_sub_ip(viewport_upper_left, temp_vector);
+	
+	// vector3_copy_ip(temp_vector, viewport_v);
+	// vector3_scalar_mul_ip(temp_vector, 0.5);
+	// vector3_sub_ip(viewport_upper_left, temp_vector);
+
+	v_put(&viewport_upper_left, "viewport_upper_left");
+	printf("\n");
+
+	t_vector3	pixel00_loc;
+	v_copy(&pixel00_loc, &viewport_upper_left);
+
+	v_add(&pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &pixel_delta_h), 0.5f));
+	v_add(&pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &pixel_delta_v), 0.5f));
+
+	// vector3_copy_ip(temp_vector, pixel_delta_h);
+	// vector3_scalar_mul_ip(temp_vector, 0.5);
+	// vector3_add_ip(pixel00_loc, temp_vector);
+	
+	// vector3_copy_ip(temp_vector, pixel_delta_v);
+	// vector3_scalar_mul_ip(temp_vector, 0.5);
+	// vector3_add_ip(pixel00_loc, temp_vector);
+
+	v_put(&pixel00_loc, "pixel00_loc");
+	printf("\n");
+
+	t_vector3	pixel_center;
+	v_copy(&pixel_center, &pixel00_loc);
+	v_put(&pixel_center, "pixel_center");
+	printf("\n");
+
+	t_ray		ray;
+	v_copy(&ray.origin, &camera_center);
+	v_set(&ray.direction, 0, 0, 0);
+	v_put(&ray.origin, "ray.origin");
+	v_put(&ray.direction, "ray.direction");
+	printf("\n");
+
 	// render
+	int			pixel_color;
+	int			x;
+	int			y;
 	for (y = 0; y < HEIGHT; y++)
 	{
 		ft_printf("Rendering: y=%i", y);
 		for (x = 0; x < WIDTH; x++)
 		{
-			vector3_copy_ip(&ray.direction, pixel_center);
-			vector3_sub_ip(&ray.direction, camera_center);
+			v_copy(&ray.direction, &pixel_center);
+			v_sub(&ray.direction, &camera_center);
 			
 			// ray is (point=camera_center, dir=ray_direction);  (ray_direction = pixel_center - camera_center)
             pixel_color = ray_color(&ray);
 			mlx_put_pixel(img, x, y, pixel_color);
 			
-			vector3_add_ip(pixel_center, pixel_delta_h);
+			v_add(&pixel_center, &pixel_delta_h);
 		}
 		ft_printf("                    \r");
-		vector3_sub_ip(pixel_center, viewport_h);
-		vector3_add_ip(pixel_center, pixel_delta_v);
+		v_sub(&pixel_center, &viewport_h);
+		v_add(&pixel_center, &pixel_delta_v);
 	}
 	ft_printf("Finish rendering\n");
-
 
 	// Register a hook and pass mlx as an optional param. NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
