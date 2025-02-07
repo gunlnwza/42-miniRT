@@ -2,20 +2,17 @@ NAME := miniRT
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-# CFLAGS := -Wall -Wextra
 RM := rm -rf
 
-HEADERS := mini_rt.h vector3.h color.h ray.h sphere.h
-SRCS := main.c vector3.c color.c ray.c sphere.c
+HEADERS := mini_rt.h vector3.h color.h ray.h sphere.h world.h camera.h
+SRCS := main.c vector3.c color.c ray.c sphere.c world.c camera.c
 OBJS := $(SRCS:%.c=%.o)
 
 LIBFT := ./libft
 LIBMLX:= ./MLX42
 
-# Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# Mac
-# LIBS := -framework Cocoa -framework OpenGL -framework IOKit
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm  # Linux
+# LIBS := -framework Cocoa -framework OpenGL -framework IOKit  # Mac
 
 .PHONY: all, clean, fclean, re, libft, libmlx
 

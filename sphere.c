@@ -1,5 +1,17 @@
 #include "sphere.h"
 
+t_sphere	*create_sphere(const t_vector3 *center, float radius)
+{
+	t_sphere	*sphere;
+
+	sphere = malloc(sizeof(t_sphere));
+	if (sphere == NULL)
+		return (NULL);	
+	v_copy(&sphere->center, center);
+	sphere->radius = radius;
+	return (sphere);
+}
+
 // return bool
 int hit_sphere(t_sphere *sphere, const t_ray *ray, float ray_tmin, float ray_tmax, t_hit_record *rec)
 {

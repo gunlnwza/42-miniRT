@@ -8,13 +8,6 @@
 # include "libft/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 
-# include "ray.h"
-# include "color.h"
-# include "sphere.h"
-
-// # define WIDTH 3000
-// # define HEIGHT 2000
-# define WIDTH 800
-# define HEIGHT 600
+# include "camera.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 14:29:19 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:58:37 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_vector3
 	float	z;
 }	t_vector3;
 
-// vector3 lib: short func name, enforce stack alloc, modify inplace, will return ptr to dest;
+// vector3 lib: short func name, encourage stack alloc, modify inplace, will return ptr to dest;
 
 void		v_put(const t_vector3 *dest, const char *var_name);
 t_vector3	*v_set(t_vector3 *dest, float x, float y, float z);
