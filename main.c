@@ -6,27 +6,11 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/07 15:54:34 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:59:06 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "mini_rt.h"
-
-// Exit the program as failure.
-static void ft_error(void)
-{
-	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
-	exit(EXIT_FAILURE);
-}
-
-// Print the window width and height.
-static void ft_hook(void* param)
-{
-	const mlx_t* mlx = param;
-
-	// printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
-	(void) mlx;
-}
 
 void render_loop(mlx_image_t *img)
 {
@@ -66,6 +50,22 @@ void render_loop(mlx_image_t *img)
 	ft_printf("\rFinish rendering !!!\n");
 }
 
+// Exit the program as failure.
+static void ft_error(void)
+{
+	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
+	exit(EXIT_FAILURE);
+}
+
+// Print the window width and height.
+static void ft_hook(void* param)
+{
+	const mlx_t* mlx = param;
+
+	// printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+	(void) mlx;
+}
+
 int	main(void)
 {
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
@@ -78,10 +78,11 @@ int	main(void)
 		ft_error();
 
 	render_loop(img);
-
+	
 	// Register a hook and pass mlx as an optional param. NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
+

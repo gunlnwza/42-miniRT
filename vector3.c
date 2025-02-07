@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/07 14:56:43 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:42:23 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,3 +116,5 @@ t_vector3	*v_normalize(t_vector3 *dest)
 	v_scalar_mul(dest, 1.0f / norm);
 	return (dest);
 }
+
+

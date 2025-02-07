@@ -1,6 +1,6 @@
 #include "sphere.h"
 
-t_sphere	*create_sphere(const t_vector3 *center, float radius)
+t_sphere	*create_sphere(const t_vector3 *center, float radius, int color)
 {
 	t_sphere	*sphere;
 
@@ -9,6 +9,7 @@ t_sphere	*create_sphere(const t_vector3 *center, float radius)
 		return (NULL);	
 	v_copy(&sphere->center, center);
 	sphere->radius = radius;
+	sphere->color = color;
 	return (sphere);
 }
 

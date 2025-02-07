@@ -2,6 +2,7 @@
 # define WORLD_H
 
 # include "sphere.h"
+# include "color.h"
 
 typedef struct s_world
 {
@@ -10,6 +11,6 @@ typedef struct s_world
 }	t_world;
 
 void	init_world(t_world *world);
-void	add_sphere(t_world *world, const t_vector3 *center, float radius);
+void	add_sphere(t_world *world, const t_vector3 *center, float radius, int color);
 
 #endif

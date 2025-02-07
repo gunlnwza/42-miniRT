@@ -8,6 +8,7 @@ typedef struct s_hit_record
 	t_vector3	point;
 	t_vector3	normal;
 	float		t;
+	int			color;
 }	t_hit_record;
 
 #endif

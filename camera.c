@@ -77,6 +77,7 @@ int	is_ray_hit(const t_world *world, t_ray *ray, float ray_tmin, float ray_tmax,
 				rec->normal = temp_rec.normal;
 				rec->point = temp_rec.point;
 				rec->t = temp_rec.t;
+				rec->color = get_rgba(100, 0, 0, 255);
 			}
 		}
 		i++;
@@ -87,14 +88,16 @@ int	is_ray_hit(const t_world *world, t_ray *ray, float ray_tmin, float ray_tmax,
 
 int	ray_color(t_ray *ray, const t_world *world)
 {
+	int				r,g,b;
+	int 			color;
 	t_hit_record	rec;
 
 	if (is_ray_hit(world, ray, 0, INF, &rec))
 	{
-		int r = (rec.normal.x + 1) * 0.5 * 255;
-		int g = (rec.normal.y + 1) * 0.5 * 255;
-		int b = (rec.normal.z + 1) * 0.5 * 255;
-		return (get_rgba(r, g, b, 255));
+		// r = (rec.normal.x + 1) * 0.5 * 255; g = (rec.normal.y + 1) * 0.5 * 255; b = (rec.normal.z + 1) * 0.5 * 255; color = get_rgba(r, g, b, 255);
+
+		color = rec.color;
+		return (color);
 	}
 	
 	// background
@@ -103,8 +106,6 @@ int	ray_color(t_ray *ray, const t_world *world)
 	v_normalize(&unit_direction);
 
 	float a = 0.5 * (unit_direction.y + 1.0);
-	int r = (1.0 - a) * 255 + a * 0.5 * 255;
-	int g = (1.0 - a) * 255 + a * 0.7 * 255;
-	int b = (1.0 - a) * 255 + a * 1.0 * 255;
+	r = (1.0 - a) * 255 + a * 0.5 * 255; g = (1.0 - a) * 255 + a * 0.7 * 255; b = (1.0 - a) * 255 + a * 1.0 * 255;
 	return (get_rgba(r, g, b, 255));
 }
