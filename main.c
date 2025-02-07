@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/07 16:59:06 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:42:42 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void render_loop(mlx_image_t *img)
 	init_world(&world);
 
 	t_camera	camera;
+	int			max_depth = 50;
 	init_camera(&camera);
 
 	t_ray		ray;
@@ -39,7 +40,7 @@ void render_loop(mlx_image_t *img)
 			v_copy(&ray.direction, &pixel_center);
 			v_sub(&ray.direction, &camera.center);
 
-		    pixel_color = ray_color(&ray, &world);
+		    pixel_color = ray_color(&ray, max_depth, &world);
 			mlx_put_pixel(img, x, y, pixel_color);
 
 			v_add(&pixel_center, &camera.pixel_delta_h);

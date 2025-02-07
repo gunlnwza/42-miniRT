@@ -63,7 +63,7 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 {
 	t_hit_record	temp_rec;
 	int				hit_anything = 0;
-	t_decimal			closest_so_far = ray_tmax;
+	t_decimal		closest_so_far = ray_tmax;
 
 	int i = 0;
 	while (i < world->nb_spheres)
@@ -86,33 +86,59 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 	return (hit_anything);
 }
 
-// void	random_on_hemisphere(t_vector3 *dest, const t_vector3 *normal)
-// {
-// 	t_vector3	on_unit_sphere;
-// 	float		length;
-
-// 	while (1)
-// 	{
-// 		v_set(&on_unit_sphere, ft_random(), ft_random(), ft_random());
-// 		if (0.01 < )
-// 	}
-// }
-
-int	ray_color(t_ray *ray, const t_world *world)
+void	random_on_hemisphere(t_vector3 *dest, const t_vector3 *normal)
 {
+	t_vector3	on_unit_sphere;
+	float		length_squared;
+
+	while (1)
+	{
+		v_set(&on_unit_sphere, ft_random(), ft_random(), ft_random());
+		length_squared = v_norm2(&on_unit_sphere);
+		if (1e-160 < length_squared && length_squared <= 1)
+		{
+			v_normalize(&on_unit_sphere);
+			break ;
+		}
+	}
+
+	if (v_dot(&on_unit_sphere, normal) > 0.0)
+	{
+		v_copy(dest, &on_unit_sphere);
+	}
+	else
+	{
+		v_copy(dest, v_scalar_mul(&on_unit_sphere, -1));
+	}
+}
+
+int	ray_color(t_ray *ray, int depth, const t_world *world)
+{
+	if (depth <= 0)
+		return (get_rgba(0, 0, 0, 255));
+
 	int				r,g,b;
-	int 			color;
+	// int 			color;
 	t_hit_record	rec;
 
-	if (is_ray_hit(world, ray, 0, INF, &rec))
+	t_decimal a;
+
+	if (is_ray_hit(world, ray, 0.001, INF, &rec))
 	{
 		// r = (rec.normal.x + 1) * 0.5 * 255; g = (rec.normal.y + 1) * 0.5 * 255; b = (rec.normal.z + 1) * 0.5 * 255; color = get_rgba(r, g, b, 255);
 
-		// t_vector3	direction;
+		t_vector3	direction;
 		// random_on_hemisphere(&direction, &rec.normal);
+		v_set(&direction, ft_random(), ft_random(), ft_random());
+		v_add(&direction, &rec.normal);
 
-		color = rec.color;
-		return (color);
+		t_ray	new_ray;
+		new_ray.origin = rec.point;
+		v_copy(&new_ray.direction, &direction);
+
+		a = 0.5;
+		// return ((1 - a) * rec.color + a * ray_color(&new_ray, depth - 1, world));
+		return (ray_color(&new_ray, depth - 1, world));
 	}
 	
 	// background
@@ -120,7 +146,7 @@ int	ray_color(t_ray *ray, const t_world *world)
 	v_copy(&unit_direction, &ray->direction);
 	v_normalize(&unit_direction);
 
-	t_decimal a = 0.5 * (unit_direction.y + 1.0);
+	a = 0.5 * (unit_direction.y + 1.0);
 	r = (1.0 - a) * 255 + a * 0.5 * 255; g = (1.0 - a) * 255 + a * 0.7 * 255; b = (1.0 - a) * 255 + a * 1.0 * 255;
 	return (get_rgba(r, g, b, 255));
 }

@@ -4,7 +4,7 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
-HEADERS := mini_rt.h vector3.h color.h ray.h sphere.h world.h camera.h utils.h
+HEADERS := mini_rt.h vector3.h color.h ray.h sphere.h world.h camera.h utils.h constants.h
 SRCS := main.c vector3.c color.c ray.c sphere.c world.c camera.c utils.c
 OBJS := $(SRCS:%.c=%.o)
 
