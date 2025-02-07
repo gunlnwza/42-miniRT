@@ -13,82 +13,44 @@
 #include <stdio.h>
 #include "vector3.h"
 
-void	vector3_put(const t_vector3 *dest, const char *var_name)
+void	v_put(const t_vector3 *dest, const char *var_name)
 {
 	printf("%s(%f, %f, %f)\n", var_name, dest->x, dest->y, dest->z);
 }
 
-void	vector3_set_values_ip(t_vector3 *dest, float x, float y, float z)
+t_vector3	*v_set(t_vector3 *dest, float x, float y, float z)
 {
 	dest->x = x;
 	dest->y = y;
 	dest->z = z;
+	return (dest);
 }
 
-void	vector3_copy_ip(t_vector3 *dest, const t_vector3 *src)
+t_vector3	*v_copy(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x = src->x;
 	dest->y = src->y;
 	dest->z = src->z;
-}
-
-t_vector3	*vector3_create(float x, float y, float z)
-{
-	t_vector3	*u;
-
-	u = malloc(sizeof(t_vector3));
-	if (u == NULL)
-		return (NULL);
-	vector3_set_values_ip(u, x, y, z);
-	return (u);
-}
-
-t_vector3	*vector3_copy(const t_vector3 *src)
-{
-	t_vector3	*dest;
-
-	dest = vector3_create(src->x, src->y, src->z);
-	if (dest == NULL)
-		return (NULL);
 	return (dest);
 }
 
-t_vector3	*vector3_operation(t_vector3 *dest, const t_vector3 *src, void (*inplace_func)(t_vector3*, const t_vector3*))
-{
-	t_vector3	*new;
-
-	new = vector3_copy(dest);
-	if (new == NULL)
-		return (NULL);
-	inplace_func(new, src);
-	return (new);
-}
-
-void	vector3_add_ip(t_vector3 *dest, const t_vector3 *src)
+t_vector3	*v_add(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x += src->x;
 	dest->y += src->y;
 	dest->z += src->z;
+	return (dest);
 }
 
-t_vector3	*vector3_add(t_vector3 *dest, const t_vector3 *src)
-{
-	return (vector3_operation(dest, src, vector3_add_ip));
-}
-
-void	vector3_sub_ip(t_vector3 *dest, const t_vector3 *src)
+t_vector3	*v_sub(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x -= src->x;
 	dest->y -= src->y;
 	dest->z -= src->z;
+	return (dest);
 }
 
-t_vector3	*vector3_sub(t_vector3 *dest, const t_vector3 *src)
-{ 
-	return (vector3_operation(dest, src, vector3_sub_ip));
-}
-
-float	vector3_dot(const t_vector3 *dest, const t_vector3 *src)
+float	v_dot(const t_vector3 *dest, const t_vector3 *src)
 {
 	float	value;
 
@@ -96,96 +58,60 @@ float	vector3_dot(const t_vector3 *dest, const t_vector3 *src)
 	return (value);
 }
 
-// multiply element-wise
-void	vector3_element_mul_ip(t_vector3 *dest, const t_vector3 *src)
+t_vector3	*v_element_mul(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x *= src->x;
 	dest->y *= src->y;
 	dest->z *= src->z;
+	return (dest);
 }
 
-t_vector3	*vector3_element_mul(t_vector3 *dest, const t_vector3 *src)
-{
-	return (vector3_operation(dest, src, vector3_element_mul_ip));
-}
-
-void	vector3_scalar_mul_ip(t_vector3 *dest, float scalar)
+t_vector3	*v_scalar_mul(t_vector3 *dest, float scalar)
 {
 	dest->x *= scalar;
 	dest->y *= scalar;
 	dest->z *= scalar;
+	return (dest);
 }
 
-t_vector3	*vector3_scalar_mul(t_vector3 *dest, float scalar)
+t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src)
 {
-	t_vector3	*new;
+	float	new_x;
+	float	new_y;
+	float	new_z;
 
-	new = vector3_copy(dest);
-	if (new == NULL)
-		return (NULL);
-	vector3_scalar_mul_ip(new, scalar);
-	return (new);
+	new_x = dest->y * src->z - dest->z * src->y;
+	new_y = dest->z * src->x - dest->x * src->z;
+	new_z = dest->x * src->y - dest->y * src->x;
+	dest->x = new_x;
+	dest->y = new_y;
+	dest->z = new_z;
 }
 
-void	vector3_cross_ip(t_vector3 *dest, const t_vector3 *src)
-{
-	float	x;
-	float	y;
-	float	z;
-
-	x = dest->y * src->z - dest->z * src->y;
-	y = dest->z * src->x - dest->x * src->z;
-	z = dest->x * src->y - dest->y * src->x;
-	dest->x = x;
-	dest->y = y;
-	dest->z = z;
-}
-
-t_vector3	*vector3_cross(t_vector3 *dest, const t_vector3 *src)
-{
-	return (vector3_operation(dest, src, vector3_cross_ip));
-}
-
-float	vector3_norm2(const t_vector3 *dest)
+float	v_norm2(const t_vector3 *dest)
 {
 	float	norm2;
 
-	norm2 = vector3_dot(dest, dest);
+	norm2 = v_dot(dest, dest);
 	return (norm2);
 }
 
-float	vector3_norm(const t_vector3 *dest)
+float	v_norm(const t_vector3 *dest)
 {
 	float	norm2;
 	float	norm;
 
-	norm2 = vector3_norm2(dest);
+	norm2 = v_norm2(dest);
 	norm = sqrtf(norm2);
 	return (norm);
 }
 
 // can cause error if dest's norm is 0
-void	vector3_normalize_ip(t_vector3 *dest)
+t_vector3	*v_normalize(t_vector3 *dest)
 {
 	float	norm;
 
-	norm = vector3_norm(dest);
-	vector3_scalar_mul_ip(dest, 1.0f / norm);
-}
-
-t_vector3	*vector3_normalize(const t_vector3 *dest)
-{
-	t_vector3	*new;
-
-	new = vector3_copy(dest);
-	if (new == NULL)
-		return (NULL);
-	vector3_normalize_ip(new);
-	return (new);
-}
-
-void	vector3_free(t_vector3 **dest)
-{
-	free(*dest);
-	*dest = NULL;
+	norm = v_norm(dest);
+	v_scalar_mul(dest, 1.0f / norm);
+	return (dest);
 }
