@@ -13,7 +13,7 @@ void	init_world(t_world *world)
 	add_sphere(world, &temp_vector, 100, get_rgba(0, 200, 0, 255));
 }
 
-void	add_sphere(t_world *world, const t_vector3 *center, float radius, int color)
+void	add_sphere(t_world *world, const t_vector3 *center, t_decimal radius, int color)
 {
 	world->spheres[world->nb_spheres] = create_sphere(center, radius, color);
 	world->nb_spheres++;

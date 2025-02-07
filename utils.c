@@ -9,7 +9,7 @@ unsigned int	ft_random_unsigned_int(void)
 	return (value);
 }
 
-float	ft_random(void)
+t_decimal	ft_random(void)
 {
 	unsigned int	a;
 	unsigned int	b;
@@ -23,7 +23,7 @@ float	ft_random(void)
 		a = b;
 		b = temp;
 	}
-	return ((float) a / b);
+	return ((t_decimal) a / b);
 }
 
 // ft_random test;

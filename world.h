@@ -11,6 +11,6 @@ typedef struct s_world
 }	t_world;
 
 void	init_world(t_world *world);
-void	add_sphere(t_world *world, const t_vector3 *center, float radius, int color);
+void	add_sphere(t_world *world, const t_vector3 *center, t_decimal radius, int color);
 
 #endif

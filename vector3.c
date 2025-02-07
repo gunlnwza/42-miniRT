@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/07 16:42:23 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:22:22 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	v_put(const t_vector3 *dest, const char *var_name)
 {
-	printf("%s(%f, %f, %f)\n", var_name, dest->x, dest->y, dest->z);
+	printf("%s(%lf, %lf, %lf)\n", var_name, dest->x, dest->y, dest->z);
 }
 
-t_vector3	*v_set(t_vector3 *dest, float x, float y, float z)
+t_vector3	*v_set(t_vector3 *dest, t_decimal x, t_decimal y, t_decimal z)
 {
 	dest->x = x;
 	dest->y = y;
@@ -50,9 +50,9 @@ t_vector3	*v_sub(t_vector3 *dest, const t_vector3 *src)
 	return (dest);
 }
 
-float	v_dot(const t_vector3 *dest, const t_vector3 *src)
+t_decimal	v_dot(const t_vector3 *dest, const t_vector3 *src)
 {
-	float	value;
+	t_decimal	value;
 
 	value = (dest->x * src->x) + (dest->y * src->y) + (dest->z * src->z);
 	return (value);
@@ -66,7 +66,7 @@ t_vector3	*v_element_mul(t_vector3 *dest, const t_vector3 *src)
 	return (dest);
 }
 
-t_vector3	*v_scalar_mul(t_vector3 *dest, float scalar)
+t_vector3	*v_scalar_mul(t_vector3 *dest, t_decimal scalar)
 {
 	dest->x *= scalar;
 	dest->y *= scalar;
@@ -76,9 +76,9 @@ t_vector3	*v_scalar_mul(t_vector3 *dest, float scalar)
 
 t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src)
 {
-	float	new_x;
-	float	new_y;
-	float	new_z;
+	t_decimal	new_x;
+	t_decimal	new_y;
+	t_decimal	new_z;
 
 	new_x = dest->y * src->z - dest->z * src->y;
 	new_y = dest->z * src->x - dest->x * src->z;
@@ -89,32 +89,30 @@ t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src)
 	return (dest);
 }
 
-float	v_norm2(const t_vector3 *dest)
+t_decimal	v_norm2(const t_vector3 *dest)
 {
-	float	norm2;
+	t_decimal	norm2;
 
 	norm2 = v_dot(dest, dest);
 	return (norm2);
 }
 
-float	v_norm(const t_vector3 *dest)
+t_decimal	v_norm(const t_vector3 *dest)
 {
-	float	norm2;
-	float	norm;
+	t_decimal	norm2;
+	t_decimal	norm;
 
 	norm2 = v_norm2(dest);
-	norm = sqrtf(norm2);
+	norm = sqrt(norm2);
 	return (norm);
 }
 
 // can cause error if dest's norm is 0
 t_vector3	*v_normalize(t_vector3 *dest)
 {
-	float	norm;
+	t_decimal	norm;
 
 	norm = v_norm(dest);
 	v_scalar_mul(dest, 1.0f / norm);
 	return (dest);
 }
-
-

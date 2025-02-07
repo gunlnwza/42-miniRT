@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:59:20 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 14:19:39 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:19:29 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ typedef struct s_ray
 	t_vector3	direction;
 }	t_ray;
 
-void	ray_at(const t_ray *ray, float t, t_vector3 *res_point);
+void	ray_at(const t_ray *ray, t_decimal t, t_vector3 *res_point);
 
 #endif

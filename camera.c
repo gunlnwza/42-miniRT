@@ -2,18 +2,18 @@
 
 void	init_camera(t_camera *camera)
 {
-	float	aspect_ratio;
-	aspect_ratio = (float) WIDTH / HEIGHT;
+	t_decimal	aspect_ratio;
+	aspect_ratio = (t_decimal) WIDTH / HEIGHT;
 	
 	t_vector3	temp_vector;
 
-	float	focal_length;
-	focal_length = 1.0f;
+	t_decimal	focal_length;
+	focal_length = 1.0;
 
-	float	viewport_height;
-	viewport_height = 2.0f;
+	t_decimal	viewport_height;
+	viewport_height = 2.0;
 
-	float	viewport_width;
+	t_decimal	viewport_width;
 	viewport_width = viewport_height * aspect_ratio;
 
 	v_set(&camera->center, 0, 0, 0);
@@ -21,19 +21,19 @@ void	init_camera(t_camera *camera)
 	v_set(&camera->viewport_v, 0, -viewport_height, 0);
 
 	v_copy(&camera->pixel_delta_h, &camera->viewport_h);
-	v_scalar_mul(&camera->pixel_delta_h, 1.0f / WIDTH);
+	v_scalar_mul(&camera->pixel_delta_h, 1.0 / WIDTH);
 	v_copy(&camera->pixel_delta_v, &camera->viewport_v);
-	v_scalar_mul(&camera->pixel_delta_v, 1.0f / HEIGHT);
+	v_scalar_mul(&camera->pixel_delta_v, 1.0 / HEIGHT);
 
 	t_vector3	viewport_upper_left;
 	v_copy(&viewport_upper_left, &camera->center);  // camera_center - vec3(0, 0, focal_length) - viewport_h/2 - viewport_v/2;
 	v_sub(&viewport_upper_left, v_set(&temp_vector, 0, 0, focal_length));
-	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &camera->viewport_h), 0.5f));
-	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &camera->viewport_v), 0.5f));
+	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &camera->viewport_h), 0.5));
+	v_sub(&viewport_upper_left, v_scalar_mul(v_copy(&temp_vector, &camera->viewport_v), 0.5));
 
 	v_copy(&camera->pixel00_loc, &viewport_upper_left);
-	v_add(&camera->pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &camera->pixel_delta_h), 0.5f));
-	v_add(&camera->pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &camera->pixel_delta_v), 0.5f));
+	v_add(&camera->pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &camera->pixel_delta_h), 0.5));
+	v_add(&camera->pixel00_loc, v_scalar_mul(v_copy(&temp_vector, &camera->pixel_delta_v), 0.5));
 
 	// debug
 	// printf("Debug!!!\n");
@@ -59,11 +59,11 @@ void	init_camera(t_camera *camera)
 	// printf("\n");
 }
 
-int	is_ray_hit(const t_world *world, t_ray *ray, float ray_tmin, float ray_tmax, t_hit_record *rec)
+int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
 {
 	t_hit_record	temp_rec;
 	int				hit_anything = 0;
-	float			closest_so_far = ray_tmax;
+	t_decimal			closest_so_far = ray_tmax;
 
 	int i = 0;
 	while (i < world->nb_spheres)
@@ -86,6 +86,18 @@ int	is_ray_hit(const t_world *world, t_ray *ray, float ray_tmin, float ray_tmax,
 	return (hit_anything);
 }
 
+// void	random_on_hemisphere(t_vector3 *dest, const t_vector3 *normal)
+// {
+// 	t_vector3	on_unit_sphere;
+// 	float		length;
+
+// 	while (1)
+// 	{
+// 		v_set(&on_unit_sphere, ft_random(), ft_random(), ft_random());
+// 		if (0.01 < )
+// 	}
+// }
+
 int	ray_color(t_ray *ray, const t_world *world)
 {
 	int				r,g,b;
@@ -96,6 +108,9 @@ int	ray_color(t_ray *ray, const t_world *world)
 	{
 		// r = (rec.normal.x + 1) * 0.5 * 255; g = (rec.normal.y + 1) * 0.5 * 255; b = (rec.normal.z + 1) * 0.5 * 255; color = get_rgba(r, g, b, 255);
 
+		// t_vector3	direction;
+		// random_on_hemisphere(&direction, &rec.normal);
+
 		color = rec.color;
 		return (color);
 	}
@@ -105,7 +120,7 @@ int	ray_color(t_ray *ray, const t_world *world)
 	v_copy(&unit_direction, &ray->direction);
 	v_normalize(&unit_direction);
 
-	float a = 0.5 * (unit_direction.y + 1.0);
+	t_decimal a = 0.5 * (unit_direction.y + 1.0);
 	r = (1.0 - a) * 255 + a * 0.5 * 255; g = (1.0 - a) * 255 + a * 0.7 * 255; b = (1.0 - a) * 255 + a * 1.0 * 255;
 	return (get_rgba(r, g, b, 255));
 }
