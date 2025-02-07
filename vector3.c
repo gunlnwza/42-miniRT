@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 14:56:26 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:56:43 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src)
 	dest->x = new_x;
 	dest->y = new_y;
 	dest->z = new_z;
+	return (dest);
 }
 
 float	v_norm2(const t_vector3 *dest)

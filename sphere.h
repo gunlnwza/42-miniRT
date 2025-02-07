@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:59:20 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/05 15:39:32 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:04:52 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,7 @@
 # define SPHERE_H
 
 # include "ray.h"
-
-typedef struct s_hit_record
-{
-	t_vector3	point;
-	t_vector3	normal;
-	float		t;
-}	t_hit_record;
+# include "hit_record.h"
 
 typedef struct s_sphere
 {

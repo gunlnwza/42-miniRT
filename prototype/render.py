@@ -2,9 +2,9 @@ import time
 
 from PIL import Image
 
-from Camera import Camera
+from prototype.Camera import Camera
 from Scene import Scene
-from Ray import Ray
+from prototype.Ray import Ray
 
 def trace_ray(ray: Ray, scene: Scene) -> tuple:
 	closest_t = 2147483647

@@ -1,7 +1,7 @@
 import math
 
 from Vector3 import Vector3
-from Ray import Ray
+from prototype.Ray import Ray
 
 class SceneObject:
 	# return first-hit t if actually hit, else -1

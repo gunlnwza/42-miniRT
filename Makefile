@@ -1,8 +1,8 @@
 NAME := miniRT
 
 CC := cc
-# CFLAGS := -Wall -Wextra -Werror
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -Werror
+# CFLAGS := -Wall -Wextra
 RM := rm -rf
 
 HEADERS := mini_rt.h vector3.h color.h ray.h sphere.h
@@ -29,12 +29,10 @@ $(LIBFT)/libft.a:
 libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-# Linux
-# $(NAME): $(OBJS) $(HEADERS)
-# 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
-# Mac
-$(NAME): $(OBJS) $(HEADERS)
-	$(CC) $(OBJS) $(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
+$(NAME): $(OBJS) $(HEADERS)  # Linux
+	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
+# $(NAME): $(OBJS) $(HEADERS)  # Mac
+# 	$(CC) $(OBJS) $(LIBS) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
 %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) -c $< -o $@

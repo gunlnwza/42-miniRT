@@ -12,6 +12,8 @@
 # include "color.h"
 # include "sphere.h"
 
+// # define WIDTH 3000
+// # define HEIGHT 2000
 # define WIDTH 800
 # define HEIGHT 600
 

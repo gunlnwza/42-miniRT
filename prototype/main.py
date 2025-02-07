@@ -3,7 +3,7 @@ from datetime import datetime
 
 from PIL import Image
 
-from Camera import Camera
+from prototype.Camera import Camera
 
 from Vector3 import Vector3
 from Scene import Scene
