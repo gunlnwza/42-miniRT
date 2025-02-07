@@ -47,5 +47,7 @@ int hit_sphere(t_sphere *sphere, const t_ray *ray, float ray_tmin, float ray_tma
 	v_sub(&rec->normal, &sphere->center);
 	v_normalize(&rec->normal);
 
+	rec->color = sphere->color;
+
 	return (1);
 }

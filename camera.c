@@ -77,7 +77,7 @@ int	is_ray_hit(const t_world *world, t_ray *ray, float ray_tmin, float ray_tmax,
 				rec->normal = temp_rec.normal;
 				rec->point = temp_rec.point;
 				rec->t = temp_rec.t;
-				rec->color = get_rgba(100, 0, 0, 255);
+				rec->color = temp_rec.color;
 			}
 		}
 		i++;
