@@ -1,6 +1,8 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
+# include <math.h>
+
 # include "utils.h"
 # include "ray.h"
 # include "world.h"
@@ -18,7 +20,7 @@ typedef struct s_camera
 	t_vector3	pixel_delta_v;
 }	t_camera;
 
-void	init_camera(t_camera *camera);
+void	init_camera(t_camera *camera, const t_vector3 *point, const t_vector3 *normal, int fov);
 
 int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec);
 int	ray_color(t_ray *ray, const t_world *world);

@@ -34,7 +34,7 @@ void render_image(mlx_image_t *img, t_world *world, t_camera *camera)
 		{
 			v_copy(&ray.direction, &pixel_center);
 			v_sub(&ray.direction, &camera->center);
-			
+
 		    pixel_color = ray_color(&ray, world);
 			mlx_put_pixel(img, x, y, pixel_color);
 
@@ -70,6 +70,30 @@ static void	ft_keypress(mlx_key_data_t keydata, void *param)
 	(void) param;
 }
 
+void	init_world(t_world *world)
+{
+	t_vector3	temp_vector;
+	
+	world->nb_spheres = 0;
+
+	v_set(&temp_vector, 0, 0, -1);
+	add_sphere(world, &temp_vector, 0.5, get_rgba(255, 0, 0, 255));
+
+	v_set(&temp_vector, 0, -100.5, -1);
+	add_sphere(world, &temp_vector, 100, get_rgba(0, 255, 0, 255));
+
+	v_set(&temp_vector, 1, 0, -1);
+	add_sphere(world, &temp_vector, 0.6, get_rgba(0, 0, 255, 255));
+
+	v_set(&temp_vector, 1, 0, 1);
+	add_sphere(world, &temp_vector, 0.6, get_rgba(0, 200, 200, 255));
+
+	world->ambient_light_color = get_rgba(20, 20, 20, 255);
+
+	world->light.color = get_rgba(100, 100, 100, 255);
+	world->light.point = v_create(0, 10, 0);
+}
+
 int	main(void)
 {
 	t_world		world;
@@ -78,7 +102,10 @@ int	main(void)
 	mlx_image_t	*img;
 
 	init_world(&world);  // replace with parser
-	init_camera(&camera);
+	t_vector3	point = v_create(0, 3, 0);
+	t_vector3	normal = v_create(0, -1, 0);
+	int			fov = 70;
+	init_camera(&camera, &point, &normal, fov);
 
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
