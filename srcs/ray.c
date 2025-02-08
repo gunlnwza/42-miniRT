@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray.h"
+#include "../includes/ray.h"
 
 void	ray_at(const t_ray *ray, t_decimal t, t_vector3 *res_point)
 {

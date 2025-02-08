@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mini_rt.h"
+#include "../includes/mini_rt.h"
 
 void render_loop(mlx_image_t *img)
 {

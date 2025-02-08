@@ -5,8 +5,8 @@
 # include <stdio.h>
 # include <unistd.h>
 
-# include "libft/libft.h"
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../libs/libft/libft.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
 
 # include "camera.h"
 

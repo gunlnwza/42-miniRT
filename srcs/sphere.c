@@ -1,4 +1,4 @@
-#include "sphere.h"
+#include "../includes/sphere.h"
 
 t_sphere	*create_sphere(const t_vector3 *center, t_decimal radius, int color)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "vector3.h"
+#include "../includes/vector3.h"
 
 void	v_put(const t_vector3 *dest, const char *var_name)
 {

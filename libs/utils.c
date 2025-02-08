@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "../includes/utils.h"
 
 // For choice of params, Please refer to https://en.wikipedia.org/wiki/Linear_congruential_generator
 unsigned int	ft_random_unsigned_int(void)

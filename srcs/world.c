@@ -1,4 +1,4 @@
-#include "world.h"
+#include "../includes/world.h"
 
 void	init_world(t_world *world)
 {
