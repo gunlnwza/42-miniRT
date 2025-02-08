@@ -43,3 +43,39 @@ int get_a(int rgba)
     // Move 0 bytes to the right and mask out the first byte.
     return (rgba & 0xFF);
 }
+
+int add_color(int color_a, int color_b)
+{
+    int r;
+    int g;
+    int b;
+
+    r = get_r(color_a) + get_r(color_b);
+    if (r > 255)
+        r = 255;
+    g = get_g(color_a) + get_g(color_b);
+    if (g > 255)
+        g = 255;
+    b = get_b(color_a) + get_b(color_b);
+    if (b > 255)
+        b = 255;
+    return (get_rgba(r, g, b, 255));
+}
+
+int multiply_color(int color_a, int color_b)
+{
+    int r;
+    int g;
+    int b;
+
+    r = (get_r(color_a) * get_r(color_b)) / 255;
+    if (r > 255)
+        r = 255;
+    g = (get_g(color_a) * get_g(color_b)) / 255;
+    if (g > 255)
+        g = 255;
+    b = (get_b(color_a) * get_b(color_b)) / 255;
+    if (b > 255)
+        b = 255;
+    return (get_rgba(r, g, b, 255));
+}

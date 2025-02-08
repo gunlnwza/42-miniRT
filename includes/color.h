@@ -20,4 +20,7 @@ int get_g(int rgba);
 int get_b(int rgba);
 int get_a(int rgba);
 
+int add_color(int color_a, int color_b);
+int multiply_color(int color_a, int color_b);
+
 #endif

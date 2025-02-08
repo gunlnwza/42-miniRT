@@ -62,10 +62,13 @@ void	init_camera(t_camera *camera)
 int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
 {
 	t_hit_record	temp_rec;
-	int				hit_anything = 0;
-	t_decimal		closest_so_far = ray_tmax;
+	int				hit_anything;
+	t_decimal		closest_so_far;
+	int				i;
 
-	int i = 0;
+	hit_anything = 0;
+	closest_so_far = ray_tmax;
+	i = 0;
 	while (i < world->nb_spheres)
 	{
 		if (hit_sphere(world->spheres[i], ray, ray_tmin, ray_tmax, &temp_rec))
@@ -74,6 +77,7 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 			if (temp_rec.t < closest_so_far)
 			{
 				closest_so_far = temp_rec.t;
+
 				rec->normal = temp_rec.normal;
 				rec->point = temp_rec.point;
 				rec->t = temp_rec.t;
@@ -82,7 +86,6 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 		}
 		i++;
 	}
-	// (void) closest_so_far;
 	return (hit_anything);
 }
 
@@ -114,36 +117,24 @@ void	random_on_hemisphere(t_vector3 *dest, const t_vector3 *normal)
 
 int	ray_color(t_ray *ray, const t_world *world)
 {
-	int				r,g,b;
-	// int 			color;
 	t_hit_record	rec;
-
-	t_decimal a;
+	int				ambient_color;
+	int				diffuse_color;
+	int				color;
 
 	if (is_ray_hit(world, ray, 0.001, INF, &rec))
 	{
 		// r = (rec.normal.x + 1) * 0.5 * 255; g = (rec.normal.y + 1) * 0.5 * 255; b = (rec.normal.z + 1) * 0.5 * 255; color = get_rgba(r, g, b, 255);
+		
+		ambient_color = multiply_color(get_rgba(50, 50, 50, 255), rec.color);
 
-		t_vector3	direction;
-		// random_on_hemisphere(&direction, &rec.normal);
-		v_set(&direction, ft_random(), ft_random(), ft_random());
-		v_add(&direction, &rec.normal);
-
-		t_ray	new_ray;
-		new_ray.origin = rec.point;
-		v_copy(&new_ray.direction, &direction);
-
-		a = 0.5;
-		// return ((1 - a) * rec.color + a * ray_color(&new_ray, depth - 1, world));
-		return (ray_color(&new_ray, world));
+		// t_ray	shadow_ray;
+		// shadow_ray.origin = rec.point;
+		// v_copy(&shadow_ray.direction, &direction);
+		diffuse_color = get_rgba(0, 0, 0, 255);
+		
+		color = add_color(ambient_color, diffuse_color);
+		return (color);
 	}
-	
-	// background
-	t_vector3	unit_direction;
-	v_copy(&unit_direction, &ray->direction);
-	v_normalize(&unit_direction);
-
-	a = 0.5 * (unit_direction.y + 1.0);
-	r = (1.0 - a) * 255 + a * 0.5 * 255; g = (1.0 - a) * 255 + a * 0.7 * 255; b = (1.0 - a) * 255 + a * 1.0 * 255;
-	return (get_rgba(r, g, b, 255));
+	return (get_rgba(0, 0, 0, 255));
 }
