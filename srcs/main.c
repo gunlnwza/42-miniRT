@@ -74,24 +74,28 @@ void	init_world(t_world *world)
 {
 	t_vector3	temp_vector;
 	
-	world->nb_spheres = 0;
+	world->nb_objects = 0;
 
-	v_set(&temp_vector, 0, 0, -1);
+	v_set(&temp_vector, 4, 0, -1);
 	add_sphere(world, &temp_vector, 0.5, get_rgba(255, 0, 0, 255));
 
-	v_set(&temp_vector, 0, -100.5, -1);
-	add_sphere(world, &temp_vector, 100, get_rgba(0, 255, 0, 255));
+	// v_set(&temp_vector, 0, -100.5, -1);
+	// add_sphere(world, &temp_vector, 100, get_rgba(0, 255, 0, 255));
 
-	v_set(&temp_vector, 1, 0, -1);
+	v_set(&temp_vector, -1, 0, -2);
 	add_sphere(world, &temp_vector, 0.6, get_rgba(0, 0, 255, 255));
 
-	v_set(&temp_vector, 1, 0, 1);
+	v_set(&temp_vector, -4, 0, 1);
 	add_sphere(world, &temp_vector, 0.6, get_rgba(0, 200, 200, 255));
 
-	world->ambient_light_color = get_rgba(20, 20, 20, 255);
+	t_vector3	normal = v_create(0, 1, 1);
+	v_set(&temp_vector, 0, 0, -2);
+	add_plane(world, &temp_vector, &normal, get_rgba(200, 200, 0, 255));
+
+	world->ambient_light_color = get_rgba(42, 42, 42, 255);
 
 	world->light.color = get_rgba(100, 100, 100, 255);
-	world->light.point = v_create(0, 10, 0);
+	world->light.point = v_create(-5, 3, 1);
 }
 
 int	main(void)
@@ -102,10 +106,13 @@ int	main(void)
 	mlx_image_t	*img;
 
 	init_world(&world);  // replace with parser
-	t_vector3	point = v_create(0, 3, 0);
-	t_vector3	normal = v_create(0, -1, 0);
-	int			fov = 70;
-	init_camera(&camera, &point, &normal, fov);
+	t_vector3	cam_point;
+	t_vector3	cam_normal;
+	int fov = 70;
+	cam_point = v_create(0, 0, 10);
+	// cam_normal = v_create(-1, 0, -1);
+	cam_normal = v_create(0.2, 0, -1);
+	init_camera(&camera, &cam_point, &cam_normal, fov);
 
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);

@@ -94,13 +94,19 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 	int				hit_anything;
 	t_decimal		closest_so_far;
 	int				i;
+	int				ret;
 
 	hit_anything = 0;
 	closest_so_far = ray_tmax;
 	i = 0;
-	while (i < world->nb_spheres)
+	while (i < world->nb_objects)
 	{
-		if (hit_sphere(world->spheres[i], ray, ray_tmin, ray_tmax, &temp_rec))
+
+		if (world->objects[i]->type == SPHERE)
+			ret = hit_sphere(world->objects[i], ray, ray_tmin, ray_tmax, &temp_rec);
+		else if (world->objects[i]->type == PLANE)
+			ret = hit_plane(world->objects[i], ray, ray_tmin, ray_tmax, &temp_rec);
+		if (ret)
 		{
 			hit_anything = 1;
 			if (temp_rec.t < closest_so_far)
@@ -135,14 +141,16 @@ int	ray_color(t_ray *ray, const t_world *world)
 	
 	ambient_color = multiply_color(world->ambient_light_color, rec.color);
 
+	// insert shadow
 	t_ray			shadow_ray;
 	t_hit_record	shadow_ray_rec;
 	shadow_ray.origin = rec.point;
 	v_copy(&shadow_ray.direction, &world->light.point);
 	v_sub(&shadow_ray.direction, &rec.point);
 	v_normalize(&shadow_ray.direction);
-	if (is_ray_hit(world, &shadow_ray, 0.001, INF, &shadow_ray_rec))
+	if (is_ray_hit(world, &shadow_ray, 0.001f, INF, &shadow_ray_rec))
 		return (ambient_color);
+	// is_ray_hit(world, &shadow_ray, 0.001, INF, &shadow_ray_rec);
 
 	t_decimal	dot_product = v_dot(&rec.normal, &shadow_ray.direction);
 	if (dot_product > 0)

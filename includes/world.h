@@ -1,7 +1,7 @@
 #ifndef WORLD_H
 # define WORLD_H
 
-# include "sphere.h"
+# include "object.h"
 # include "color.h"
 
 typedef struct s_light
@@ -12,13 +12,15 @@ typedef struct s_light
 
 typedef struct s_world
 {
-	t_sphere	*spheres[10];
-	int			nb_spheres;
+	t_object	*objects[10];
+	int			nb_objects;
+
 	t_light		light;
 	int			ambient_light_color;
 }	t_world;
 
 void	init_world(t_world *world);
 void	add_sphere(t_world *world, const t_vector3 *center, t_decimal radius, int color);
+void	add_plane(t_world *world, const t_vector3 *point, const t_vector3 *normal, int color);
 
 #endif

@@ -5,9 +5,9 @@ CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 HEADERS := includes/mini_rt.h includes/vector3.h includes/color.h includes/ray.h \
-	includes/sphere.h includes/world.h includes/camera.h includes/utils.h \
-	includes/constants.h
-SRCS := srcs/main.c srcs/ray.c srcs/sphere.c srcs/world.c srcs/camera.c \
+	includes/world.h includes/camera.h includes/utils.h \
+	includes/constants.h includes/object.h
+SRCS := srcs/main.c srcs/ray.c srcs/object.c srcs/world.c srcs/camera.c \
 	libs/vector3.c libs/color.c libs/utils.c
 OBJS := $(SRCS:%.c=%.o)
 
