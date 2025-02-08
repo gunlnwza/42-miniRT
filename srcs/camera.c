@@ -89,32 +89,6 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 	return (hit_anything);
 }
 
-void	random_on_hemisphere(t_vector3 *dest, const t_vector3 *normal)
-{
-	t_vector3	on_unit_sphere;
-	float		length_squared;
-
-	while (1)
-	{
-		v_set(&on_unit_sphere, ft_random(), ft_random(), ft_random());
-		length_squared = v_norm2(&on_unit_sphere);
-		if (1e-160 < length_squared && length_squared <= 1)
-		{
-			v_normalize(&on_unit_sphere);
-			break ;
-		}
-	}
-
-	if (v_dot(&on_unit_sphere, normal) > 0.0)
-	{
-		v_copy(dest, &on_unit_sphere);
-	}
-	else
-	{
-		v_copy(dest, v_scalar_mul(&on_unit_sphere, -1));
-	}
-}
-
 int	ray_color(t_ray *ray, const t_world *world)
 {
 	t_hit_record	rec;
@@ -130,7 +104,6 @@ int	ray_color(t_ray *ray, const t_world *world)
 		// color = get_rgba(r, g, b, 255);
 		
 		ambient_color = multiply_color(world->ambient_light_color, rec.color);
-		// ambient_color = get_rgba(255, 255, 255, 255);
 
 		t_ray	shadow_ray;
 		shadow_ray.origin = rec.point;
