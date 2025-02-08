@@ -112,11 +112,8 @@ void	random_on_hemisphere(t_vector3 *dest, const t_vector3 *normal)
 	}
 }
 
-int	ray_color(t_ray *ray, int depth, const t_world *world)
+int	ray_color(t_ray *ray, const t_world *world)
 {
-	if (depth <= 0)
-		return (get_rgba(0, 0, 0, 255));
-
 	int				r,g,b;
 	// int 			color;
 	t_hit_record	rec;
@@ -138,7 +135,7 @@ int	ray_color(t_ray *ray, int depth, const t_world *world)
 
 		a = 0.5;
 		// return ((1 - a) * rec.color + a * ray_color(&new_ray, depth - 1, world));
-		return (ray_color(&new_ray, depth - 1, world));
+		return (ray_color(&new_ray, world));
 	}
 	
 	// background
