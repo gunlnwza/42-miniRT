@@ -1,16 +1,8 @@
 # vscode
 .vscode
 
-# python
-venv/*
-__pycache__
-
 # Mac
 .DS_Store
-
-# debug
-pictures/*
-log
 
 # binaries
 *.o
