@@ -138,15 +138,22 @@ int	ray_color(t_ray *ray, const t_world *world)
 		v_sub(&shadow_ray.direction, &rec.point);
 		v_normalize(&shadow_ray.direction);
 
-		t_decimal	dot_product = v_dot(&rec.normal, &shadow_ray.direction);
-		if (dot_product > 0)
+		t_hit_record	shadow_ray_rec;
+		if (is_ray_hit(world, &shadow_ray, 0.001, INF, &shadow_ray_rec))
 		{
-			diffuse_color = multiply_color(world->light.color, rec.color);
-			diffuse_color = get_rgba(get_r(diffuse_color) * dot_product, get_g(diffuse_color) * dot_product, get_b(diffuse_color) * dot_product, 255);
+			diffuse_color = get_rgba(0, 0, 0, 255);
 		}
 		else
-			diffuse_color = get_rgba(0, 0, 0, 255);
-
+		{
+			t_decimal	dot_product = v_dot(&rec.normal, &shadow_ray.direction);
+			if (dot_product > 0)
+			{
+				diffuse_color = multiply_color(world->light.color, rec.color);
+				diffuse_color = get_rgba(get_r(diffuse_color) * dot_product, get_g(diffuse_color) * dot_product, get_b(diffuse_color) * dot_product, 255);
+			}
+			else
+				diffuse_color = get_rgba(0, 0, 0, 255);
+		}
 		color = add_color(ambient_color, diffuse_color);
 		return (color);
 	}
