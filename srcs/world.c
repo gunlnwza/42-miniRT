@@ -12,6 +12,8 @@ void	init_world(t_world *world)
 	v_set(&temp_vector, 0, -100.5, -1);
 	add_sphere(world, &temp_vector, 100, get_rgba(0, 255, 0, 255));
 
+	world->ambient_light_color = get_rgba(0, 0, 0, 255);
+
 	world->light.color = get_rgba(100, 100, 100, 255);
 	world->light.point = v_create(5, 5, 5);
 }

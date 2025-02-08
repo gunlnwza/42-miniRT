@@ -15,6 +15,7 @@ typedef struct s_world
 	t_sphere	*spheres[10];
 	int			nb_spheres;
 	t_light		light;
+	int			ambient_light_color;
 }	t_world;
 
 void	init_world(t_world *world);

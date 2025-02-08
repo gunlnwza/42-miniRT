@@ -129,7 +129,8 @@ int	ray_color(t_ray *ray, const t_world *world)
 		// int b = (rec.normal.z + 1) * 0.5 * 255;
 		// color = get_rgba(r, g, b, 255);
 		
-		ambient_color = multiply_color(get_rgba(50, 50, 50, 255), rec.color);
+		ambient_color = multiply_color(world->ambient_light_color, rec.color);
+		// ambient_color = get_rgba(255, 255, 255, 255);
 
 		t_ray	shadow_ray;
 		shadow_ray.origin = rec.point;
@@ -140,8 +141,8 @@ int	ray_color(t_ray *ray, const t_world *world)
 		t_decimal	dot_product = v_dot(&rec.normal, &shadow_ray.direction);
 		if (dot_product > 0)
 		{
-			int lc = world->light.color;
-			diffuse_color = get_rgba(get_r(lc) * dot_product, get_g(lc) * dot_product, get_b(lc) * dot_product, 255);
+			diffuse_color = multiply_color(world->light.color, rec.color);
+			diffuse_color = get_rgba(get_r(diffuse_color) * dot_product, get_g(diffuse_color) * dot_product, get_b(diffuse_color) * dot_product, 255);
 		}
 		else
 			diffuse_color = get_rgba(0, 0, 0, 255);
