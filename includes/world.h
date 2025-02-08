@@ -4,10 +4,17 @@
 # include "sphere.h"
 # include "color.h"
 
+typedef struct s_light
+{
+	int			color;
+	t_vector3	point;
+}	t_light;
+
 typedef struct s_world
 {
 	t_sphere	*spheres[10];
 	int			nb_spheres;
+	t_light		light;
 }	t_world;
 
 void	init_world(t_world *world);

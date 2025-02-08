@@ -18,6 +18,11 @@ void	v_put(const t_vector3 *dest, const char *var_name)
 	printf("%s(%lf, %lf, %lf)\n", var_name, dest->x, dest->y, dest->z);
 }
 
+t_vector3	v_create(t_decimal x, t_decimal y, t_decimal z)
+{
+	return ((t_vector3) {x, y, z});
+}
+
 t_vector3	*v_set(t_vector3 *dest, t_decimal x, t_decimal y, t_decimal z)
 {
 	dest->x = x;
