@@ -1,17 +1,16 @@
 #include "../includes/camera.h"
-
+#include <stdio.h>
 void	init_camera(t_camera *camera, const t_vector3 *point, const t_vector3 *normal, int fov)
 {
 	t_vector3	temp_vector;
 	t_decimal	aspect_ratio;
-	// t_decimal	focal_length;
 	t_decimal	viewport_height;
 	t_decimal	viewport_width;
 	t_vector3	viewport_upper_left;
 
 	aspect_ratio = (t_decimal) WIDTH / HEIGHT;
-	// focal_length = 1.0;
-	viewport_height = 2.0;
+	double rad = ((double) fov * PI) / 180;
+	viewport_height = 2 * tan(rad / 2);
 	viewport_width = viewport_height * aspect_ratio;
 
 	// camera center
@@ -68,12 +67,14 @@ void	init_camera(t_camera *camera, const t_vector3 *point, const t_vector3 *norm
 	// printf("Debug!!!\n");
 	// printf("aspect_ratio = %f\n", aspect_ratio);
 	// printf("focal_length = %f\n", focal_length);
-	// printf("viewport_height = %f\nviewport_width = %f\n", viewport_height, viewport_width);
+	
+	printf("fov = %d\n", fov);
+	printf("viewport_height = %f\nviewport_width = %f\n", viewport_height, viewport_width);
 	// v_put(&camera_center, "camera_center");
-	// printf("\n");
-	// v_put(&viewport_h, "viewport_h");
-	// v_put(&viewport_v, "viewport_v");
-	// printf("\n");
+	printf("\n");
+	v_put(&camera->viewport_h, "viewport_h");
+	v_put(&camera->viewport_v, "viewport_v");
+	printf("\n");
 	// v_put(&pixel_delta_h, "pixel_delta_h");
 	// v_put(&pixel_delta_v, "pixel_delta_v");
 	// printf("\n");

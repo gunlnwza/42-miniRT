@@ -109,9 +109,9 @@ int	main(void)
 	t_vector3	cam_point;
 	t_vector3	cam_normal;
 	int fov = 70;
-	cam_point = v_create(0, 0, 10);
+	cam_point = v_create(0, 0, 12);
 	// cam_normal = v_create(-1, 0, -1);
-	cam_normal = v_create(0.2, 0, -1);
+	cam_normal = v_create(0, 0, -0.8);
 	init_camera(&camera, &cam_point, &cam_normal, fov);
 
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
