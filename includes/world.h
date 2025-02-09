@@ -22,5 +22,6 @@ typedef struct s_world
 void	init_world(t_world *world);
 void	add_sphere(t_world *world, const t_vector3 *center, t_decimal radius, int color);
 void	add_plane(t_world *world, const t_vector3 *point, const t_vector3 *normal, int color);
+void	add_cylinder(t_world *world, const t_vector3 *point, const t_vector3 *normal, int color, t_decimal radius, t_decimal height);
 
 #endif

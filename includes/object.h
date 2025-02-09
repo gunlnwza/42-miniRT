@@ -27,7 +27,7 @@ int			hit_sphere(t_object *sphere, const t_ray *ray, t_decimal ray_tmin, t_decim
 t_object    *create_plane(const t_vector3 *point, const t_vector3 *normal, int color);
 int         hit_plane(t_object *plane, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec);
 
-t_object    *create_cylinder(const t_vector3 *point, t_decimal radius, const t_vector3 *normal, int color);
+t_object    *create_cylinder(const t_vector3 *point, t_decimal radius, const t_vector3 *normal, int color, t_decimal height);
 int         hit_cylinder(t_object *cylinder, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec);
 
 

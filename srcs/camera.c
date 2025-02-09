@@ -103,9 +103,20 @@ int	is_ray_hit(const t_world *world, t_ray *ray, t_decimal ray_tmin, t_decimal r
 	{
 
 		if (world->objects[i]->type == SPHERE)
+		{
+			// printf("Sp ");
 			ret = hit_sphere(world->objects[i], ray, ray_tmin, ray_tmax, &temp_rec);
+		}
 		else if (world->objects[i]->type == PLANE)
+		{
+			// printf("Pl ");
 			ret = hit_plane(world->objects[i], ray, ray_tmin, ray_tmax, &temp_rec);
+		}
+		else
+		{
+			// printf("Cy ");
+			ret = hit_cylinder(world->objects[i], ray, ray_tmin, ray_tmax, &temp_rec);
+		}
 		if (ret)
 		{
 			hit_anything = 1;

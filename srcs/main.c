@@ -72,30 +72,33 @@ static void	ft_keypress(mlx_key_data_t keydata, void *param)
 
 void	init_world(t_world *world)
 {
-	t_vector3	temp_vector;
+	t_vector3	point;
+	t_vector3	normal;
 	
 	world->nb_objects = 0;
 
-	v_set(&temp_vector, 4, 0, -1);
-	add_sphere(world, &temp_vector, 0.5, get_rgba(255, 0, 0, 255));
+	int ambient_I = 50;
+	int diffuse_I = 200;
 
-	// v_set(&temp_vector, 0, -100.5, -1);
-	// add_sphere(world, &temp_vector, 100, get_rgba(0, 255, 0, 255));
+	world->ambient_light_color = get_rgba(ambient_I, ambient_I, ambient_I, 255);
 
-	v_set(&temp_vector, -1, 0, -2);
-	add_sphere(world, &temp_vector, 0.6, get_rgba(0, 0, 255, 255));
+	world->light.color = get_rgba(diffuse_I, diffuse_I, diffuse_I, 255);
+	world->light.point = v_create(0, 0, 5);
 
-	v_set(&temp_vector, -4, 0, 1);
-	add_sphere(world, &temp_vector, 0.6, get_rgba(0, 200, 200, 255));
+	v_set(&point, 0, 0, -1);
+	v_set(&normal, 0, 1, 0.2);
+	double r = 0.5;
+	double h = 0.5;
+	add_cylinder(world, &point, &normal, get_rgba(200, 0, 0, 255), r, h);
 
-	t_vector3	normal = v_create(0, 1, 1);
-	v_set(&temp_vector, 0, 0, -2);
-	add_plane(world, &temp_vector, &normal, get_rgba(200, 200, 0, 255));
+	// v_set(&point, 0, -2, -2);
+	// v_set(&normal, 0, 1, 1);
+	// add_plane(world, &point, &normal, get_rgba(0, 200, 0, 255));
 
-	world->ambient_light_color = get_rgba(42, 42, 42, 255);
+	// v_set(&point, 0, -2, -2);
+	// v_set(&normal, 1, 0, 1);
+	// add_plane(world, &point, &normal, get_rgba(0, 0, 200, 255));
 
-	world->light.color = get_rgba(100, 100, 100, 255);
-	world->light.point = v_create(-5, 3, 1);
 }
 
 void	init_camera(t_camera *camera)
@@ -104,9 +107,9 @@ void	init_camera(t_camera *camera)
 	t_vector3	cam_normal;
 	int 		fov;
 
-	cam_point = v_create(0, 0, 0);
-	cam_normal = v_create(0, 0, -1);
-	fov	= 70;
+	// cam_point = v_create(0, 0, 1); cam_normal = v_create(0, 0, -1); fov	= 70;
+	// cam_point = v_create(1, 0, 1); cam_normal = v_create(-1, 0, -1); fov = 80;  // yes!! this is correct cylinder!
+	cam_point = v_create(1, 5, 30); cam_normal = v_create(-0.5, 0, -1); fov = 60; 
 	calculate_and_set_camera(camera, &cam_point, &cam_normal, fov);
 }
 
