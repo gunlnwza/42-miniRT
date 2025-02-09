@@ -98,6 +98,18 @@ void	init_world(t_world *world)
 	world->light.point = v_create(-5, 3, 1);
 }
 
+void	init_camera(t_camera *camera)
+{
+	t_vector3	cam_point;
+	t_vector3	cam_normal;
+	int 		fov;
+
+	cam_point = v_create(0, 0, 0);
+	cam_normal = v_create(0, 0, -1);
+	fov	= 70;
+	calculate_and_set_camera(camera, &cam_point, &cam_normal, fov);
+}
+
 int	main(void)
 {
 	t_world		world;
@@ -106,13 +118,7 @@ int	main(void)
 	mlx_image_t	*img;
 
 	init_world(&world);  // replace with parser
-	t_vector3	cam_point;
-	t_vector3	cam_normal;
-	int fov = 70;
-	cam_point = v_create(0, 0, 12);
-	// cam_normal = v_create(-1, 0, -1);
-	cam_normal = v_create(0, 0, -0.8);
-	init_camera(&camera, &cam_point, &cam_normal, fov);
+	init_camera(&camera);  // replace with parser
 
 	// mlx_set_setting(MLX_MAXIMIZED, true); // set the window to max size on start
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
@@ -132,7 +138,9 @@ int	main(void)
 	mlx_close_hook(mlx, ft_close, NULL);
 	mlx_key_hook(mlx, ft_keypress, NULL);
 	mlx_loop_hook(mlx, ft_hook, mlx);
+
 	render_image(img, &world, &camera);
+	
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);

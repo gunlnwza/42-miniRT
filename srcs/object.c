@@ -46,7 +46,7 @@ t_object    *create_cylinder(const t_vector3 *point, t_decimal radius, const t_v
 // return bool
 int hit_sphere(t_object *sphere, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
 {
-	t_vector3	oc;
+	t_vector3	oc;  // = C - O  (center - ray_origin)
 	v_copy(&oc, &sphere->point);
 	v_sub(&oc, &ray->origin);
 
@@ -98,14 +98,39 @@ int	hit_plane(t_object *plane, const t_ray *ray, t_decimal ray_tmin, t_decimal r
 	return (1);
 }
 
-
-
-int         hit_cylinder(t_object *cylinder, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
+int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
 {
-	(void) cylinder;
-	(void) ray;
-	(void) ray_tmin;
-	(void) ray_tmax;
-	(void) rec;
-	return (0);
+	t_vector3	oc;
+	v_copy(&oc, &cylinder->point);
+	v_sub(&oc, &ray->origin);
+
+	t_decimal a = v_norm2(&ray->direction);
+	t_decimal h = v_dot(&ray->direction, &oc);
+	t_decimal r = cylinder->radius;
+	t_decimal k = 0;
+	t_decimal c = v_norm2(&oc) - (r * r) - (k * k);  // very similar to sphere formula, except for c term, which have -k^2
+	
+	t_decimal discriminant = h * h - a * c;
+	if (discriminant < 0)
+		return (0);
+
+	t_decimal sqrtd = sqrtf(discriminant);
+
+	t_decimal root = (h - sqrtd) / a;
+	if (root <= ray_tmin || ray_tmax <= root)
+	{
+		root = (h + sqrtd) / a;
+		if (root <= ray_tmin || ray_tmax <= root)
+			return (0);
+	}
+
+	// save to record
+	rec->t = root;
+	ray_at(ray, rec->t, &rec->point);
+
+	v_copy(&rec->normal, &rec->point);
+	v_sub(&rec->normal, &cylinder->point);
+	v_normalize(&rec->normal);
+	rec->color = cylinder->color;
+	return (1);
 }

@@ -16,8 +16,9 @@ typedef struct s_object
     t_object_type   type;   // sp, pl, cy
     t_vector3       point;  // sp, pl, cy
     int             color;  // sp, pl, cy
-    t_decimal       radius; // sp,     cy
     t_vector3       normal; //     pl, cy
+    t_decimal       radius; // sp,     cy
+    t_decimal       height; //         cy
 }   t_object;
 
 t_object	*create_sphere(const t_vector3 *center, t_decimal radius, int color);
