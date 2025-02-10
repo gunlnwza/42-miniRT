@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create.c                                           :+:      :+:    :+:   */
+/*   vector3_create.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:04:08 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:05:33 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:56:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ t_vector3	*v_copy(t_vector3 *dest, const t_vector3 *src)
 	return (dest);
 }
 
-
 t_vector3	v_create(double x, double y, double z)
 {
-	return ((t_vector3) {x, y, z});
+	return ((t_vector3){x, y, z});
 }
 
 t_vector3	v_copy_create(const t_vector3 *src)

@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 17:42:01 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/10 17:43:06 by nteechar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/object.h"
 
-t_object    *create_cylinder(const t_vector3 *point, double radius, const t_vector3 *normal, int color, double height)
+t_object	*create_cylinder(const t_vector3 *point, double radius,
+				const t_vector3 *normal, int color, double height)
 {
 	t_object	*cylinder;
 
@@ -16,7 +29,7 @@ t_object    *create_cylinder(const t_vector3 *point, double radius, const t_vect
 	return (cylinder);
 }
 
-
+/*
 // still not correct
 int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 {
@@ -93,3 +106,4 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 
 	return (1);
 }
+*/
