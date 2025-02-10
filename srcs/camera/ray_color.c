@@ -1,6 +1,6 @@
 #include "../../includes/camera.h"
 
-int	ray_color(t_ray *ray, const t_world *world)
+int	ray_color(t_ray *ray, t_world *world)
 {
 	t_hit_record	rec;
 	int				ambient_color, diffuse_color;

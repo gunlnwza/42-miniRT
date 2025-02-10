@@ -21,7 +21,7 @@ typedef struct s_camera
 
 void	configure_camera(t_camera *camera, const t_vector3 *point, const t_vector3 *normal, int deg_fov);
 
-int	is_ray_hit(const t_world *world, t_ray *ray, t_hit_record *rec);
-int	ray_color(t_ray *ray, const t_world *world);
+int	is_ray_hit(t_world *world, t_ray *ray, t_hit_record *rec);
+int	ray_color(t_ray *ray, t_world *world);
 
 #endif
