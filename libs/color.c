@@ -6,9 +6,11 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:07 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/04 18:49:22 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 12:12:04 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// RRRRRRRR GGGGGGGG BBBBBBBB AAAAAAAA
 
 // 'Encodes' four individual bytes into an int.
 int get_rgba(int r, int g, int b, int a)

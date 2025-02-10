@@ -45,9 +45,14 @@ t_object    *create_cylinder(const t_vector3 *point, t_decimal radius, const t_v
 	return (cylinder);
 }
 
+
+
 // return bool
-int hit_sphere(t_object *sphere, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
+int hit_sphere(t_object *sphere, const t_ray *ray, t_hit_record *rec)
 {
+	t_decimal ray_tmin = 0.001;
+	t_decimal ray_tmax = INF;
+
 	t_vector3	oc;  // = C - O  (center - ray_origin)
 	v_copy(&oc, &sphere->point);
 	v_sub(&oc, &ray->origin);
@@ -81,8 +86,11 @@ int hit_sphere(t_object *sphere, const t_ray *ray, t_decimal ray_tmin, t_decimal
 	return (1);
 }
 
-int	hit_plane(t_object *plane, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
+int	hit_plane(t_object *plane, const t_ray *ray, t_hit_record *rec)
 {
+	t_decimal ray_tmin = 0.001;
+	t_decimal ray_tmax = INF;
+
 	t_vector3	cq;
 	t_decimal	root;
 
@@ -100,14 +108,11 @@ int	hit_plane(t_object *plane, const t_ray *ray, t_decimal ray_tmin, t_decimal r
 	return (1);
 }
 
-// // V = dest, A = src; to project A onto V
-// t_vector3	*v_proj(t_vector3 *dest, const t_vector3 *src)
-// {
-// 	return (dest);
-// }
-
-int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_decimal ray_tmin, t_decimal ray_tmax, t_hit_record *rec)
+int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 {
+	t_decimal ray_tmin = 0.001;
+	t_decimal ray_tmax = INF;
+
 	t_vector3	center_to_origin;
 	v_copy(&center_to_origin, &ray->origin);
 	v_sub(&center_to_origin, &cylinder->point);

@@ -7,8 +7,14 @@ RM := rm -rf
 HEADERS := includes/mini_rt.h includes/vector3.h includes/color.h includes/ray.h \
 	includes/world.h includes/camera.h includes/utils.h \
 	includes/constants.h includes/object.h
-SRCS := srcs/main.c srcs/ray.c srcs/object.c srcs/world.c srcs/camera.c \
+
+SRCS := \
+	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c srcs/camera/render_image.c  \
+	\
+	srcs/main.c srcs/ray.c srcs/object.c srcs/world.c \
+	\
 	libs/vector3.c libs/color.c libs/utils.c
+
 OBJS := $(SRCS:%.c=%.o)
 
 LIBFT := ./libs/libft
