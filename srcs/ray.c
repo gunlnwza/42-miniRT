@@ -12,6 +12,7 @@
 
 #include "../includes/ray.h"
 
+// will move into camera dir later
 void	ray_at(const t_ray *ray, double t, t_vector3 *res_point)
 {
 	t_vector3	diff;

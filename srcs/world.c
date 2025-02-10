@@ -12,6 +12,8 @@
 
 #include "../includes/world_and_camera.h"
 
+// will be replaced with parser later
+
 void	add_sphere(t_world *world, const t_vector3 *center,
 			double radius, int color)
 {
