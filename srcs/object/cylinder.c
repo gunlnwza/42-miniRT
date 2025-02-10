@@ -82,6 +82,24 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 		if (root < RAY_T_MIN)
 			return (FALSE);
 	}
+
+	// see if the 0 <= parallel_component length <= h
+	// t_vector3	parallel_component;
+	// t_vector3	P;
+	// t_vector3	CP;
+
+	// ray_at(ray, root, &P);
+	// v_copy(&CP, &P);
+	// v_sub(&CP, &cylinder->point);
+
+	// double height = v_dot(&CP, &cylinder->normal);
+	// if (height < 0 || height > cylinder->height)
+		// return (FALSE);
+	// v_copy(&parallel_component, &cylinder->normal);
+	// v_scalar_mul(&parallel_component, height);
+
 	save_to_record(rec, root, ray, cylinder, &A_p, &D_p);
+
+	// hit_cylinder_caps(rec, ray, cylinder);
 	return (TRUE);
 }

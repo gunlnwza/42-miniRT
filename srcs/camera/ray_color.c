@@ -12,14 +12,6 @@
 
 #include "../../includes/world_and_camera.h"
 
-static int get_normal_color(t_vector3 *normal)
-{
-	int r = (normal->x + 1) * 0.5 * 255; 
-	int g = (normal->y + 1) * 0.5 * 255; 
-	int b = (normal->z + 1) * 0.5 * 255;
-	return (get_rgba(r, g, b, 255));
-}
-
 static int	is_shadow_ray_hit(t_world *world, t_hit_record *rec,
 				t_ray *shadow_ray, t_hit_record *shadow_ray_rec)
 {
@@ -58,7 +50,10 @@ int	ray_color(t_ray *ray, t_world *world)
 
 	if (!is_ray_hit(world, ray, &rec))
 		return (get_rgba(0, 0, 0, 255));
-	return (get_normal_color(&rec.normal));
+	// int r = (normal->x + 1) * 0.5 * 255;
+	// int g = (normal->y + 1) * 0.5 * 255; 
+	// int b = (normal->z + 1) * 0.5 * 255;
+	// return (get_rgba(r, g, b, 255));  // get normal color
 	ambient_color = multiply_color(world->ambient_light_color, rec.color);
 	if (is_shadow_ray_hit(world, &rec, &shadow_ray, &shadow_ray_rec))
 		return (ambient_color);
