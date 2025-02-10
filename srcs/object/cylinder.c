@@ -29,10 +29,55 @@ t_object	*create_cylinder(const t_vector3 *point, double radius,
 	return (cylinder);
 }
 
+static void	get_perpendicular_component(t_vector3 *dest, const t_vector3 *src, const t_vector3 *normal)
+{
+	t_vector3	parallel_component;
+
+	v_copy(&parallel_component, normal);
+	v_scalar_mul(&parallel_component, v_dot(src, normal));
+	\
+	v_copy(dest, src);
+	v_sub(dest, &parallel_component);
+}
+
+static void	save_to_record(t_hit_record *rec, double root,
+				const t_ray *ray, t_object *cylinder, t_vector3 *A_p, t_vector3 *D_p)
+{
+	rec->t = root;
+	ray_at(ray, rec->t, &rec->point);
+	\
+	v_copy(&rec->normal, D_p);
+	v_scalar_mul(&rec->normal, rec->t);
+	v_add(&rec->normal, A_p);
+	v_normalize(&rec->normal);
+	\
+	rec->color = cylinder->color;
+}
+
 int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 {
-	(void) cylinder;
-	(void) ray;
-	(void) rec;
+	t_vector3	A;
+	t_vector3	A_p;
+	t_vector3	D_p;
+	double		a, b, c, discriminant, sqrtd, root;
+
+	v_copy(&A, &ray->origin);
+	v_sub(&A, &cylinder->point);
+	get_perpendicular_component(&A_p, &A, &cylinder->normal);
+	get_perpendicular_component(&D_p, &ray->direction, &cylinder->normal);
+
+	a = v_norm2(&D_p);
+	b = 2 * v_dot(&A_p, &D_p);
+	c = v_norm2(&A_p) - cylinder->radius * cylinder->radius;
+
+	discriminant = b * b - 4 * a * c;
+	if (discriminant < 0)
+		return (0);
+	
+	sqrtd = sqrt(discriminant);
+	root = (-b + sqrtd) / (2 * a);
+	// if (root < RAY_T_MIN)
+	//	use another root
+	save_to_record(rec, root, ray, cylinder, &A_p, &D_p);
 	return (1);
 }
