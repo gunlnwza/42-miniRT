@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   norm.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 13:59:24 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:11:24 by nteechar         ###   ########.fr       */
+/*   Created: 2025/02/10 16:08:59 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/10 16:08:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ray.h"
+#include "../../includes/vector3.h"
 
-void	ray_at(const t_ray *ray, double t, t_vector3 *res_point)
+double	v_norm2(const t_vector3 *dest)
 {
-	t_vector3	direction;
+	return (v_dot(dest, dest));
+}
 
-	v_copy(&direction, &ray->direction);
-	v_copy(res_point, &ray->origin);
-	v_add(res_point, v_scalar_mul(&direction, t));
+double	v_norm(const t_vector3 *dest)
+{
+	return (sqrt(v_norm2(dest)));
 }

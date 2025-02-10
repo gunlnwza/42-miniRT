@@ -1,6 +1,6 @@
 #include "../../includes/object.h"
 
-t_object    *create_cylinder(const t_vector3 *point, t_decimal radius, const t_vector3 *normal, int color, t_decimal height)
+t_object    *create_cylinder(const t_vector3 *point, double radius, const t_vector3 *normal, int color, double height)
 {
 	t_object	*cylinder;
 
@@ -20,8 +20,8 @@ t_object    *create_cylinder(const t_vector3 *point, t_decimal radius, const t_v
 // still not correct
 int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 {
-	t_decimal ray_tmin = 0.001;
-	t_decimal ray_tmax = INF;
+	double ray_tmin = 0.001;
+	double ray_tmax = INF;
 
 	t_vector3	center_to_origin;
 	v_copy(&center_to_origin, &ray->origin);
@@ -50,19 +50,19 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 	v_sub(&D_perpen, &temp_normal);
 
 
-	t_decimal a, b, c;
+	double a, b, c;
 
 	a = v_norm2(&D_perpen);
 	b = 2 * v_dot(&A_perpen, &D_perpen);
 	c = v_norm2(&A_perpen) - (cylinder->radius * cylinder->radius);
 	
-	t_decimal discriminant = b * b - 4 * a * c;
+	double discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
 		return (0);
 
-	t_decimal sqrtd = sqrtf(discriminant);
+	double sqrtd = sqrtf(discriminant);
 
-	t_decimal root = (-b - sqrtd) / (2*a);
+	double root = (-b - sqrtd) / (2*a);
 	if (root <= ray_tmin || ray_tmax <= root)
 	{
 		root = (-b + sqrtd) / (2*a);

@@ -3,6 +3,6 @@
 
 # include "constants.h"
 
-t_decimal	ft_random(void);
+double	ft_random(void);
 
 #endif

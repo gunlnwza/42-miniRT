@@ -1,6 +1,6 @@
 #include "../../includes/object.h"
 
-t_object	*create_sphere(const t_vector3 *center, t_decimal radius, int color)
+t_object	*create_sphere(const t_vector3 *center, double radius, int color)
 {
 	t_object	*sphere;
 
@@ -14,42 +14,46 @@ t_object	*create_sphere(const t_vector3 *center, t_decimal radius, int color)
 	return (sphere);
 }
 
+static void	save_to_record(t_hit_record *rec, double root,
+				const t_ray *ray, t_object *sphere)
+{
+	rec->t = root;
+	\
+	ray_at(ray, rec->t, &rec->point);
+	\
+	v_sub(v_copy(&rec->normal, &rec->point), &sphere->point);
+	v_normalize(&rec->normal);
+	\
+	rec->color = sphere->color;
+}
 
 // return bool
 int hit_sphere(t_object *sphere, const t_ray *ray, t_hit_record *rec)
 {
-	t_decimal ray_tmin = 0.001;
-	t_decimal ray_tmax = INF;
+	double ray_tmin = 0.001;
+	double ray_tmax = INF;
 
 	t_vector3	oc;  // = C - O  (center - ray_origin)
 	v_copy(&oc, &sphere->point);
 	v_sub(&oc, &ray->origin);
 
-	t_decimal a = v_norm2(&ray->direction);
-	t_decimal h = v_dot(&ray->direction, &oc);
-	t_decimal c = v_norm2(&oc) - (sphere->radius * sphere->radius);
+	double a = v_norm2(&ray->direction);
+	double h = v_dot(&ray->direction, &oc);
+	double c = v_norm2(&oc) - (sphere->radius * sphere->radius);
 	
-	t_decimal discriminant = h * h - a * c;
+	double discriminant = h * h - a * c;
 	if (discriminant < 0)
 		return (0);
 
-	t_decimal sqrtd = sqrtf(discriminant);
+	double sqrtd = sqrtf(discriminant);
 
-	t_decimal root = (h - sqrtd) / a;
+	double root = (h - sqrtd) / a;
 	if (root <= ray_tmin || ray_tmax <= root)
 	{
 		root = (h + sqrtd) / a;
 		if (root <= ray_tmin || ray_tmax <= root)
 			return (0);
 	}
-
-	// save to record
-	rec->t = root;
-	ray_at(ray, rec->t, &rec->point);
-
-	v_copy(&rec->normal, &rec->point);
-	v_sub(&rec->normal, &sphere->point);
-	v_normalize(&rec->normal);
-	rec->color = sphere->color;
+	save_to_record(rec, root, ray, sphere);
 	return (1);
 }

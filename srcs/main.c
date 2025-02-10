@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 13:39:46 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:15:50 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,30 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 {
 	t_vector3	point;
 	t_vector3	normal;
+	int 		fov;
 	
 	world->nb_objects = 0;
 
 	int ambient_I = 50;
-	int diffuse_I = 200;
+	int diffuse_I = 150;
 
 	world->ambient_light_color = get_rgba(ambient_I, ambient_I, ambient_I, 255);
 
 	world->light.color = get_rgba(diffuse_I, diffuse_I, diffuse_I, 255);
-	world->light.point = v_create(0, 0, 5);
+	world->light.point = v_create(0, 5, 0);
 
-	// v_set(&point, 0, 0, -1);
-	// v_set(&normal, 0, 1, 0.2);
-	// double r = 0.5;
-	// double h = 0.5;
-	// add_cylinder(world, &point, &normal, get_rgba(200, 0, 0, 255), r, h);
+	add_sphere(world, v_set(&point, 0, -100.5, -1), 100, get_rgba(0, 0, 200, 255));
+	// add_sphere(world, v_set(&point, 0, 0, -1), 0.5, get_rgba(200, 0, 0, 255));
+	// add_sphere(world, v_set(&point, 2, 1, -2), 1, get_rgba(0, 200, 0, 255));
+	// add_sphere(world, v_set(&point, -2, 2, -2), 1.5, get_rgba(0, 200, 200, 255));
 
-	v_set(&point, 0, -2, -2);
-	v_set(&normal, 0, 1, 1);
-	add_sphere(world, &point, 1, get_rgba(200, 0, 0, 255));
+	add_plane(world, v_set(&point, 0, 0, -8), v_set(&normal, 0, 0, 1), get_rgba(200, 200, 0, 255));
 
-	v_set(&point, 0, -2, -2);
-	v_set(&normal, 0, 1, 1);
-	add_plane(world, &point, &normal, get_rgba(0, 200, 0, 255));
-
-	v_set(&point, 0, -2, -2);
-	v_set(&normal, 1, 0, 1);
-	add_plane(world, &point, &normal, get_rgba(0, 0, 200, 255));
-
-
-	int 		fov;
-	// cam_point = v_create(0, 0, 1); cam_normal = v_create(0, 0, -1); fov	= 70;
-	// cam_point = v_create(1, 0, 1); cam_normal = v_create(-1, 0, -1); fov = 80;  // yes!! this is correct cylinder!
-	point = v_create(1, 5, 30); normal = v_create(-0.5, 0, -1); fov = 60; 
+	v_set(&point, 0, 0, 1);
+	v_normalize(v_set(&normal, -0.1, 0.3, -1));
+	fov = 100; 
 	configure_camera(camera, &point, &normal, fov);
-	
+
 	return (SUCCESS);
 }
 

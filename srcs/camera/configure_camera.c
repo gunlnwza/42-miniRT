@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:38:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 13:47:13 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:11:24 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static void	configure_viewport_v_and_h(
 				t_camera *camera, const t_vector3 *normal, int deg_fov)
 {
 	t_vector3	world_up;
-	t_decimal	aspect_ratio;
-	t_decimal	viewport_width;
-	t_decimal	viewport_height;
-	t_decimal	rad_fov;
+	double	aspect_ratio;
+	double	viewport_width;
+	double	viewport_height;
+	double	rad_fov;
 
 	world_up = v_create(0, 1, 0);
 	if (fabs(normal->x) < 1e-6 && fabs(normal->z) < 1e-6)
@@ -28,7 +28,7 @@ static void	configure_viewport_v_and_h(
 	v_cross(v_copy(&camera->viewport_h, normal), &world_up);
 	v_cross(v_copy(&camera->viewport_v, normal), &camera->viewport_h);
 	\
-	aspect_ratio = (t_decimal) WIDTH / HEIGHT;
+	aspect_ratio = (double) WIDTH / HEIGHT;
 	rad_fov = (((double) deg_fov) * PI) / 180;
 	viewport_height = 2 * tan(rad_fov / 2);
 	viewport_width = viewport_height * aspect_ratio;

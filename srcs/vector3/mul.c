@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   mul.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 13:59:24 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:11:24 by nteechar         ###   ########.fr       */
+/*   Created: 2025/02/10 16:07:36 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/10 16:07:36 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ray.h"
+#include "../../includes/vector3.h"
 
-void	ray_at(const t_ray *ray, double t, t_vector3 *res_point)
+t_vector3	*v_element_mul(t_vector3 *dest, const t_vector3 *src)
 {
-	t_vector3	direction;
+	dest->x *= src->x;
+	dest->y *= src->y;
+	dest->z *= src->z;
+	return (dest);
+}
 
-	v_copy(&direction, &ray->direction);
-	v_copy(res_point, &ray->origin);
-	v_add(res_point, v_scalar_mul(&direction, t));
+t_vector3	*v_scalar_mul(t_vector3 *dest, double scalar)
+{
+	dest->x *= scalar;
+	dest->y *= scalar;
+	dest->z *= scalar;
+	return (dest);
 }

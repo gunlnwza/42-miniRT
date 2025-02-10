@@ -28,7 +28,7 @@ int	ray_color(t_ray *ray, t_world *world)
 		return (ambient_color);
 	// is_ray_hit(world, &shadow_ray, 0.001, INF, &shadow_ray_rec);
 
-	t_decimal	dot_product = v_dot(&rec.normal, &shadow_ray.direction);
+	double	dot_product = v_dot(&rec.normal, &shadow_ray.direction);
 	if (dot_product > 0)
 	{
 		diffuse_color = multiply_color(world->light.color, rec.color);

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   cross.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 13:59:24 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:11:24 by nteechar         ###   ########.fr       */
+/*   Created: 2025/02/10 16:05:40 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/10 16:07:22 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ray.h"
+#include "../../includes/vector3.h"
 
-void	ray_at(const t_ray *ray, double t, t_vector3 *res_point)
+t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src)
 {
-	t_vector3	direction;
+	double	new_x;
+	double	new_y;
+	double	new_z;
 
-	v_copy(&direction, &ray->direction);
-	v_copy(res_point, &ray->origin);
-	v_add(res_point, v_scalar_mul(&direction, t));
+	new_x = dest->y * src->z - dest->z * src->y;
+	new_y = dest->z * src->x - dest->x * src->z;
+	new_z = dest->x * src->y - dest->y * src->x;
+	v_set(dest, new_x, new_y, new_z);
+	return (dest);
 }
