@@ -74,12 +74,11 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 		// v_set(&point, 0, 0, -8), v_set(&normal, 0, 0, 1), get_rgba(200, 200, 0, 255));
 	\
 	add_cylinder(world,
-		v_set(&point, 0, 0, -10), v_normalize(v_set(&normal, 1, 1, 3)), get_rgba(200, 0, 200, 255), 1, 10);
+		v_set(&point, 0, 0, -4), v_normalize(v_set(&normal, 1, 1, 3)), get_rgba(200, 0, 200, 255), 1, 10);
+		// v_set(&point, 0, 0, 2), v_normalize(v_set(&normal, 0, 1, 0)), get_rgba(200, 0, 200, 255), 1, 10);
 	\
-	v_set(&point, 0, 0, 1);
-	v_normalize(v_set(&normal, -0.1, 0.3, -1));
-	fov = 150;
-	configure_camera(camera, &point, &normal, fov);
+	fov = 170;
+	configure_camera(camera, v_set(&point, 0, 0, 1), v_normalize(v_set(&normal, 0, 0, -1)), fov);
 	\
 	return (SUCCESS);
 }

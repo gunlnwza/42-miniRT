@@ -75,9 +75,13 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 		return (0);
 	
 	sqrtd = sqrt(discriminant);
-	root = (-b + sqrtd) / (2 * a);
-	// if (root < RAY_T_MIN)
-	//	use another root
+	root = (-b - sqrtd) / (2 * a);
+	if (root < RAY_T_MIN)
+	{
+		root = (-b + sqrtd) / (2 * a);
+		if (root < RAY_T_MIN)
+			return (FALSE);
+	}
 	save_to_record(rec, root, ray, cylinder, &A_p, &D_p);
-	return (1);
+	return (TRUE);
 }
