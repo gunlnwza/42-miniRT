@@ -11,7 +11,9 @@ HEADERS := includes/mini_rt.h includes/vector3.h includes/color.h includes/ray.h
 SRCS := \
 	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c srcs/camera/render_image.c  \
 	\
-	srcs/main.c srcs/ray.c srcs/object.c srcs/world.c \
+	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
+	\
+	srcs/main.c srcs/ray.c  srcs/world.c \
 	\
 	libs/vector3.c libs/color.c libs/utils.c
 
