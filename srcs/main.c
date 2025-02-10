@@ -6,52 +6,19 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:18:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:32:07 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-void render_image(mlx_image_t *img, t_world *world, t_camera *camera);
-
-// replace with parser
-int	init_world_and_camera(t_world *world, t_camera *camera)
-{
-	t_vector3	point;
-	t_vector3	normal;
-	int 		fov;
-	
-	world->nb_objects = 0;
-
-	int ambient_I = 50;
-	int diffuse_I = 150;
-
-	world->ambient_light_color = get_rgba(ambient_I, ambient_I, ambient_I, 255);
-
-	world->light.color = get_rgba(diffuse_I, diffuse_I, diffuse_I, 255);
-	world->light.point = v_create(0, 2, 0);
-
-	add_sphere(world, v_set(&point, 0, -100.5, -1), 100, get_rgba(0, 0, 200, 255));
-	add_sphere(world, v_set(&point, 0, 0, -1), 0.5, get_rgba(200, 0, 0, 255));
-	add_sphere(world, v_set(&point, 2, 1, -2), 1, get_rgba(0, 200, 0, 255));
-	add_sphere(world, v_set(&point, -2, 2, -2), 1.5, get_rgba(0, 200, 200, 255));
-
-	add_plane(world, v_set(&point, 0, 0, -8), v_set(&normal, 0, 0, 1), get_rgba(200, 200, 0, 255));
-
-	v_set(&point, 0, 0, 1);
-	v_normalize(v_set(&normal, -0.1, 0.3, -1));
-	fov = 100; 
-	configure_camera(camera, &point, &normal, fov);
-
-	return (SUCCESS);
-}
-
+void	render_image(mlx_image_t *img, t_world *world, t_camera *camera);
+int		init_world_and_camera(t_world *world, t_camera *camera);  // replace with parser
 
 void ft_hook(void* param)
 {
 	const mlx_t* mlx = param;
 
-	// printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
 	(void) mlx;
 }
 
@@ -89,7 +56,6 @@ int	init_display(mlx_t **mlx, mlx_image_t **img)
 	mlx_loop_hook(*mlx, ft_hook, *mlx);
 	return (SUCCESS);
 }
-
 
 int	main(void)
 {

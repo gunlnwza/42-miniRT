@@ -6,11 +6,11 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:38:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:11:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:36:43 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/camera.h"
+#include "../../includes/world_and_camera.h"
 
 static void	configure_viewport_v_and_h(
 				t_camera *camera, const t_vector3 *normal, int deg_fov)

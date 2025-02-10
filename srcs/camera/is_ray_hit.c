@@ -6,11 +6,11 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:49:37 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 16:11:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:36:50 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/camera.h"
+#include "../../includes/world_and_camera.h"
 
 static int	is_hit_object(t_object *object, t_ray *ray, t_hit_record *temp_rec)
 {

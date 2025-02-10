@@ -4,16 +4,29 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
-HEADERS := includes/mini_rt.h includes/vector3.h includes/color.h includes/ray.h \
-	includes/world.h includes/camera.h includes/utils.h \
-	includes/constants.h includes/object.h
+HEADERS := includes/color.h \
+	includes/constants.h \
+	includes/hit_record.h \
+	includes/libs.h \
+	includes/mini_rt.h \
+	includes/object.h \
+	includes/ray.h \
+	includes/utils.h \
+	includes/vector3.h \
+	includes/world_and_camera.h \
 
 SRCS := \
 	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c srcs/camera/render_image.c  \
 	\
 	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
 	\
-	srcs/main.c srcs/ray.c srcs/world.c srcs/utils.c \
+	srcs/main.c \
+	\
+	srcs/world.c \
+	\
+	srcs/ray.c \
+	\
+	srcs/utils.c \
 	\
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
 	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_proj.c \

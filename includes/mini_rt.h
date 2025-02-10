@@ -6,7 +6,6 @@
 # include <unistd.h>
 
 # include "libs.h"
-# include "vector3.h"
-# include "camera.h"
+# include "world_and_camera.h"
 
 #endif

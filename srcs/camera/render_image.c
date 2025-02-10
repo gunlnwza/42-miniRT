@@ -1,7 +1,7 @@
 # include "../../libs/MLX42/include/MLX42/MLX42.h"
 # include "../../libs/libft/libft.h"
 
-#include "../../includes/camera.h"
+#include "../../includes/world_and_camera.h"
 
 void	init_ray(t_ray *ray, t_camera *camera)
 {

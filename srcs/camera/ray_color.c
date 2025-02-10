@@ -1,4 +1,4 @@
-#include "../../includes/camera.h"
+#include "../../includes/world_and_camera.h"
 
 int	ray_color(t_ray *ray, t_world *world)
 {

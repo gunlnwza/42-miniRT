@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 14:27:14 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/04 13:44:14 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:30:34 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ int	ft_isspace(int c);
 
 # define TRUE 1
 # define FALSE 0
-
-# define CORRECT TRUE
-# define WRONG FALSE
 
 # define SUCCESS 0
 # define ERROR -1

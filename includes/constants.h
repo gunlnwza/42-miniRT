@@ -11,4 +11,10 @@
 
 # define PI 3.1415926535897932385
 
+# define TRUE 1
+# define FALSE 0
+
+# define SUCCESS 0
+# define ERROR -1
+
 #endif
