@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:49:37 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 17:55:26 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:07:53 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	is_hit_object(t_object *object, t_ray *ray, t_hit_record *temp_rec)
 	else if (object->type == PLANE)
 		return (hit_plane(object, ray, temp_rec));
 	else
-		return (0);
-		// return (hit_cylinder(object, ray, temp_rec));
+		return (hit_cylinder(object, ray, temp_rec));
 }
 
 static void	update_record(t_hit_record *rec, t_hit_record *temp_rec)

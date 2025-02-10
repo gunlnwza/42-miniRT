@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 18:00:30 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/10 18:00:52 by nteechar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/utils.h"
 
-// For choice of params, Please refer to https://en.wikipedia.org/wiki/Linear_congruential_generator
+// For choice of params,
+// Please refer to https://en.wikipedia.org/wiki/Linear_congruential_generator
 unsigned int	ft_random_unsigned_int(void)
 {
 	static unsigned int	value = 42;
@@ -26,26 +39,28 @@ double	ft_random(void)
 	return ((double) a / b);
 }
 
-// ft_random test;
-// int	main()
-// {
-// 	int	n = 10;
-// 	int	times = 1000000;
+/*
+// ft_random test
+int	main()
+{
+	int	n = 10;
+	int	times = 1000000;
 	
-// 	int	bin[n];
-// 	ft_memset(bin, 0, n * sizeof(int));
+	int	bin[n];
+	ft_memset(bin, 0, n * sizeof(int));
 
-// 	for (int i = 0; i < times; i++)
-// 	{
-// 		float val = ft_random();
-// 		int	idx = (val * n);
-// 		bin[idx] += 1;
-// 		// printf("%i %f \n", i, val);
-// 	}
-// 	printf("\n");
+	for (int i = 0; i < times; i++)
+	{
+		float val = ft_random();
+		int	idx = (val * n);
+		bin[idx] += 1;
+		// printf("%i %f \n", i, val);
+	}
+	printf("\n");
 	
-// 	for (int i = 0; i < n; i++)
-// 	{
-// 		printf("bin[%i] = %i\n", i, bin[i]);
-// 	}
-// }
+	for (int i = 0; i < n; i++)
+	{
+		printf("bin[%i] = %i\n", i, bin[i]);
+	}
+}
+*/

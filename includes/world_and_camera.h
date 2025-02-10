@@ -1,6 +1,7 @@
 #ifndef WORLD_AND_CAMERA_H
 # define WORLD_AND_CAMERA_H
 
+# include "libs.h"
 # include "object.h"
 # include "color.h"
 
