@@ -13,11 +13,12 @@ SRCS := \
 	\
 	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
 	\
-	srcs/main.c srcs/ray.c  srcs/world.c srcs/color.c srcs/utils.c \
+	srcs/main.c srcs/ray.c srcs/world.c srcs/utils.c \
 	\
-	srcs/vector3/add.c srcs/vector3/create.c srcs/vector3/cross.c srcs/vector3/dot.c \
-	srcs/vector3/mul.c srcs/vector3/norm.c srcs/vector3/normalize.c srcs/vector3/proj.c \
+	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
+	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_proj.c \
 	\
+	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	
 
 OBJS := $(SRCS:%.c=%.o)
