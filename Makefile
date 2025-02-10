@@ -29,7 +29,7 @@ SRCS := \
 	srcs/utils.c \
 	\
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
-	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_proj.c \
+	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
 	\
 	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	
