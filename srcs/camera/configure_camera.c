@@ -31,7 +31,6 @@ static void	configure_viewport_v_and_h(
 	t_vector3	world_up;
 	double		viewport_width;
 	double		viewport_height;
-	
 
 	world_up = v_create(0, 1, 0);
 	if (fabs(normal->x) < 1e-6 && fabs(normal->z) < 1e-6)
