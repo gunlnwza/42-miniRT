@@ -43,5 +43,5 @@ void	render_image(mlx_image_t *img, t_world *world, t_camera *camera)
 		v_sub(&ray.direction, &camera->viewport_h);
 		v_add(&ray.direction, &camera->pixel_delta_v);
 	}
-	ft_printf("\rFinish rendering!");
+	ft_printf("\rFinish rendering!\n");
 }
