@@ -50,10 +50,13 @@ int	ray_color(t_ray *ray, t_world *world)
 
 	if (!is_ray_hit(world, ray, &rec))
 		return (get_rgba(0, 0, 0, 255));
-	// int r = (normal->x + 1) * 0.5 * 255;
-	// int g = (normal->y + 1) * 0.5 * 255; 
-	// int b = (normal->z + 1) * 0.5 * 255;
-	// return (get_rgba(r, g, b, 255));  // get normal color
+	
+	// int r, g, b;  // get normal color
+	// r = (rec.normal.x + 1) * 0.5 * 255;
+	// g = (rec.normal.y + 1) * 0.5 * 255;
+	// b = (rec.normal.z + 1) * 0.5 * 255;
+	// return (get_rgba(r, g, b, 255));
+
 	ambient_color = multiply_color(world->ambient_light_color, rec.color);
 	if (is_shadow_ray_hit(world, &rec, &shadow_ray, &shadow_ray_rec))
 		return (ambient_color);

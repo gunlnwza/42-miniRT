@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/object.h"
+#include <stdio.h>
 
 t_object	*create_sphere(const t_vector3 *center, double radius, int color)
 {
@@ -29,11 +30,17 @@ t_object	*create_sphere(const t_vector3 *center, double radius, int color)
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *sphere)
 {
+	t_vector3	origin_to_point;
+
 	rec->t = root;
 	ray_at(ray, rec->t, &rec->point);
-	v_sub(v_copy(&rec->normal, &rec->point),
-		&sphere->point);
+	\
+	v_sub(v_copy(&rec->normal, &rec->point), &sphere->point);
 	v_normalize(&rec->normal);
+	v_sub(v_copy(&origin_to_point, &rec->point), &ray->origin);
+	if (v_dot(&origin_to_point, &rec->normal) > 0)
+		v_scalar_mul(&rec->normal, -1);
+	\
 	rec->color = sphere->color;
 }
 

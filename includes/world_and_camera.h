@@ -8,6 +8,8 @@
 typedef struct s_camera
 {
 	t_vector3	center;
+	int			deg_fov;
+	t_vector3	normal;
 	t_vector3	viewport_h;
 	t_vector3	viewport_v;
 	t_vector3	pixel_delta_h;

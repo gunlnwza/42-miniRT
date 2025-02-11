@@ -30,14 +30,14 @@ t_object	*create_plane(const t_vector3 *point, const t_vector3 *normal,
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *plane)
 {
-	t_vector3	v;
+	t_vector3	origin_to_point;
 
 	rec->t = root;
 	ray_at(ray, rec->t, &rec->point);
 	\
 	v_copy(&rec->normal, &plane->normal);
-	if (v_dot(v_sub(v_copy(&v, &rec->point), &ray->origin),
-		&plane->normal) > 0)
+	v_sub(v_copy(&origin_to_point, &rec->point), &ray->origin);
+	if (v_dot(&origin_to_point, &rec->normal) > 0)
 		v_scalar_mul(&rec->normal, -1);
 	\
 	rec->color = plane->color;

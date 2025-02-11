@@ -78,6 +78,8 @@ void	configure_camera(
 			const t_vector3 *normal, int deg_fov)
 {
 	v_copy(&camera->center, point);
+	v_copy(&camera->normal, normal);
+	camera->deg_fov = deg_fov;
 	configure_viewport_v_and_h(camera, normal, deg_fov);
 	configure_pixel_delta_v_and_h(camera);
 	configure_pixel00_loc(camera, normal);
