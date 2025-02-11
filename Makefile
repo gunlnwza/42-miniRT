@@ -16,17 +16,14 @@ HEADERS := includes/color.h \
 	includes/world_and_camera.h \
 
 SRCS := \
-	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c srcs/camera/render_image.c  \
+	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c \
+	srcs/camera/ray.c srcs/camera/render_image.c \
 	\
 	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
 	\
 	srcs/main.c \
 	\
 	srcs/world.c \
-	\
-	srcs/ray.c \
-	\
-	srcs/utils.c \
 	\
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
 	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
