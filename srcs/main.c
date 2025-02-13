@@ -116,7 +116,7 @@ int	init_display(mlx_t **mlx, mlx_image_t **img, t_param *param)
 }
 
 // TODO: replace `init_world_and_camera` with parser
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_world		world;
 	t_camera	camera;
@@ -125,8 +125,15 @@ int	main(void)
 
 	t_param 	param;
 
-	if (init_world_and_camera(&world, &camera) == ERROR)
-		return (EXIT_FAILURE);
+	if (argc < 2) {
+        fprintf(stderr, "Usage: %s <scene.rt>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    if (!parse_scene(argv[1], &world, &camera)) {
+        fprintf(stderr, "Failed to parse scene file.\n");
+        return EXIT_FAILURE;
+    }
 	mlx = NULL;
 	img = NULL;
 	param.mlx = &mlx;

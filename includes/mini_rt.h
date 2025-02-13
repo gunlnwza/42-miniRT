@@ -8,4 +8,6 @@
 # include "libs.h"
 # include "world_and_camera.h"
 
+int parse_scene(const char *filename, t_world *world, t_camera *camera);
+
 #endif
