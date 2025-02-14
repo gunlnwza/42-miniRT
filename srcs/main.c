@@ -86,8 +86,8 @@ void	ft_keypress(mlx_key_data_t keydata, void *param_)
 		|| keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	{
 		v_normalize(&camera->normal);
-		printf("camera.center = (%f, %f, %f)\n", camera->center.x, camera->center.y, camera->center.z);
-		printf("camera.normal = (%f, %f, %f)\n", camera->normal.x, camera->normal.y, camera->normal.z);
+		printf("configure_camera(camera, v_set(&P, %f, %f, %f), v_normalize(v_set(&N, %f, %f, %f)), fov);\n",
+			camera->center.x, camera->center.y, camera->center.z, camera->normal.x, camera->normal.y, camera->normal.z);
 		configure_camera(camera, &camera->center, &camera->normal, camera->deg_fov);
 		render_image(*param->img, param->world, camera);	
 	}

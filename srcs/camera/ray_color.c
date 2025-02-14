@@ -76,9 +76,9 @@ int	ray_color(t_ray *ray, t_world *world)
 	// return (get_rgba(r, g, b, 255));
 
 	ambient_color = multiply_color(world->ambient_light_color, rec.color);
-	if (is_shadow_ray_hit(world, &rec, &shadow_ray, &shadow_ray_rec))
-		return (ambient_color);
-	diffuse_color = get_rgba(100, 100, 100, 255);
+	// if (is_shadow_ray_hit(world, &rec, &shadow_ray, &shadow_ray_rec))
+		// return (ambient_color);
+	// diffuse_color = get_rgba(100, 100, 100, 255);
 	diffuse_color = calculate_diffuse_color(world, &rec, &shadow_ray);
 	return (add_color(ambient_color, diffuse_color));
 }
