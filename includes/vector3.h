@@ -38,6 +38,9 @@ t_vector3	*v_element_mul(t_vector3 *dest, const t_vector3 *src);
 t_vector3	*v_scalar_mul(t_vector3 *dest, double scalar);
 t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src);
 
+t_vector3	v_proj(const t_vector3 *vec, const t_vector3 *onto);
+t_vector3	v_rej(const t_vector3 *vec, const t_vector3 *onto);
+
 double	v_norm2(const t_vector3 *dest);
 double	v_norm(const t_vector3 *dest);
 

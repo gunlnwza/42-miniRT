@@ -29,17 +29,6 @@ t_object	*create_cylinder(const t_vector3 *point, double radius,
 	return (cylinder);
 }
 
-static void	get_perpendicular_component(t_vector3 *dest, const t_vector3 *src, const t_vector3 *normal)
-{
-	t_vector3	parallel_component;
-
-	v_copy(&parallel_component, normal);
-	v_scalar_mul(&parallel_component, v_dot(src, normal));
-	\
-	v_copy(dest, src);
-	v_sub(dest, &parallel_component);
-}
-
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *cylinder, t_vector3 *A_p, t_vector3 *D_p)
 {
@@ -63,8 +52,8 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 
 	v_copy(&A, &ray->origin);
 	v_sub(&A, &cylinder->point);
-	get_perpendicular_component(&A_p, &A, &cylinder->normal);
-	get_perpendicular_component(&D_p, &ray->direction, &cylinder->normal);
+	A_p = v_rej(&A, &cylinder->normal);
+	D_p = v_rej(&ray->direction, &cylinder->normal);
 
 	a = v_norm2(&D_p);
 	b = 2 * v_dot(&A_p, &D_p);
@@ -83,23 +72,8 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 			return (FALSE);
 	}
 
-	// see if the 0 <= parallel_component length <= h
-	// t_vector3	parallel_component;
-	// t_vector3	P;
-	// t_vector3	CP;
-
-	// ray_at(ray, root, &P);
-	// v_copy(&CP, &P);
-	// v_sub(&CP, &cylinder->point);
-
-	// double height = v_dot(&CP, &cylinder->normal);
-	// if (height < 0 || height > cylinder->height)
-		// return (FALSE);
-	// v_copy(&parallel_component, &cylinder->normal);
-	// v_scalar_mul(&parallel_component, height);
+	// insert logic for finite cylinder, and caps here
 
 	save_to_record(rec, root, ray, cylinder, &A_p, &D_p);
-
-	// hit_cylinder_caps(rec, ray, cylinder);
 	return (TRUE);
 }

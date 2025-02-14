@@ -59,21 +59,21 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 	\
 	world->light.color = get_rgba(
 		diffuse_intensity, diffuse_intensity, diffuse_intensity, 255);
-	world->light.point = v_create(0, 0, -20);
+	world->light.point = v_create(3, 0, 0);
 	\
 	fov = 60;
-	configure_camera(camera, v_set(&P, -2.810526, 2.000000, 1.872992), v_normalize(v_set(&N, 0.891702, -0.304524, -0.334863)), fov);
+	configure_camera(camera, v_set(&P, 0, 0, 1), v_normalize(v_set(&N, 0, 0, -1)), fov);
 	\
-	add_sphere(world, v_set(&P, 2, 0, 0), 1, get_rgba(200, 0, 0, 255));
-	add_sphere(world, v_set(&P, 0, -0.5, 0), 0.1, get_rgba(200, 200, 200, 255));
-	add_sphere(world, v_set(&P, 0, 0, 2), 1, get_rgba(0, 200, 0, 255));
-	add_sphere(world, v_set(&P, 0, 0, -2), 1, get_rgba(0, 0, 200, 255));
-	add_sphere(world, v_set(&P, 0, -2, 0), 1, get_rgba(0, 200, 200, 255));
+	// add_sphere(world, v_set(&P, 0, 0, -1), 0.5, get_rgba(200, 0, 0, 255));
+	// add_sphere(world, v_set(&P, 0, -0.5, 0), 0.1, get_rgba(200, 200, 200, 255));
+	// add_sphere(world, v_set(&P, 0, 0, 2), 1, get_rgba(0, 200, 0, 255));
+	// add_sphere(world, v_set(&P, 0, 0, -2), 1, get_rgba(0, 0, 200, 255));
+	// add_sphere(world, v_set(&P, 0, -2, 0), 1, get_rgba(0, 200, 200, 255));
 	// add_sphere(world, v_set(&P, 0, 0, -4), 1, get_rgba(0, 200, 0, 255));
 	// add_sphere(world, v_set(&P, 0, 0, -110), 100, get_rgba(0, 0, 200, 255));
 	\
-	add_plane(world, v_set(&P, 0, 0, -10), v_normalize(v_set(&N, -1, -1, -1)), get_rgba(200, 200, 0, 255));
+	// add_plane(world, v_set(&P, 0, 0, -10), v_normalize(v_set(&N, -1, -1, -1)), get_rgba(200, 200, 0, 255));
 	\
-	// add_cylinder(world, v_set(&P, 0, 0, 0), v_normalize(v_set(&N, 0, 1, 0)), get_rgba(200, 0, 200, 255), 0.5, 10);
+	add_cylinder(world, v_set(&P, 0, 0, -1), v_normalize(v_set(&N, 0.5, 0.5, 0)), get_rgba(200, 0, 200, 255), 0.5, 1);
 	return (SUCCESS);
 }
