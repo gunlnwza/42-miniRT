@@ -59,13 +59,15 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 	\
 	world->light.color = get_rgba(
 		diffuse_intensity, diffuse_intensity, diffuse_intensity, 255);
-	world->light.point = v_create(0, 0, 7);
+	world->light.point = v_create(0, 0, -20);
 	\
 	fov = 60;
-	configure_camera(camera, v_set(&P, 17.246448, 0.000000, 7.944556), v_normalize(v_set(&N, -0.776900, 0.000000, -0.629624)), fov);
+	configure_camera(camera, v_set(&P, 8.180134, 2.000000, -12.236174), v_normalize(v_set(&N, -0.956572, -0.203256, 0.208944)), fov);
 	\
-	add_sphere(world, v_set(&P, 0, 0, 0), 2, get_rgba(200, 0, 200, 255));
-	add_sphere(world, v_set(&P, 0, 0, -4), 1, get_rgba(0, 200, 0, 255));
+	// add_sphere(world, v_set(&P, 2, 0, 0), 2, get_rgba(200, 0, 0, 255));
+	add_sphere(world, v_set(&P, 0, 0, -10), 1, get_rgba(200, 0, 0, 255));
+	// add_sphere(world, v_set(&P, 0, 0, 2), 1, get_rgba(200, 0, 0, 255));
+	// add_sphere(world, v_set(&P, 0, 0, -4), 1, get_rgba(0, 200, 0, 255));
 	add_sphere(world, v_set(&P, 0, 0, -110), 100, get_rgba(0, 0, 200, 255));
 	\
 	// add_plane(world, v_set(&P, 0, 0, -10), v_normalize(v_set(&N, -1, -1, -1)), get_rgba(200, 200, 0, 255));
