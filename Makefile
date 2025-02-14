@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 HEADERS := includes/color.h \
@@ -26,7 +26,7 @@ SRCS := \
 	srcs/world.c \
 	\
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
-	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
+	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_dist.c \
 	\
 	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	

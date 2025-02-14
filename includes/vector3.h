@@ -41,6 +41,9 @@ t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src);
 double	v_norm2(const t_vector3 *dest);
 double	v_norm(const t_vector3 *dest);
 
+double	v_dist2(const t_vector3 *a, const t_vector3 *b);
+double	v_dist(const t_vector3 *a, const t_vector3 *b);
+
 t_vector3	*v_normalize(t_vector3 *dest);
 
 #endif
