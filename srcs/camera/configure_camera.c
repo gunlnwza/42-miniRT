@@ -12,8 +12,8 @@
 
 #include "../../includes/world_and_camera.h"
 
-static void	calculate_viewport_height_and_width(int deg_fov,
-	double *viewport_height, double *viewport_width)
+static void	calculate_viewport_height_and_width(
+	int deg_fov, double *vp_height, double *vp_width)
 {
 	double	aspect_ratio;
 	double	rad_fov;
@@ -21,28 +21,27 @@ static void	calculate_viewport_height_and_width(int deg_fov,
 	aspect_ratio = (double) WIDTH / HEIGHT;
 	\
 	rad_fov = (((double) deg_fov) * PI) / 180;
-	*viewport_height = 2 * tan(rad_fov / 2);
-	*viewport_width = (*viewport_height) * aspect_ratio;
+	*vp_height = 2 * tan(rad_fov / 2);
+	*vp_width = (*vp_height) * aspect_ratio;
 }
 
 static void	configure_viewport_v_and_h(
-				t_camera *camera, const t_vector3 *normal, int deg_fov)
+	t_camera *camera, const t_vector3 *normal, int deg_fov)
 {
 	t_vector3	world_up;
-	double		viewport_width;
-	double		viewport_height;
+	double		vp_width;
+	double		vp_height;
 
 	world_up = v_create(0, 1, 0);
 	if (fabs(normal->x) < 1e-6 && fabs(normal->z) < 1e-6)
 		world_up = v_create(0, 0, 1);
 	\
-	v_cross_ip(v_copy_ip(&camera->viewport_h, normal), &world_up);
-	v_cross_ip(v_copy_ip(&camera->viewport_v, normal), &camera->viewport_h);
+	camera->viewport_h = v_cross(normal, &world_up);
+	camera->viewport_v = v_cross(normal, &camera->viewport_h);
 	\
-	calculate_viewport_height_and_width(deg_fov,
-		&viewport_height, &viewport_width);
-	v_scalar_mul_ip(&camera->viewport_h, viewport_width);
-	v_scalar_mul_ip(&camera->viewport_v, viewport_height);
+	calculate_viewport_height_and_width(deg_fov, &vp_height, &vp_width);
+	v_scalar_mul_ip(&camera->viewport_h, vp_width);
+	v_scalar_mul_ip(&camera->viewport_v, vp_height);
 }
 
 static void	configure_pixel_delta_v_and_h(t_camera *camera)

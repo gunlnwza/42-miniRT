@@ -41,6 +41,7 @@ void	ft_close(void *param)
 
 void	ft_keypress(mlx_key_data_t keydata, void *param_)
 {
+	// (void) param_;
 	t_param		*param = param_;
 	t_camera	*camera = param->camera;
 
@@ -50,33 +51,54 @@ void	ft_keypress(mlx_key_data_t keydata, void *param_)
 	if (keydata.action != MLX_PRESS)
 		return ;
 	
-	float k = 2;
-	t_vector3	world_up;
-	v_set_ip(&world_up, 0, 1, 0);
-	t_vector3	front;
-	v_set_ip(&front, camera->normal.x, 0, camera->normal.z);
-
-	if (keydata.key == MLX_KEY_A)
-		v_add_ip(&camera->center, v_scalar_mul_ip(v_cross_ip(&world_up, &front), k));
-	else if (keydata.key == MLX_KEY_D)
-		v_sub_ip(&camera->center, v_scalar_mul_ip(v_cross_ip(&world_up, &front), k));
-	else if (keydata.key == MLX_KEY_S)
-		v_sub_ip(&camera->center,v_scalar_mul_ip(&front, k));
-	else if (keydata.key == MLX_KEY_W)
-		v_add_ip(&camera->center, v_scalar_mul_ip(&front, k));
-	else if (keydata.key == MLX_KEY_SPACE)
-		v_add_ip(&camera->center, v_scalar_mul_ip(&world_up, k));
-	else if (keydata.key == MLX_KEY_LEFT_SHIFT)
-		v_sub_ip(&camera->center, v_scalar_mul_ip(&world_up, k));
-	\
-	if (keydata.key == MLX_KEY_UP)
-		v_sub_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_v, 0.2));
-	else if (keydata.key == MLX_KEY_DOWN)
-		v_add_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_v, 0.2));
-	else if (keydata.key == MLX_KEY_LEFT)
-		v_sub_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_h, 0.2));
-	else if (keydata.key == MLX_KEY_RIGHT)
-		v_add_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_h, 0.2));
+	float move_mul = 5;
+	float	look_mul = 0.5;
+	t_vector3	world_up = v_create(0, 1, 0);
+	t_vector3	front = v_copy_create(&camera->normal);
+	front.y = 0;
+	t_vector3	diff;
+	keys_t key = keydata.key;
+	if (key == MLX_KEY_A || key == MLX_KEY_D)
+	{
+		diff = v_cross(&world_up, &front);
+		v_scalar_mul_ip(&diff, move_mul);
+		if (key == MLX_KEY_A)
+			v_add_ip(&camera->center, &diff);
+		else
+			v_sub_ip(&camera->center, &diff);
+	}
+	else if (key == MLX_KEY_S || key == MLX_KEY_W)
+	{
+		diff = v_scalar_mul(&front, move_mul);
+		if (key == MLX_KEY_W)
+			v_add_ip(&camera->center, &diff);
+		else
+			v_sub_ip(&camera->center, &diff);
+	}
+	else if (key == MLX_KEY_SPACE || key == MLX_KEY_LEFT_SHIFT)
+	{
+		diff = v_scalar_mul(&world_up, move_mul);
+		if (key == MLX_KEY_SPACE)
+			v_add_ip(&camera->center, &diff);
+		else
+			v_sub_ip(&camera->center, &diff);
+	}
+	else if (key == MLX_KEY_UP || key == MLX_KEY_DOWN)
+	{
+		diff = v_scalar_mul(&camera->viewport_v, look_mul);
+		if (key == MLX_KEY_UP)
+			v_sub_ip(&camera->normal, &diff);
+		else
+			v_add_ip(&camera->normal, &diff);
+	}
+	else if (key == MLX_KEY_LEFT || key == MLX_KEY_RIGHT)
+	{
+		diff = v_scalar_mul(&camera->viewport_h, look_mul);
+		if (key == MLX_KEY_LEFT)
+			v_sub_ip(&camera->normal, &diff);
+		else
+			v_add_ip(&camera->normal, &diff);
+	}
 
 	if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
 		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
