@@ -25,7 +25,7 @@ t_vector3	*v_set_ip(t_vector3 *dest, double x, double y, double z)
 	return (dest);
 }
 
-t_vector3	v_copy_create(const t_vector3 *other)
+t_vector3	v_copy(const t_vector3 *other)
 {
 	return ((t_vector3){other->x, other->y, other->z});
 }

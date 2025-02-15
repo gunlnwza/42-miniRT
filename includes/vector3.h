@@ -26,7 +26,7 @@ typedef struct s_vector3
 t_vector3	v_create(double x, double y, double z);
 t_vector3	*v_set_ip(t_vector3 *dest, double x, double y, double z);
 
-t_vector3	v_copy_create(const t_vector3 *other);
+t_vector3	v_copy(const t_vector3 *other);
 t_vector3	*v_copy_ip(t_vector3 *dest, const t_vector3 *other);
 
 t_vector3	v_add(const t_vector3 *a, const t_vector3 *b);

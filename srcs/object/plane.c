@@ -21,9 +21,9 @@ t_object	*create_plane(const t_vector3 *point, const t_vector3 *normal,
 	if (plane == NULL)
 		return (NULL);
 	plane->type = PLANE;
-	v_copy_ip(&plane->point, point);
+	plane->point = v_copy(point);
 	plane->color = color;
-	v_copy_ip(&plane->normal, normal);
+	plane->normal = v_copy(normal);
 	return (plane);
 }
 
@@ -35,8 +35,10 @@ static void	save_to_record(t_hit_record *rec, double root,
 	rec->t = root;
 	ray_at(ray, rec->t, &rec->point);
 	\
-	v_copy_ip(&rec->normal, &plane->normal);
-	v_sub_ip(v_copy_ip(&origin_to_point, &rec->point), &ray->origin);
+	rec->normal = v_copy(&plane->normal);
+	\
+	origin_to_point = v_copy(&rec->point);
+	v_sub_ip(&origin_to_point, &ray->origin);
 	if (v_dot(&origin_to_point, &rec->normal) > 0)
 		v_scalar_mul_ip(&rec->normal, -1);
 	\
@@ -45,17 +47,14 @@ static void	save_to_record(t_hit_record *rec, double root,
 
 int	hit_plane(t_object *plane, const t_ray *ray, t_hit_record *rec)
 {
-	double		ray_tmin;
-	double		ray_tmax;
 	t_vector3	origin_to_point;
 	double		root;
 
-	ray_tmin = 0.001;
-	ray_tmax = INF;
-	v_sub_ip(v_copy_ip(&origin_to_point, &plane->point), &ray->origin);
+	origin_to_point = v_copy(&plane->point);
+	v_sub_ip(&origin_to_point, &ray->origin);
 	root = v_dot(&origin_to_point, &plane->normal) \
 			/ v_dot(&ray->direction, &plane->normal);
-	if (root <= ray_tmin || ray_tmax <= root)
+	if (root <= RAY_T_MIN)
 		return (0);
 	save_to_record(rec, root, ray, plane);
 	return (1);
