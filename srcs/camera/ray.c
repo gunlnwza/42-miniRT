@@ -13,11 +13,11 @@
 #include "../../includes/ray.h"
 
 // will move into camera dir later
-void	ray_at(const t_ray *ray, double t, t_vector3 *res_point)
+t_vector3	ray_at(const t_ray *ray, double t)
 {
 	t_vector3	diff;
 
-	v_scalar_mul_ip(v_copy_ip(&diff, &ray->direction), t);
-	v_copy_ip(res_point, &ray->origin);
-	v_add_ip(res_point, &diff);
+	diff = v_copy(&ray->direction);
+	v_scalar_mul_ip(&diff, t);
+	return (v_add(&ray->origin, &diff));
 }

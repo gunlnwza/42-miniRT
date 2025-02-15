@@ -33,7 +33,7 @@ static void	save_to_record(t_hit_record *rec, double root,
 	t_vector3	origin_to_point;
 
 	rec->t = root;
-	ray_at(ray, rec->t, &rec->point);
+	rec->point = ray_at(ray, rec->t);
 	\
 	rec->normal = v_copy(&plane->normal);
 	\

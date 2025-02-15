@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "../../includes/object.h"
 
 t_object	*create_cylinder(const t_vector3 *point, double radius,
@@ -30,14 +31,14 @@ t_object	*create_cylinder(const t_vector3 *point, double radius,
 }
 
 static void	save_to_record(t_hit_record *rec, double root,
-				const t_ray *ray, t_object *cylinder, t_vector3 *A_p, t_vector3 *D_p)
+				const t_ray *ray, t_object *cylinder, t_vector3 *A_perpen, t_vector3 *D_perpen)
 {
 	rec->t = root;
-	ray_at(ray, rec->t, &rec->point);
+	rec->point = ray_at(ray, rec->t);
 	\
-	rec->normal = v_copy(D_p);
+	rec->normal = v_copy(D_perpen);
 	v_scalar_mul_ip(&rec->normal, rec->t);
-	v_add_ip(&rec->normal, A_p);
+	v_add_ip(&rec->normal, A_perpen);
 	v_normalize_ip(&rec->normal);
 	\
 	rec->color = cylinder->color;
@@ -46,34 +47,85 @@ static void	save_to_record(t_hit_record *rec, double root,
 int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 {
 	t_vector3	A;
-	t_vector3	A_p;
-	t_vector3	D_p;
-	double		a, b, c, discriminant, sqrtd, root;
+	t_vector3	A_perpen;
+	t_vector3	D;
+	t_vector3	D_perpen;
+	double		coef[3];
+	double		discriminant, sqrtd;
+	double		root;
 
 	A = v_copy(&ray->origin);
 	v_sub_ip(&A, &cylinder->point);
-	A_p = v_rej(&A, &cylinder->normal);
-	D_p = v_rej(&ray->direction, &cylinder->normal);
+	A_perpen = v_rej(&A, &cylinder->normal);
 
-	a = v_norm2(&D_p);
-	b = 2 * v_dot(&A_p, &D_p);
-	c = v_norm2(&A_p) - cylinder->radius * cylinder->radius;
+	D = v_copy(&ray->direction);
+	D_perpen = v_rej(&D, &cylinder->normal);
 
-	discriminant = b * b - 4 * a * c;
+	coef[0] = v_norm2(&D_perpen);
+	coef[1] = v_dot(&A_perpen, &D_perpen);
+	coef[2] = v_norm2(&A_perpen) - cylinder->radius * cylinder->radius;
+
+	discriminant = coef[1] * coef[1] - coef[0] * coef[2];
 	if (discriminant < 0)
-		return (0);
+		return (FALSE);
 	
 	sqrtd = sqrt(discriminant);
-	root = (-b - sqrtd) / (2 * a);
+	root = (-coef[1] - sqrtd) / coef[0];
 	if (root < RAY_T_MIN)
 	{
-		root = (-b + sqrtd) / (2 * a);
+		root = (-coef[1] + sqrtd) / coef[0];
 		if (root < RAY_T_MIN)
 			return (FALSE);
 	}
 
-	// insert logic for finite cylinder, and caps here
+	t_vector3	intersection_point;
+	intersection_point = ray_at(ray, root);
 
-	save_to_record(rec, root, ray, cylinder, &A_p, &D_p);
+	t_vector3	base_to_point;
+	base_to_point = v_sub(&intersection_point, &cylinder->point);
+
+	double height_pos = v_dot(&base_to_point, &cylinder->normal);
+	if (height_pos < 0 || height_pos > cylinder->height)
+	{
+		t_object	plane;
+		t_hit_record plane_rec;
+
+		plane.color = cylinder->color;
+		plane.normal = v_copy(&cylinder->normal);
+		plane.point = v_copy(&cylinder->point);
+
+		// bottom cap
+		if (hit_plane(&plane, ray, &plane_rec))
+		{
+			if (v_dist(&plane_rec.point, &plane.point) < cylinder->radius)
+			{
+				rec->color = plane_rec.color;
+				rec->normal = plane_rec.normal;
+				rec->point = plane_rec.point;
+				rec->t = plane_rec.t;
+				return (TRUE);
+			}
+		}
+
+		// top cap
+		t_vector3	height_vec;
+		height_vec = v_copy(&plane.normal);
+		v_scalar_mul_ip(&height_vec, cylinder->height);
+		v_add_ip(&plane.point, &height_vec);
+
+		if (hit_plane(&plane, ray, &plane_rec))
+		{
+			if (v_dist(&plane_rec.point, &plane.point) < cylinder->radius)
+			{
+				rec->color = plane_rec.color;
+				rec->normal = plane_rec.normal;
+				rec->point = plane_rec.point;
+				rec->t = plane_rec.t;
+				return (TRUE);
+			}
+		}
+		return (FALSE);
+	}
+	save_to_record(rec, root, ray, cylinder, &A_perpen, &D_perpen);
 	return (TRUE);
 }
