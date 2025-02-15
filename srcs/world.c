@@ -61,7 +61,7 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 		diffuse_intensity, diffuse_intensity, diffuse_intensity, 255);
 	world->light.point = v_create(0, 1, 0);
 	\
-	fov = 80;
+	fov = 60;
 	configure_camera(camera, v_set_ip(&P, 10.040007, 9.000000, -1.160600), v_normalize_ip(v_set_ip(&N, -0.914289, -0.400540, 0.060354)), fov);
 	\
 	add_sphere(world, v_set_ip(&P, 0, 0, -1), 0.5, get_rgba(200, 0, 0, 255));
