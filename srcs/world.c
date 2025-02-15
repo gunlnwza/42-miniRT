@@ -59,19 +59,22 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 	\
 	world->light.color = get_rgba(
 		diffuse_intensity, diffuse_intensity, diffuse_intensity, 255);
-	world->light.point = v_create(0, 5, 20);
+	world->light.point = v_create(0, 0, 0);
 	\
 	fov = 60;
-	configure_camera(camera, v_set_ip(&P, -11.35, 6.00, 18.73), v_normalize_ip(v_set_ip(&N, 0.42, -0.02, -0.91)), fov);
 	\
-	add_sphere(world, v_set_ip(&P, -10, 0, 0), 1, get_rgba(200, 0, 0, 255));
-	// add_sphere(world, v_set_ip(&P, 2, 0, 0), 1, get_rgba(0, 0, 200, 255));
-	// add_sphere(world, v_set_ip(&P, 2, 0, 6), 1, get_rgba(0, 200, 0, 255));
+	// scene 1
+	configure_camera(camera, v_set_ip(&P, 10.14, 6.00, -1.24), v_normalize_ip(v_set_ip(&N, -0.89, -0.28, -0.35)), fov);
+	add_cylinder(world, v_set_ip(&P, 0, -10, 0), v_normalize_ip(v_set_ip(&N, 0, 1, 0)), get_rgba(100, 100, 100, 255), 20, 20);
+	add_cylinder(world, v_set_ip(&P, -1, 0, -6), v_normalize_ip(v_set_ip(&N, 1, 0, -1)), get_rgba(0, 0, 200, 255), 1, 2);
+	add_cylinder(world, v_set_ip(&P, 2, 0, -6), v_normalize_ip(v_set_ip(&N, 1, 0, 1)), get_rgba(0, 200, 0, 255), 1, 2);
+	add_cylinder(world, v_set_ip(&P, -4, 0, -6), v_normalize_ip(v_set_ip(&N, 1, 1, 0)), get_rgba(200, 0, 0, 255), 1, 2);
 	\
-	add_plane(world, v_set_ip(&P, 0, 0, -5), v_normalize_ip(v_set_ip(&N, 0, 0, 1)), get_rgba(125, 125, 125, 255));
-	\
-	double radius = 3;
-	double height = 10;
-	add_cylinder(world, v_set_ip(&P, 0, 0, 0), v_normalize_ip(v_set_ip(&N, 0, 1, 1)), get_rgba(0, 200, 0, 255), radius, height);
+	// scene 2
+	// configure_camera(camera, v_set_ip(&P, 0, 0, 0), v_normalize_ip(v_set_ip(&N, 0, 0, -1)), fov);
+	// add_cylinder(world, v_set_ip(&P, 0, 1, -6), v_normalize_ip(v_set_ip(&N, 0, 0, 1)), get_rgba(200, 0, 0, 255), 0.5, 2);
+	// add_cylinder(world, v_set_ip(&P, 0, -1, -6), v_normalize_ip(v_set_ip(&N, 0, 0, -1)), get_rgba(200, 0, 0, 255), 0.5, 2);
+
+
 	return (SUCCESS);
 }

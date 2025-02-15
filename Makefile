@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+# CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 HEADERS := includes/color.h \
