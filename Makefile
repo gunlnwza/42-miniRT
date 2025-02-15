@@ -17,9 +17,9 @@ HEADERS := includes/color.h \
 
 SRCS := \
 	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c \
-	srcs/camera/ray.c srcs/camera/render_image.c \
+	srcs/camera/ray.c srcs/camera/render_image.c srcs/camera/hit_record.c \
 	\
-	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
+	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c srcs/object/object_create.c \
 	\
 	srcs/main.c \
 	\

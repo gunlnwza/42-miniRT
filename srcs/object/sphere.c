@@ -13,20 +13,6 @@
 #include "../../includes/object.h"
 #include <stdio.h>
 
-t_object	*create_sphere(const t_vector3 *center, double radius, int color)
-{
-	t_object	*sphere;
-
-	sphere = malloc(sizeof(t_object));
-	if (sphere == NULL)
-		return (NULL);
-	sphere->type = SPHERE;
-	sphere->point = v_copy(center);
-	sphere->color = color;
-	sphere->radius = radius;
-	return (sphere);
-}
-
 static void	calculate_coef(t_object *sphere, const t_ray *ray, double coef[3])
 {
 	t_vector3	oc;

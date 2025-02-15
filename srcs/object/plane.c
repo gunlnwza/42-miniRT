@@ -12,21 +12,6 @@
 
 #include "../../includes/object.h"
 
-t_object	*create_plane(const t_vector3 *point, const t_vector3 *normal,
-				int color)
-{
-	t_object	*plane;
-
-	plane = malloc(sizeof(t_object));
-	if (plane == NULL)
-		return (NULL);
-	plane->type = PLANE;
-	plane->point = v_copy(point);
-	plane->color = color;
-	plane->normal = v_copy(normal);
-	return (plane);
-}
-
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *plane)
 {

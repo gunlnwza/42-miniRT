@@ -75,6 +75,14 @@ void	modify_camera(t_camera *camera, keys_t key)
 			camera->center.x, camera->center.y, camera->center.z, camera->normal.x, camera->normal.y, camera->normal.z);
 }
 
+int	is_modify_camera_key(keys_t key)
+{
+	return (key == MLX_KEY_A || key == MLX_KEY_D || key == MLX_KEY_S || key == MLX_KEY_W
+		|| key == MLX_KEY_SPACE || key == MLX_KEY_LEFT_SHIFT
+		|| key == MLX_KEY_UP || key == MLX_KEY_DOWN || key == MLX_KEY_LEFT || key == MLX_KEY_RIGHT
+		|| key == MLX_KEY_ENTER);
+}
+
 void	ft_keypress(mlx_key_data_t keydata, void *param_)
 {
 	// (void) param_;
@@ -86,16 +94,15 @@ void	ft_keypress(mlx_key_data_t keydata, void *param_)
 	\
 	if (keydata.action != MLX_PRESS)
 		return ;
-	if (!(keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
-		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
-		|| keydata.key == MLX_KEY_SPACE || keydata.key == MLX_KEY_LEFT_SHIFT
-		|| keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN
-		|| keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT))
+	if (!is_modify_camera_key(keydata.key))
 		return ;
 	\
 	modify_camera(camera, keydata.key);
-	configure_camera(camera, &camera->center, &camera->normal, camera->deg_fov);
-	render_image(*param->img, param->world, camera);
+	if (keydata.key == MLX_KEY_ENTER)
+	{
+		configure_camera(camera, &camera->center, &camera->normal, camera->deg_fov);
+		render_image(*param->img, param->world, camera);
+	}
 }
 
 int	init_display(mlx_t **mlx, mlx_image_t **img, t_param *param)
