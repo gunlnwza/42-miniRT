@@ -27,6 +27,37 @@ t_object	*create_sphere(const t_vector3 *center, double radius, int color)
 	return (sphere);
 }
 
+static void	calculate_coef(t_object *sphere, const t_ray *ray, double coef[3])
+{
+	t_vector3	oc;
+
+	oc = v_copy(&sphere->point);
+	v_sub_ip(&oc, &ray->origin);
+	\
+	coef[0] = v_norm2(&ray->direction);
+	coef[1] = v_dot(&ray->direction, &oc);
+	coef[2] = v_norm2(&oc) - (sphere->radius * sphere->radius);
+}
+
+static int	have_root(double coef[3], double *root)
+{
+	double	discriminant;
+	double	sqrtd;
+
+	discriminant = coef[1] * coef[1] - coef[0] * coef[2];
+	if (discriminant < 0)
+		return (FALSE);
+	sqrtd = sqrtf(discriminant);
+	*root = (coef[1] - sqrtd) / coef[0];
+	if (*root < RAY_T_MIN)
+	{
+		*root = (coef[1] + sqrtd) / coef[0];
+		if (*root < RAY_T_MIN)
+			return (FALSE);
+	}
+	return (TRUE);
+}
+
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *sphere)
 {
@@ -50,28 +81,12 @@ static void	save_to_record(t_hit_record *rec, double root,
 // return bool
 int	hit_sphere(t_object *sphere, const t_ray *ray, t_hit_record *rec)
 {
-	t_vector3	oc;
-	double		coef[3];
-	double		discriminant;
-	double		sqrtd;
-	double		root;
+	double	coef[3];
+	double	root;
 
-	oc = v_copy(&sphere->point);
-	v_sub_ip(&oc, &ray->origin);
-	coef[0] = v_norm2(&ray->direction);
-	coef[1] = v_dot(&ray->direction, &oc);
-	coef[2] = v_norm2(&oc) - (sphere->radius * sphere->radius);
-	discriminant = coef[1] * coef[1] - coef[0] * coef[2];
-	if (discriminant < 0)
+	calculate_coef(sphere, ray, coef);
+	if (!have_root(coef, &root))
 		return (FALSE);
-	sqrtd = sqrtf(discriminant);
-	root = (coef[1] - sqrtd) / coef[0];
-	if (root < RAY_T_MIN)
-	{
-		root = (coef[1] + sqrtd) / coef[0];
-		if (root < RAY_T_MIN)
-			return (FALSE);
-	}
 	save_to_record(rec, root, ray, sphere);
 	return (TRUE);
 }
