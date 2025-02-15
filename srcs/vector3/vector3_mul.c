@@ -12,15 +12,12 @@
 
 #include "../../includes/vector3.h"
 
-t_vector3	*v_element_mul(t_vector3 *dest, const t_vector3 *src)
+t_vector3	v_scalar_mul(const t_vector3 *v, double scalar)
 {
-	dest->x *= src->x;
-	dest->y *= src->y;
-	dest->z *= src->z;
-	return (dest);
+	return ((t_vector3){v->x * scalar, v->y * scalar, v->z * scalar});
 }
 
-t_vector3	*v_scalar_mul(t_vector3 *dest, double scalar)
+t_vector3	*v_scalar_mul_ip(t_vector3 *dest, double scalar)
 {
 	dest->x *= scalar;
 	dest->y *= scalar;

@@ -12,12 +12,12 @@
 
 #include "../../includes/vector3.h"
 
-double	v_norm2(const t_vector3 *dest)
+double	v_norm2(const t_vector3 *v)
 {
-	return (v_dot(dest, dest));
+	return (v_dot(v, v));
 }
 
-double	v_norm(const t_vector3 *dest)
+double	v_norm(const t_vector3 *v)
 {
-	return (sqrt(v_norm2(dest)));
+	return (sqrt(v_norm2(v)));
 }

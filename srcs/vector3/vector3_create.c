@@ -12,7 +12,12 @@
 
 #include "../../includes/vector3.h"
 
-t_vector3	*v_set(t_vector3 *dest, double x, double y, double z)
+t_vector3	v_create(double x, double y, double z)
+{
+	return ((t_vector3){x, y, z});
+}
+
+t_vector3	*v_set_ip(t_vector3 *dest, double x, double y, double z)
 {
 	dest->x = x;
 	dest->y = y;
@@ -20,20 +25,15 @@ t_vector3	*v_set(t_vector3 *dest, double x, double y, double z)
 	return (dest);
 }
 
-t_vector3	*v_copy(t_vector3 *dest, const t_vector3 *src)
+t_vector3	v_copy_create(const t_vector3 *other)
 {
-	dest->x = src->x;
-	dest->y = src->y;
-	dest->z = src->z;
+	return ((t_vector3){other->x, other->y, other->z});
+}
+
+t_vector3	*v_copy_ip(t_vector3 *dest, const t_vector3 *other)
+{
+	dest->x = other->x;
+	dest->y = other->y;
+	dest->z = other->z;
 	return (dest);
-}
-
-t_vector3	v_create(double x, double y, double z)
-{
-	return ((t_vector3){x, y, z});
-}
-
-t_vector3	v_copy_create(const t_vector3 *src)
-{
-	return (v_create(src->x, src->y, src->z));
 }

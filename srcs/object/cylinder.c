@@ -21,9 +21,9 @@ t_object	*create_cylinder(const t_vector3 *point, double radius,
 	if (cylinder == NULL)
 		return (NULL);
 	cylinder->type = CYLINDER;
-	v_copy(&cylinder->point, point);
+	v_copy_ip(&cylinder->point, point);
 	cylinder->radius = radius;
-	v_copy(&cylinder->normal, normal);
+	v_copy_ip(&cylinder->normal, normal);
 	cylinder->color = color;
 	cylinder->height = height;
 	return (cylinder);
@@ -35,10 +35,10 @@ static void	save_to_record(t_hit_record *rec, double root,
 	rec->t = root;
 	ray_at(ray, rec->t, &rec->point);
 	\
-	v_copy(&rec->normal, D_p);
-	v_scalar_mul(&rec->normal, rec->t);
-	v_add(&rec->normal, A_p);
-	v_normalize(&rec->normal);
+	v_copy_ip(&rec->normal, D_p);
+	v_scalar_mul_ip(&rec->normal, rec->t);
+	v_add_ip(&rec->normal, A_p);
+	v_normalize_ip(&rec->normal);
 	\
 	rec->color = cylinder->color;
 }
@@ -50,8 +50,8 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 	t_vector3	D_p;
 	double		a, b, c, discriminant, sqrtd, root;
 
-	v_copy(&A, &ray->origin);
-	v_sub(&A, &cylinder->point);
+	v_copy_ip(&A, &ray->origin);
+	v_sub_ip(&A, &cylinder->point);
 	A_p = v_rej(&A, &cylinder->normal);
 	D_p = v_rej(&ray->direction, &cylinder->normal);
 

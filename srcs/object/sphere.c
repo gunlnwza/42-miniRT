@@ -21,7 +21,7 @@ t_object	*create_sphere(const t_vector3 *center, double radius, int color)
 	if (sphere == NULL)
 		return (NULL);
 	sphere->type = SPHERE;
-	v_copy(&sphere->point, center);
+	v_copy_ip(&sphere->point, center);
 	sphere->color = color;
 	sphere->radius = radius;
 	return (sphere);
@@ -35,11 +35,11 @@ static void	save_to_record(t_hit_record *rec, double root,
 	rec->t = root;
 	ray_at(ray, rec->t, &rec->point);
 	\
-	v_sub(v_copy(&rec->normal, &rec->point), &sphere->point);
-	v_normalize(&rec->normal);
-	v_sub(v_copy(&origin_to_point, &rec->point), &ray->origin);
+	v_sub_ip(v_copy_ip(&rec->normal, &rec->point), &sphere->point);
+	v_normalize_ip(&rec->normal);
+	v_sub_ip(v_copy_ip(&origin_to_point, &rec->point), &ray->origin);
 	if (v_dot(&origin_to_point, &rec->normal) > 0)
-		v_scalar_mul(&rec->normal, -1);
+		v_scalar_mul_ip(&rec->normal, -1);
 	\
 	rec->color = sphere->color;
 }
@@ -53,7 +53,7 @@ int	hit_sphere(t_object *sphere, const t_ray *ray, t_hit_record *rec)
 	double		sqrtd;
 	double		root;
 
-	v_sub(v_copy(&oc, &sphere->point), &ray->origin);
+	v_sub_ip(v_copy_ip(&oc, &sphere->point), &ray->origin);
 	coef[0] = v_norm2(&ray->direction);
 	coef[1] = v_dot(&ray->direction, &oc);
 	coef[2] = v_norm2(&oc) - (sphere->radius * sphere->radius);

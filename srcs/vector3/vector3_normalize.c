@@ -12,9 +12,17 @@
 
 #include "../../includes/vector3.h"
 
-// can cause error if dest's norm is 0
-t_vector3	*v_normalize(t_vector3 *dest)
+t_vector3	v_normalize(const t_vector3 *v)
 {
-	v_scalar_mul(dest, 1.0f / v_norm(dest));
+	double	norm;
+
+	norm = v_norm(v);
+	return ((t_vector3){v->x / norm, v->y / norm, v->z / norm});
+}
+
+// can cause error if dest's norm is 0
+t_vector3	*v_normalize_ip(t_vector3 *dest)
+{
+	v_scalar_mul_ip(dest, 1.0f / v_norm(dest));
 	return (dest);
 }

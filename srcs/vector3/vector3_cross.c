@@ -12,15 +12,11 @@
 
 #include "../../includes/vector3.h"
 
-t_vector3	*v_cross(t_vector3 *dest, const t_vector3 *src)
+t_vector3	v_cross(const t_vector3 *a, const t_vector3 *b)
 {
-	double	new_x;
-	double	new_y;
-	double	new_z;
-
-	new_x = dest->y * src->z - dest->z * src->y;
-	new_y = dest->z * src->x - dest->x * src->z;
-	new_z = dest->x * src->y - dest->y * src->x;
-	v_set(dest, new_x, new_y, new_z);
-	return (dest);
+	return ((t_vector3) {
+		(a->y * b->z) - (a->z * b->y),
+		(a->z * b->x) - (a->x * b->z),
+		(a->x * b->y) - (a->y * b->x)
+	});
 }

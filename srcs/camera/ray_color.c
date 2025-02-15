@@ -15,10 +15,10 @@
 static void	init_shadow_ray(t_world *world, t_hit_record *rec,
 				t_ray *shadow_ray)
 {
-	v_copy(&shadow_ray->origin, &rec->point);
-	v_copy(&shadow_ray->direction, &world->light.point);
-	v_sub(&shadow_ray->direction, &rec->point);
-	v_normalize(&shadow_ray->direction);
+	v_copy_ip(&shadow_ray->origin, &rec->point);
+	v_copy_ip(&shadow_ray->direction, &world->light.point);
+	v_sub_ip(&shadow_ray->direction, &rec->point);
+	v_normalize_ip(&shadow_ray->direction);
 }
 
 static int	is_light_reach(t_world *world, t_hit_record *rec,

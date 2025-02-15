@@ -2,10 +2,10 @@
 
 double	v_dist2(const t_vector3 *a, const t_vector3 *b)
 {
-	t_vector3	temp;
+	t_vector3	diff;
 
-	v_sub(v_copy(&temp, b), a);
-	return (v_norm2(&temp));
+	diff = v_sub(b, a);
+	return (v_norm2(&diff));
 }
 
 double	v_dist(const t_vector3 *a, const t_vector3 *b)

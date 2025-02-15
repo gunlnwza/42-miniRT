@@ -52,31 +52,31 @@ void	ft_keypress(mlx_key_data_t keydata, void *param_)
 	
 	float k = 2;
 	t_vector3	world_up;
-	v_set(&world_up, 0, 1, 0);
+	v_set_ip(&world_up, 0, 1, 0);
 	t_vector3	front;
-	v_set(&front, camera->normal.x, 0, camera->normal.z);
+	v_set_ip(&front, camera->normal.x, 0, camera->normal.z);
 
 	if (keydata.key == MLX_KEY_A)
-		v_add(&camera->center, v_scalar_mul(v_cross(&world_up, &front), k));
+		v_add_ip(&camera->center, v_scalar_mul_ip(v_cross_ip(&world_up, &front), k));
 	else if (keydata.key == MLX_KEY_D)
-		v_sub(&camera->center, v_scalar_mul(v_cross(&world_up, &front), k));
+		v_sub_ip(&camera->center, v_scalar_mul_ip(v_cross_ip(&world_up, &front), k));
 	else if (keydata.key == MLX_KEY_S)
-		v_sub(&camera->center,v_scalar_mul(&front, k));
+		v_sub_ip(&camera->center,v_scalar_mul_ip(&front, k));
 	else if (keydata.key == MLX_KEY_W)
-		v_add(&camera->center, v_scalar_mul(&front, k));
+		v_add_ip(&camera->center, v_scalar_mul_ip(&front, k));
 	else if (keydata.key == MLX_KEY_SPACE)
-		v_add(&camera->center, v_scalar_mul(&world_up, k));
+		v_add_ip(&camera->center, v_scalar_mul_ip(&world_up, k));
 	else if (keydata.key == MLX_KEY_LEFT_SHIFT)
-		v_sub(&camera->center, v_scalar_mul(&world_up, k));
+		v_sub_ip(&camera->center, v_scalar_mul_ip(&world_up, k));
 	\
 	if (keydata.key == MLX_KEY_UP)
-		v_sub(&camera->normal, v_scalar_mul(&camera->viewport_v, 0.2));
+		v_sub_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_v, 0.2));
 	else if (keydata.key == MLX_KEY_DOWN)
-		v_add(&camera->normal, v_scalar_mul(&camera->viewport_v, 0.2));
+		v_add_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_v, 0.2));
 	else if (keydata.key == MLX_KEY_LEFT)
-		v_sub(&camera->normal, v_scalar_mul(&camera->viewport_h, 0.2));
+		v_sub_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_h, 0.2));
 	else if (keydata.key == MLX_KEY_RIGHT)
-		v_add(&camera->normal, v_scalar_mul(&camera->viewport_h, 0.2));
+		v_add_ip(&camera->normal, v_scalar_mul_ip(&camera->viewport_h, 0.2));
 
 	if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
 		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
@@ -85,8 +85,8 @@ void	ft_keypress(mlx_key_data_t keydata, void *param_)
 		|| keydata.key == MLX_KEY_UP || keydata.key == MLX_KEY_DOWN
 		|| keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
 	{
-		v_normalize(&camera->normal);
-		printf("configure_camera(camera, v_set(&P, %f, %f, %f), v_normalize(v_set(&N, %f, %f, %f)), fov);\n",
+		v_normalize_ip(&camera->normal);
+		printf("configure_camera(camera, v_set_ip(&P, %f, %f, %f), v_normalize_ip(v_set_ip(&N, %f, %f, %f)), fov);\n",
 			camera->center.x, camera->center.y, camera->center.z, camera->normal.x, camera->normal.y, camera->normal.z);
 		configure_camera(camera, &camera->center, &camera->normal, camera->deg_fov);
 		render_image(*param->img, param->world, camera);	

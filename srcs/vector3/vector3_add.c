@@ -12,7 +12,12 @@
 
 #include "../../includes/vector3.h"
 
-t_vector3	*v_add(t_vector3 *dest, const t_vector3 *src)
+t_vector3	v_add(const t_vector3 *a, const t_vector3 *b)
+{
+	return (t_vector3){a->x + b->x, a->y + b->y, a->z + b->z};
+}
+
+t_vector3	*v_add_ip(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x += src->x;
 	dest->y += src->y;
@@ -20,7 +25,12 @@ t_vector3	*v_add(t_vector3 *dest, const t_vector3 *src)
 	return (dest);
 }
 
-t_vector3	*v_sub(t_vector3 *dest, const t_vector3 *src)
+t_vector3	v_sub(const t_vector3 *a, const t_vector3 *b)
+{
+	return (t_vector3){a->x - b->x, a->y - b->y, a->z - b->z};
+}
+
+t_vector3	*v_sub_ip(t_vector3 *dest, const t_vector3 *src)
 {
 	dest->x -= src->x;
 	dest->y -= src->y;
