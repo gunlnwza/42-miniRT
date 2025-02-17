@@ -11,4 +11,6 @@ typedef struct s_hit_record
 	int			color;
 }	t_hit_record;
 
+void    hit_record_copy(t_hit_record *dest, const t_hit_record *src);
+
 #endif

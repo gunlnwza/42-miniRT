@@ -14,9 +14,9 @@
 
 void	init_ray(t_ray *ray, t_camera *camera)
 {
-	v_copy(&ray->origin, &camera->center);
-	v_copy(&ray->direction, &camera->pixel00_loc);
-	v_sub(&ray->direction, &ray->origin);
+	v_copy_ip(&ray->origin, &camera->center);
+	v_copy_ip(&ray->direction, &camera->pixel00_loc);
+	v_sub_ip(&ray->direction, &ray->origin);
 }
 
 void	render_image(mlx_image_t *img, t_world *world, t_camera *camera)
@@ -37,11 +37,11 @@ void	render_image(mlx_image_t *img, t_world *world, t_camera *camera)
 			pixel_color = ray_color(&ray, world);
 			mlx_put_pixel(img, x, y, pixel_color);
 			x++;
-			v_add(&ray.direction, &camera->pixel_delta_h);
+			v_add_ip(&ray.direction, &camera->pixel_delta_h);
 		}
 		y++;
-		v_sub(&ray.direction, &camera->viewport_h);
-		v_add(&ray.direction, &camera->pixel_delta_v);
+		v_sub_ip(&ray.direction, &camera->viewport_h);
+		v_add_ip(&ray.direction, &camera->pixel_delta_v);
 	}
 	ft_printf("\rFinish rendering!\n");
 }

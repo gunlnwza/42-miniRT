@@ -51,7 +51,7 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 
 	world->nb_objects = 0;
 	\
-	ambient_intensity = 70;
+	ambient_intensity = 100;
 	diffuse_intensity = 200;
 	\
 	world->ambient_light_color = get_rgba(
@@ -59,27 +59,22 @@ int	init_world_and_camera(t_world *world, t_camera *camera)
 	\
 	world->light.color = get_rgba(
 		diffuse_intensity, diffuse_intensity, diffuse_intensity, 255);
-	world->light.point = v_create(0, 4, 10);
+	world->light.point = v_create(0, 0, 0);
 	\
-	add_sphere(world, v_set(&P, 0, -100, 0), 100, get_rgba(0, 0, 200, 255));
+	fov = 60;
 	\
-	add_plane(world, v_set(&P, 0, 0, -10), v_normalize(v_set(&N, -1, -1, -1)), get_rgba(200, 200, 0, 255));
+	// scene 1
+	configure_camera(camera, v_set_ip(&P, 10.14, 6.00, -1.24), v_normalize_ip(v_set_ip(&N, -0.89, -0.28, -0.35)), fov);
+	add_cylinder(world, v_set_ip(&P, 0, -10, 0), v_normalize_ip(v_set_ip(&N, 0, 1, 0)), get_rgba(100, 100, 100, 255), 20, 20);
+	add_cylinder(world, v_set_ip(&P, -1, 0, -6), v_normalize_ip(v_set_ip(&N, 1, 0, -1)), get_rgba(0, 0, 200, 255), 1, 2);
+	add_cylinder(world, v_set_ip(&P, 2, 0, -6), v_normalize_ip(v_set_ip(&N, 1, 0, 1)), get_rgba(0, 200, 0, 255), 1, 2);
+	add_cylinder(world, v_set_ip(&P, -4, 0, -6), v_normalize_ip(v_set_ip(&N, 1, 1, 0)), get_rgba(200, 0, 0, 255), 1, 2);
 	\
-	add_cylinder(world, v_set(&P, 0, 0, 0), v_normalize(v_set(&N, 0, 1, 0)), get_rgba(200, 0, 200, 255), 0.5, 10);
-	\
-	fov = 45;
-	// configure_camera(camera, v_set(&P, 28.6, 8, 33.4), v_normalize(v_set(&N, -0.8, -0.15, -0.55)), fov);
-	// configure_camera(camera, v_set(&P, 0, 1, 2), v_normalize(v_set(&N, 0, 0, -1)), fov);
-	configure_camera(camera, v_set(&P, 2, 4, 10), v_normalize(v_set(&N, 0, 0, -1)), fov);
+	// scene 2
+	// configure_camera(camera, v_set_ip(&P, 0, 0, 0), v_normalize_ip(v_set_ip(&N, 0, 0, -1)), fov);
+	// add_cylinder(world, v_set_ip(&P, 0, 1, -6), v_normalize_ip(v_set_ip(&N, 0, 0, 1)), get_rgba(200, 0, 0, 255), 0.5, 2);
+	// add_cylinder(world, v_set_ip(&P, 0, -1, -6), v_normalize_ip(v_set_ip(&N, 0, 0, -1)), get_rgba(200, 0, 0, 255), 0.5, 2);
+
+
 	return (SUCCESS);
 }
-
-/*
-camera.center = (28.626529, 8.000000, 33.423184)
-camera.normal = (-0.816260, -0.149902, -0.557897)
-*/
-
-/*
-camera.center = (3.122321, 1.000000, 0.344586)
-camera.normal = (-0.994143, 0.000000, -0.108071)
-*/

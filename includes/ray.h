@@ -24,6 +24,6 @@ typedef struct s_ray
 	t_vector3	direction;
 }	t_ray;
 
-void	ray_at(const t_ray *ray, double t, t_vector3 *res_point);
+t_vector3	ray_at(const t_ray *ray, double t);
 
 #endif

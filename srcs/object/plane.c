@@ -12,50 +12,34 @@
 
 #include "../../includes/object.h"
 
-t_object	*create_plane(const t_vector3 *point, const t_vector3 *normal,
-				int color)
-{
-	t_object	*plane;
-
-	plane = malloc(sizeof(t_object));
-	if (plane == NULL)
-		return (NULL);
-	plane->type = PLANE;
-	v_copy(&plane->point, point);
-	plane->color = color;
-	v_copy(&plane->normal, normal);
-	return (plane);
-}
-
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *plane)
 {
 	t_vector3	origin_to_point;
 
 	rec->t = root;
-	ray_at(ray, rec->t, &rec->point);
+	rec->point = ray_at(ray, rec->t);
 	\
-	v_copy(&rec->normal, &plane->normal);
-	v_sub(v_copy(&origin_to_point, &rec->point), &ray->origin);
+	rec->normal = v_copy(&plane->normal);
+	\
+	origin_to_point = v_copy(&rec->point);
+	v_sub_ip(&origin_to_point, &ray->origin);
 	if (v_dot(&origin_to_point, &rec->normal) > 0)
-		v_scalar_mul(&rec->normal, -1);
+		v_scalar_mul_ip(&rec->normal, -1);
 	\
 	rec->color = plane->color;
 }
 
 int	hit_plane(t_object *plane, const t_ray *ray, t_hit_record *rec)
 {
-	double		ray_tmin;
-	double		ray_tmax;
 	t_vector3	origin_to_point;
 	double		root;
 
-	ray_tmin = 0.001;
-	ray_tmax = INF;
-	v_sub(v_copy(&origin_to_point, &plane->point), &ray->origin);
+	origin_to_point = v_copy(&plane->point);
+	v_sub_ip(&origin_to_point, &ray->origin);
 	root = v_dot(&origin_to_point, &plane->normal) \
 			/ v_dot(&ray->direction, &plane->normal);
-	if (root <= ray_tmin || ray_tmax <= root)
+	if (root <= RAY_T_MIN)
 		return (0);
 	save_to_record(rec, root, ray, plane);
 	return (1);

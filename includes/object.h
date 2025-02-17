@@ -18,8 +18,8 @@ typedef struct s_object
     t_vector3       point;  // sp, pl, cy
     int             color;  // sp, pl, cy
     t_vector3       normal; //     pl, cy
-    double         radius; // sp,     cy
-    double       height; //         cy
+    double          radius; // sp,     cy
+    double          height; //         cy
 }   t_object;
 
 t_object	*create_sphere(const t_vector3 *center, double radius, int color);

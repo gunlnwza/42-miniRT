@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+# CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 HEADERS := includes/color.h \
@@ -17,9 +17,9 @@ HEADERS := includes/color.h \
 
 SRCS := \
 	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c \
-	srcs/camera/ray.c srcs/camera/render_image.c \
+	srcs/camera/ray.c srcs/camera/render_image.c srcs/camera/hit_record.c \
 	\
-	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
+	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c srcs/object/object_create.c \
 	\
 	srcs/main.c \
 	\
@@ -28,7 +28,8 @@ SRCS := \
 	srcs/parser.c \
 	\
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
-	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
+	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_dist.c \
+	srcs/vector3/vector3_proj.c \
 	\
 	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	

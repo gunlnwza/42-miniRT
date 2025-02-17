@@ -37,14 +37,14 @@ int	is_ray_hit(t_world *world, t_ray *ray, t_hit_record *rec)
 	int				i;
 	t_hit_record	temp_rec;
 
-	hit_anything = 0;
+	hit_anything = FALSE;
 	closest_so_far = INF;
 	i = 0;
 	while (i < world->nb_objects)
 	{
 		if (is_hit_object(world->objects[i], ray, &temp_rec))
 		{
-			hit_anything = 1;
+			hit_anything = TRUE;
 			if (temp_rec.t < closest_so_far)
 			{
 				closest_so_far = temp_rec.t;
