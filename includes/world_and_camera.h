@@ -30,6 +30,7 @@ typedef struct s_world
 
 	t_light		light;
 	int			ambient_light_color;
+	t_camera	camera;
 }	t_world;
 
 

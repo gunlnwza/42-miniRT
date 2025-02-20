@@ -134,17 +134,11 @@ int	main(int argc, char **argv)
 	t_camera	camera;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-
 	t_param 	param;
 
-	if (argc < 2) {
-        fprintf(stderr, "Usage: %s <scene.rt>\n", argv[0]);
-        return EXIT_FAILURE;
-    }
-
-    if (!parse_scene(argv[1], &world, &camera)) {
-        fprintf(stderr, "Failed to parse scene file.\n");
-        return EXIT_FAILURE;
+	if (argc != 2 || !open_file(&world, argv[1])) {
+        ft_putstr_fd("Error: Invalid scene file\n", STDERR_FILENO);
+        return (EXIT_FAILURE);
     }
 	mlx = NULL;
 	img = NULL;
@@ -154,6 +148,7 @@ int	main(int argc, char **argv)
 	param.camera = &camera;
 	if (init_display(&mlx, &img, &param) == ERROR)
 		return (EXIT_FAILURE);
+	configure_camera(&camera, &camera.center, &camera.normal, camera.deg_fov);
 	render_image(img, &world, &camera);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

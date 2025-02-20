@@ -25,7 +25,13 @@ SRCS := \
 	\
 	srcs/world.c \
 	\
-	srcs/parser.c \
+	srcs/parser/parsing.c \
+    srcs/parser/parsing_obj.c \
+	srcs/parser/parsing_env.c \
+	srcs/parser/parsing_util.c \
+    srcs/parser/openfile.c \
+    srcs/parser/error.c \
+	srcs/parser/array.c \
 	\
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
 	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_dist.c \
