@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_binary_tree.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/10 18:11:49 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/10 18:14:08 by nteechar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "ft_binary_tree.h"
 
-t_binary_tree	*ft_binary_tree_new(void *content)
-{
-	t_binary_tree	*node;
+// STILL IN DEVELOPMENT
 
-	node = malloc(sizeof(t_binary_tree));
+t_bin_tree	*ft_binary_tree_new(void *content)
+{
+	t_bin_tree	*node;
+
+	node = malloc(sizeof(t_bin_tree));
 	if (node == NULL)
 		return (NULL);
 	node->content = content;
@@ -17,7 +31,7 @@ t_binary_tree	*ft_binary_tree_new(void *content)
 }
 
 // free everything, from given node to leaves
-void	ft_binary_tree_clear(t_binary_tree **tree, void (*del)(void *))
+void	ft_binary_tree_clear(t_bin_tree **tree, void (*del)(void *))
 {
 	if ((*tree)->left)
 		ft_binary_tree_clear(&(*tree)->left, del);
@@ -31,16 +45,17 @@ void	ft_binary_tree_clear(t_binary_tree **tree, void (*del)(void *))
 	*tree = NULL;
 }
 
-void	ft_binary_tree_set_left(t_binary_tree *parent, t_binary_tree *child)
+void	ft_binary_tree_set_left(t_bin_tree *parent, t_bin_tree *child)
 {
 	parent->left = child;
 }
 
-void	ft_binary_tree_set_right(t_binary_tree *parent, t_binary_tree *child)
+void	ft_binary_tree_set_right(t_bin_tree *parent, t_bin_tree *child)
 {
 	parent->right = child;
 }
 
+/*
 int main(void)
 {
 	char **strings = malloc(sizeof(char *) * 4);
@@ -78,7 +93,9 @@ int main(void)
 		" b c\n"
 		"d\n"
 	);
-	printf("a=%s b=%s c=%s d=%s\n", (char *) a->content, (char *) a->left->content, (char *) a->right->content, (char *) a->left->left->content);
+	printf("a=%s b=%s c=%s d=%s\n",
+		(char *) a->content, (char *) a->left->content,
+		(char *) a->right->content, (char *) a->left->left->content);
 
 	// ft_binary_tree_delete(&d, NULL);
 	ft_binary_tree_clear(&a, free);
@@ -87,3 +104,4 @@ int main(void)
 
 	return (0);
 }
+*/
