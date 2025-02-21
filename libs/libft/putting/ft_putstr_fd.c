@@ -12,7 +12,7 @@
 
 void	ft_putchar_fd(char c, int fd);
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(const char *s, int fd)
 {
 	while (*s != '\0')
 	{

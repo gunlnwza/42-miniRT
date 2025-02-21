@@ -128,26 +128,29 @@ int	init_display(mlx_t **mlx, mlx_image_t **img, t_param *param)
 }
 
 // TODO: replace `init_world_and_camera` with parser
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_world		world;
-	t_camera	camera;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-
 	t_param 	param;
 
-	if (init_world_and_camera(&world, &camera) == ERROR)
-		return (EXIT_FAILURE);
+	ft_bzero(&world, sizeof(t_world));
+	if (argc != 2 || open_file(&world, argv[1]) != 0)
+	{
+        ft_putstr_fd("Error: Invalid scene file\n", STDERR_FILENO);
+        return (EXIT_FAILURE);
+    }
 	mlx = NULL;
 	img = NULL;
 	param.mlx = &mlx;
 	param.img = &img;
 	param.world = &world;
-	param.camera = &camera;
+	param.camera = &world.camera;
 	if (init_display(&mlx, &img, &param) == ERROR)
 		return (EXIT_FAILURE);
-	render_image(img, &world, &camera);
+	configure_camera(&world.camera, &world.camera.center, &world.camera.normal, world.camera.deg_fov);
+	render_image(img, &world, &world.camera);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);

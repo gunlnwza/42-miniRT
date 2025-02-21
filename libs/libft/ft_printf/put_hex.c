@@ -15,7 +15,7 @@
 // only takes 0 <= n <= 15
 static char	convert_to_upper_hex(unsigned int n)
 {
-	if (0 <= n && n <= 9)
+	if (n <= 9)
 		return (n + '0');
 	else
 		return (n - 10 + 'A');
@@ -24,7 +24,7 @@ static char	convert_to_upper_hex(unsigned int n)
 // only takes 0 <= n <= 15
 static char	convert_to_lower_hex(unsigned int n)
 {
-	if (0 <= n && n <= 9)
+	if (n <= 9)
 		return (n + '0');
 	else
 		return (n - 10 + 'a');
