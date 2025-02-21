@@ -136,7 +136,9 @@ int	main(int argc, char **argv)
 	mlx_image_t	*img;
 	t_param 	param;
 
-	if (argc != 2 || !open_file(&world, argv[1])) {
+	ft_bzero(&world, sizeof(t_world));
+	if (argc != 2 || open_file(&world, argv[1]) != 0)
+	{
         ft_putstr_fd("Error: Invalid scene file\n", STDERR_FILENO);
         return (EXIT_FAILURE);
     }

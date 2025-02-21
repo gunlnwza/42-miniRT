@@ -1,9 +1,8 @@
 #include "../../includes/mini_rt.h"
 
-// 解析平面
 int parse_plane(t_world *world, char **params) {
     int i = 0;
-    t_object obj;
+    t_object   obj;
     ft_bzero(&obj, sizeof(t_object));
     obj.type = PLANE;
     while (params && params[++i]) {
@@ -19,7 +18,6 @@ int parse_plane(t_world *world, char **params) {
     return (0);
 }
 
-// 解析球体
 int parse_sphere(t_world *world, char **params) {
     int i = 0;
     t_object obj;
@@ -37,7 +35,6 @@ int parse_sphere(t_world *world, char **params) {
     return (0);
 }
 
-// 解析圆柱
 int parse_cylinder(t_world *world, char **params) {
     int i = 0;
     t_object obj;

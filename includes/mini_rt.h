@@ -10,11 +10,11 @@
 # include "world_and_camera.h"
 
 // 解析器相关函数
-int open_file(t_world *world, const char *filename);
+int open_file(t_world *world, char *filename);
 int parse_params(t_world *world, char *line);
-int parse_ambient(t_world *world, char *line);
-int parse_camera(t_world *world, char *line);
-int parse_light(t_world *world, char *line);
+int parse_ambient(t_world *world, char **params);
+int parse_camera(t_world *world, char **params);
+int parse_light(t_world *world, char **params);
 int parse_sphere(t_world *world, char **params);
 int parse_plane(t_world *world, char **params);
 int parse_cylinder(t_world *world, char **params);

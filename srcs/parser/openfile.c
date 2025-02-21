@@ -1,5 +1,15 @@
 #include "../../includes/mini_rt.h"
 
+static int	is_rt_file(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename) - 3;
+	if (len > 3)
+		return (ft_strncmp(filename + len, ".rt", 3) == 0);
+	return (0);
+}
+
 int read_file(t_world *world, int fd) {
 	char *line;
 	while ((line = get_next_line(fd)) != NULL) {
@@ -13,26 +23,28 @@ int read_file(t_world *world, int fd) {
 	return (0);
 }
 
-int open_file(t_world *world, const char *filename) {
+int open_file(t_world *world, char *filename) {
     int fd = open(filename, O_RDONLY);
-    if (fd == -1) {
-        return show_error("Failed to open file");
-    }
-	int	result = read_file(world, fd);
-    close(fd);
-    return (result);
+    if (fd == -1)
+        return (show_error("Failed to open file"));
+	if (!is_rt_file(filename))
+		return (!show_error("Wrong file"));
+	if(!read_file(world, fd))
+		return (0);
+    return (1);
 }
 
-char *sanitize_line(char *line) {
-	int i = -1;
-	char *tmp = ft_strdup(line);
-	free(line);
-	while (tmp && tmp[++i]) {
-		if (tmp[i] == '\t' || tmp[i] == '\n') {
+char	*sanitize_line(char *line)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	tmp = line;
+	while (tmp && tmp[++i])
+		if (tmp[i] == '\t' || tmp[i] == '\n')
 			tmp[i] = ' ';
-		}
-	}
-	char *trimmed_line = ft_strtrim(tmp, " ");
+	line = ft_strtrim(tmp, " ");
 	free(tmp);
-	return (trimmed_line);
+	return (line);
 }

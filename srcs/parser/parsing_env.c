@@ -1,8 +1,9 @@
 #include "../../includes/mini_rt.h"
 
-int parse_camera(t_world *world, char *line) {
-    char **params = ft_split(line, ' ');
-    if (array_length(params) != 4) {
+int parse_camera(t_world *world, char **params)
+{
+    if (array_length(params) != 4)
+    {
         free_array(params);
         return (show_error("Invalid camera parameters"));
     }
@@ -13,9 +14,10 @@ int parse_camera(t_world *world, char *line) {
     return (0);
 }
 
-int parse_ambient(t_world *world, char *line) {
-    char **params = ft_split(line, ' ');
-    if (array_length(params) != 3) {
+int parse_ambient(t_world *world, char **params)
+{
+    if (array_length(params) != 3)
+    {
         free_array(params);
         return (show_error("Invalid ambient parameters"));
     }
@@ -30,9 +32,10 @@ int parse_ambient(t_world *world, char *line) {
     return (0);
 }
 
-int parse_light(t_world *world, char *line) {
-    char **params = ft_split(line, ' ');
-    if (array_length(params) != 4) {
+int parse_light(t_world *world, char **params)
+{
+    if (array_length(params) != 4)
+    {
         free_array(params);
         return (show_error("Invalid light parameters"));
     }
