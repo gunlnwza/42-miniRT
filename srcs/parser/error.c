@@ -1,6 +1,7 @@
 #include "../../includes/mini_rt.h"
 
-int show_parsing_error(t_world *world, char **params, const char *msg) {
+int show_parsing_error(t_world *world, char **params, const char *msg)
+{
     ft_putstr_fd("Error: ", 2);
     ft_putstr_fd(msg, 2);
     if (world->nb_objects > 0) {
@@ -14,7 +15,8 @@ int show_parsing_error(t_world *world, char **params, const char *msg) {
 }
 
 
-int show_error(const char *msg) {
+int show_error(const char *msg)
+{
     ft_putstr_fd("Error: ", 2);
     ft_putstr_fd(msg, 2);
     ft_putendl_fd("", 2);

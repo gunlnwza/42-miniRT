@@ -19,16 +19,20 @@ int parse_color(char *str, int *color) {
         free_array(rgb);
         return (1);
     }
-    int r = atoi(rgb[0]);
-    int g = atoi(rgb[1]);
-    int b = atoi(rgb[2]);
+    int r = (double)atoi(rgb[0]);
+    int g = (double)atoi(rgb[1]);
+    int b = (double)atoi(rgb[2]);
     *color = get_rgba(r, g, b, 255);
     free_array(rgb);
     return (0);
 }
 
-int parse_double(char *str, double *num) {
+int parse_double(char *str, double *num)
+{
     char *endptr;
     *num = strtod(str, &endptr);
-    return (*endptr == '\0') ? 0 : 1;
+    
+    if (*endptr == '\0')
+        return (0);
+    return(1);
 }

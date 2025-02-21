@@ -27,7 +27,7 @@ int parse_ambient(t_world *world, char **params)
         free_array(params);
         return show_error("Invalid ambient color format");
     }
-    world->ambient_light_color = get_rgba((int)(r * brightness), (int)(g * brightness), (int)(b * brightness), 255);
+    world->ambient_light_color = get_rgba((r * brightness), (g * brightness), (b * brightness), 255);
     free_array(params);
     return (0);
 }

@@ -10,11 +10,14 @@ static int	is_rt_file(char *filename)
 	return (0);
 }
 
-int read_file(t_world *world, int fd) {
+int read_file(t_world *world, int fd)
+{
 	char *line;
-	while ((line = get_next_line(fd)) != NULL) {
+	while ((line = get_next_line(fd)) != NULL)
+	{
 		line = sanitize_line(line);
-		if (parse_params(world, line) != 0) {
+		if (parse_params(world, line) != 0)
+		{
             free(line);
             return show_error("Failed to parse line");
         }
@@ -23,7 +26,8 @@ int read_file(t_world *world, int fd) {
 	return (0);
 }
 
-int open_file(t_world *world, char *filename) {
+int open_file(t_world *world, char *filename)
+{
     int fd = open(filename, O_RDONLY);
     if (fd == -1)
         return (show_error("Failed to open file"));
