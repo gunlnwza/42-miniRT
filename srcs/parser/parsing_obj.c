@@ -23,7 +23,9 @@ int parse_sphere(t_world *world, char **params) {
     t_object obj;
     ft_bzero(&obj, sizeof(t_object));
     obj.type = SPHERE;
-    while (params && params[++i]) {
+    
+    while (params && params[++i])
+    {
         if (i == 1 && parse_vector(params[i], &obj.point))
             return (show_parsing_error(world, params, "Invalid number of coordinates"));
         if (i == 2 && parse_double(params[i], &obj.radius))
@@ -31,6 +33,11 @@ int parse_sphere(t_world *world, char **params) {
         if (i == 3 && parse_color(params[i], &obj.color))
             return (show_parsing_error(world, params, "Invalid number of colors"));
     }
+
+    // obj.point = v_create(0, 0, -1);
+    // obj.radius = 0.5;
+    // obj.color = get_rgba(200, 0, 0, 255);
+    
     add_sphere(world, &obj.point, obj.radius, obj.color);
     return (0);
 }

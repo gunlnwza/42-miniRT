@@ -46,8 +46,10 @@ char	*sanitize_line(char *line)
 	i = -1;
 	tmp = line;
 	while (tmp && tmp[++i])
+	{
 		if (tmp[i] == '\t' || tmp[i] == '\n')
 			tmp[i] = ' ';
+	}
 	line = ft_strtrim(tmp, " ");
 	free(tmp);
 	return (line);

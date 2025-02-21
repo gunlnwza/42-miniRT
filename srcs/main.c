@@ -131,7 +131,6 @@ int	init_display(mlx_t **mlx, mlx_image_t **img, t_param *param)
 int	main(int argc, char **argv)
 {
 	t_world		world;
-	t_camera	camera;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_param 	param;
@@ -147,11 +146,11 @@ int	main(int argc, char **argv)
 	param.mlx = &mlx;
 	param.img = &img;
 	param.world = &world;
-	param.camera = &camera;
+	param.camera = &world.camera;
 	if (init_display(&mlx, &img, &param) == ERROR)
 		return (EXIT_FAILURE);
-	configure_camera(&camera, &camera.center, &camera.normal, camera.deg_fov);
-	render_image(img, &world, &camera);
+	configure_camera(&world.camera, &world.camera.center, &world.camera.normal, world.camera.deg_fov);
+	render_image(img, &world, &world.camera);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);

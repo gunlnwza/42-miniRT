@@ -1,5 +1,6 @@
 #include "../../includes/mini_rt.h"
 
+// receive vector_str and set the values of vect
 int parse_vector(char *str, t_vector3 *vect) {
     char **nbrs = ft_split(str, ',');
     if (array_length(nbrs) != 3) {
