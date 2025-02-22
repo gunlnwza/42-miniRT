@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 11:41:41 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:25:26 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_keypress(mlx_key_data_t keydata, void *param_)
 	modify_camera(camera, keydata.key);
 	if (keydata.key == MLX_KEY_ENTER)
 	{
-		configure_camera(camera, &camera->center, &camera->normal, camera->deg_fov);
+		configure_camera(camera);
 		render_image(*param->img, param->world, camera);
 	}
 }
@@ -138,7 +138,7 @@ int	main(int argc, char **argv)
 	param.camera = &world.camera;
 	if (init_display(&mlx, &img, &param) == ERROR)
 		return (EXIT_FAILURE);
-	configure_camera(&world.camera, &world.camera.center, &world.camera.normal, world.camera.deg_fov);
+	configure_camera(&world.camera);
 	render_image(img, &world, &world.camera);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

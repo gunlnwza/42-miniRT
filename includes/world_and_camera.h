@@ -34,7 +34,7 @@ typedef struct s_world
 }	t_world;
 
 
-void	configure_camera(t_camera *camera, const t_vector3 *point, const t_vector3 *normal, int deg_fov);
+void	configure_camera(t_camera *camera);
 
 int		is_ray_hit(t_world *world, t_ray *ray, t_hit_record *rec);
 int		ray_color(t_ray *ray, t_world *world);
