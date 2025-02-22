@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   world_and_camera.h                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/22 12:53:02 by nteechar          #+#    #+#             */
+/*   Updated: 2025/02/22 12:53:03 by nteechar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WORLD_AND_CAMERA_H
 # define WORLD_AND_CAMERA_H
 
@@ -27,23 +39,18 @@ typedef struct s_world
 {
 	t_object	*objects[10];
 	int			nb_objects;
-
 	t_light		light;
 	int			ambient_light_color;
 	t_camera	camera;
 }	t_world;
-
 
 void	configure_camera(t_camera *camera);
 
 int		is_ray_hit(t_world *world, t_ray *ray, t_hit_record *rec);
 int		ray_color(t_ray *ray, t_world *world);
 
-
 void	add_sphere(t_world *world, const t_vector3 *center, double radius, int color);
 void	add_plane(t_world *world, const t_vector3 *point, const t_vector3 *normal, int color);
 void	add_cylinder(t_world *world, const t_vector3 *point, const t_vector3 *normal, int color, double radius, double height);
-
-int		init_world_and_camera(t_world *world, t_camera *camera);
 
 #endif
