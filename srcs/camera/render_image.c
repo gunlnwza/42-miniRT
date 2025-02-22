@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:42:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:49:07 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init_ray(t_ray *ray, t_camera *camera)
 {
-    ray->origin = v_copy(&camera->center);
+	ray->origin = v_copy(&camera->center);
 	ray->direction = v_sub(&camera->pixel00_loc, &ray->origin);
 }
 
