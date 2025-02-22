@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:59:24 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 18:11:23 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:27:54 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/ray.h"
 
-// will move into camera dir later
 t_vector3	ray_at(const t_ray *ray, double t)
 {
 	t_vector3	diff;

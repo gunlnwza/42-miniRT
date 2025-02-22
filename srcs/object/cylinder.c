@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:42:01 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 18:08:28 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:33:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 static void	calculate_coef(
 	t_object *cylinder, const t_ray *ray, double coef[3])
 {
-	t_vector3	A;
-	t_vector3	A_perpen;
-	t_vector3	D_perpen;
+	t_vector3	to_origin;
+	t_vector3	to_origin_perpen;
+	t_vector3	dir_perpen;
 
-	A = v_sub(&ray->origin, &cylinder->point);
-	A_perpen = v_rej(&A, &cylinder->normal);
+	to_origin = v_sub(&ray->origin, &cylinder->point);
+	to_origin_perpen = v_rej(&to_origin, &cylinder->normal);
 	\
-	D_perpen = v_rej(&ray->direction, &cylinder->normal);
+	dir_perpen = v_rej(&ray->direction, &cylinder->normal);
 	\
-	coef[0] = v_norm2(&D_perpen);
-	coef[1] = v_dot(&A_perpen, &D_perpen);
-	coef[2] = v_norm2(&A_perpen) - cylinder->radius * cylinder->radius;
+	coef[0] = v_norm2(&dir_perpen);
+	coef[1] = v_dot(&to_origin_perpen, &dir_perpen);
+	coef[2] = v_norm2(&to_origin_perpen) - cylinder->radius * cylinder->radius;
 }
 
 static int	have_root(double coef[3], double *root)
