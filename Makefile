@@ -22,7 +22,7 @@ SRCS := \
 	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
 	srcs/object/object_create.c srcs/object/object_add.c \
 	\
-	srcs/main.c \
+	srcs/main.c srcs/display.c \
 	\
 	srcs/parser/parsing.c \
     srcs/parser/parsing_obj.c \

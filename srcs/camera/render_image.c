@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 17:40:06 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:42:24 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 void	init_ray(t_ray *ray, t_camera *camera)
 {
-	v_copy_ip(&ray->origin, &camera->center);
-	v_copy_ip(&ray->direction, &camera->pixel00_loc);
-	v_sub_ip(&ray->direction, &ray->origin);
+    ray->origin = v_copy(&camera->center);
+	ray->direction = v_sub(&camera->pixel00_loc, &ray->origin);
 }
 
-void	render_image(mlx_image_t *img, t_world *world, t_camera *camera)
+void	render_image(mlx_image_t *img, t_world *world)
 {
 	t_ray	ray;
 	int		pixel_color;
 	int		x;
 	int		y;
 
-	init_ray(&ray, camera);
+	init_ray(&ray, &world->camera);
 	y = 0;
 	while (y < HEIGHT)
 	{
@@ -37,11 +36,11 @@ void	render_image(mlx_image_t *img, t_world *world, t_camera *camera)
 			pixel_color = ray_color(&ray, world);
 			mlx_put_pixel(img, x, y, pixel_color);
 			x++;
-			v_add_ip(&ray.direction, &camera->pixel_delta_h);
+			v_add_ip(&ray.direction, &world->camera.pixel_delta_h);
 		}
 		y++;
-		v_sub_ip(&ray.direction, &camera->viewport_h);
-		v_add_ip(&ray.direction, &camera->pixel_delta_v);
+		v_sub_ip(&ray.direction, &world->camera.viewport_h);
+		v_add_ip(&ray.direction, &world->camera.pixel_delta_v);
 	}
 	ft_printf("\rFinish rendering!\n");
 }
