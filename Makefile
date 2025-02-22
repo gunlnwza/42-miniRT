@@ -19,11 +19,10 @@ SRCS := \
 	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c \
 	srcs/camera/ray.c srcs/camera/render_image.c srcs/camera/hit_record.c \
 	\
-	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c srcs/object/object_create.c \
+	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
+	srcs/object/object_create.c srcs/object/object_add.c \
 	\
 	srcs/main.c \
-	\
-	srcs/world.c \
 	\
 	srcs/parser/parsing.c \
     srcs/parser/parsing_obj.c \
@@ -33,9 +32,11 @@ SRCS := \
     srcs/parser/error.c \
 	srcs/parser/array.c \
 	\
-	srcs/vector3/vector3_add.c srcs/vector3/vector3_create.c srcs/vector3/vector3_cross.c srcs/vector3/vector3_dot.c \
-	srcs/vector3/vector3_mul.c srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c srcs/vector3/vector3_dist.c \
-	srcs/vector3/vector3_proj.c \
+	srcs/vector3/vector3_create.c \
+	srcs/vector3/vector3_add.c srcs/vector3/vector3_mul.c \
+	srcs/vector3/vector3_dot.c srcs/vector3/vector3_dist.c \
+	srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
+	srcs/vector3/vector3_cross.c srcs/vector3/vector3_proj.c \
 	\
 	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	

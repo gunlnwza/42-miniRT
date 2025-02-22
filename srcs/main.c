@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 18:00:13 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:41:41 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
 void	render_image(mlx_image_t *img, t_world *world, t_camera *camera);
-
-// replace with parser
-int		init_world_and_camera(t_world *world, t_camera *camera);
 
 typedef struct s_param
 {
@@ -24,14 +21,6 @@ typedef struct s_param
 	t_world		*world;
 	t_camera	*camera;
 }	t_param;
-
-// void	ft_hook(void *param)
-// {
-// 	const mlx_t	*mlx;
-
-// 	mlx = param;
-// 	(void) mlx;
-// }
 
 void	ft_close(void *param)
 {
