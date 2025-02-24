@@ -4,6 +4,10 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
+LIBFT := ./libs/libft
+LIBMLX := ./libs/MLX42
+
+
 HEADERS := includes/color.h \
 	includes/constants.h \
 	includes/hit_record.h \
@@ -11,7 +15,6 @@ HEADERS := includes/color.h \
 	includes/mini_rt.h \
 	includes/object.h \
 	includes/ray.h \
-	includes/utils.h \
 	includes/vector3.h \
 	includes/world_and_camera.h \
 
@@ -40,16 +43,13 @@ SRCS := \
 	\
 	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	
+OBJS := $(SRCS:.c=.o)
 
-OBJS := $(SRCS:%.c=%.o)
+# Linux
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# Mac
+# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
 
-LIBFT := ./libs/libft
-LIBMLX:= ./libs/MLX42
-
-# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm  # Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit  # Mac
-
-.PHONY: all, clean, fclean, re, libft, libmlx
 
 all: libft libmlx $(NAME)
 
@@ -77,3 +77,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+.PHONY: all, clean, fclean, re, libft, libmlx
