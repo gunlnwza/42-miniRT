@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+# CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 LIBFT := ./libs/libft
@@ -43,7 +43,10 @@ SRCS := \
 	\
 	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
 	
-OBJS := $(SRCS:.c=.o)
+OBJS := $(SRCS:%.c=%.o)
+
+LIBFT := ./libs/libft
+LIBMLX:= ./libs/MLX42
 
 # Linux
 LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
