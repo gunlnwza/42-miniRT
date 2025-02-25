@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+         #
+#    By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 13:18:31 by nteechar          #+#    #+#              #
-#    Updated: 2025/02/25 15:46:36 by nteechar         ###   ########.fr        #
+#    Updated: 2025/02/25 18:09:18 by ykai-yua         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ HEADERS := libft.h \
 SRCS := \
 	conversion/ft_atoi.c conversion/ft_tolower.c \
 	conversion/ft_itoa.c conversion/ft_toupper.c conversion/ft_atof.c \
+	conversion/ft_strtod.c conversion/ft_strtol.c \
 	\
 	ft_printf/ft_printf.c \
 	ft_printf/put_address.c ft_printf/put_char.c ft_printf/put_hex.c \

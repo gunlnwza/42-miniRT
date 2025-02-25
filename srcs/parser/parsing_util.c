@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/22 12:54:53 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:54:53 by nteechar         ###   ########.fr       */
+/*   Created: 2025/02/25 17:46:45 by ykai-yua          #+#    #+#             */
+/*   Updated: 2025/02/25 17:46:45 by ykai-yua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	parse_vector(char *str, t_vector3 *vect)
 		free_array(nbrs);
 		return (1);
 	}
-	vect->x = atof(nbrs[0]);
-	vect->y = atof(nbrs[1]);
-	vect->z = atof(nbrs[2]);
+	vect->x = ft_atof(nbrs[0]);
+	vect->y = ft_atof(nbrs[1]);
+	vect->z = ft_atof(nbrs[2]);
 	free_array(nbrs);
 	return (0);
 }
@@ -43,9 +43,9 @@ int	parse_color(char *str, int *color)
 		free_array(rgb);
 		return (1);
 	}
-	r = atoi(rgb[0]);
-	g = atoi(rgb[1]);
-	b = atoi(rgb[2]);
+	r = ft_atoi(rgb[0]);
+	g = ft_atoi(rgb[1]);
+	b = ft_atoi(rgb[2]);
 	*color = get_rgba(r, g, b, 255);
 	free_array(rgb);
 	return (0);
@@ -55,8 +55,33 @@ int	parse_double(char *str, double *num)
 {
 	char	*endptr;
 
-	*num = strtod(str, &endptr);
+	*num = ft_strtod(str, &endptr);
 	if (*endptr == '\0')
 		return (0);
 	return (1);
+}
+
+int	ft_sscanf(const char *str, int *r, int *g, int *b)
+{
+	int		count;
+	char	*endptr;
+
+	count = 0;
+	*r = (int)ft_strtol(str, &endptr, 10);
+	if (endptr == str)
+		return (count);
+	count++;
+	if (*endptr == ',')
+		endptr++;
+	*g = (int)ft_strtol(endptr, &endptr, 10);
+	if (endptr == str)
+		return (count);
+	count++;
+	if (*endptr == ',')
+		endptr++;
+	*b = (int)ft_strtol(endptr, &endptr, 10);
+	if (endptr == str)
+		return (count);
+	count++;
+	return (count);
 }

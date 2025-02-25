@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:53:29 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:14:32 by ykai-yua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ void	free_array(char *arr[]);
 int		array_length(char *arr[]);
 
 char	*sanitize_line(char *line);
+
+int		ft_sscanf(const char *str, int *r, int *g, int *b);
 
 #endif
