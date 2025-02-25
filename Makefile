@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+# CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 HEADERS := includes/color.h \
@@ -11,7 +11,6 @@ HEADERS := includes/color.h \
 	includes/mini_rt.h \
 	includes/object.h \
 	includes/ray.h \
-	includes/utils.h \
 	includes/vector3.h \
 	includes/world_and_camera.h \
 
@@ -46,8 +45,8 @@ OBJS := $(SRCS:%.c=%.o)
 LIBFT := ./libs/libft
 LIBMLX:= ./libs/MLX42
 
-# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm  # Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit  # Mac
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm  # Linux
+# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit  # Mac
 
 .PHONY: all, clean, fclean, re, libft, libmlx
 
