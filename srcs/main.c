@@ -6,11 +6,23 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:46:16 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:38:25 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
+
+void    free_world(t_world *world)
+{
+
+}
+
+void    free_data(t_data *data)
+{
+    free_world(&data->world);
+    mlx_delete_image(data->mlx, data->img);
+    mlx_terminate(data->mlx);
+}
 
 int	main(int argc, char **argv)
 {
@@ -27,6 +39,6 @@ int	main(int argc, char **argv)
 	configure_camera(&data.world.camera);
 	render_image(data.img, &data.world);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
+    free_data(&data);
 	return (EXIT_SUCCESS);
 }

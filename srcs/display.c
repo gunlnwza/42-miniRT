@@ -6,14 +6,14 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 13:21:06 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:58:24 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-#define MOVE_MUL 3
-#define LOOK_MUL 0.3
+#define MOVE_MUL 0.5
+#define LOOK_MUL 0.1
 
 void	modify_camera(t_camera *camera, keys_t key)
 {
@@ -48,7 +48,7 @@ void	modify_camera(t_camera *camera, keys_t key)
 		v_add_ip(&camera->normal, &diff);
 	v_normalize_ip(&camera->normal);
 	\
-	dprintf(2, "C %.2f,%.2f,%.2f %.2f,%.2f,%.2f %i\n", \
+	dprintf(2, "\rC %.2f,%.2f,%.2f %.2f,%.2f,%.2f %i", \
 		camera->center.x, camera->center.y, camera->center.z, \
 		camera->normal.x, camera->normal.y, camera->normal.z, camera->deg_fov);
 }
@@ -90,6 +90,7 @@ void	ft_keypress(mlx_key_data_t keydata, void *param)
 	modify_camera(camera, keydata.key);
 	if (keydata.key == MLX_KEY_ENTER)
 	{
+        dprintf(2, "\n");
 		configure_camera(camera);
 		render_image(data->img, &data->world);
 	}

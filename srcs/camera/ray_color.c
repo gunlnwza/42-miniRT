@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:50:44 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 11:27:47 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:17:39 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 static void	init_shadow_ray(t_world *world, t_hit_record *rec,
 				t_ray *shadow_ray)
 {
-	v_copy_ip(&shadow_ray->origin, &rec->point);
-	v_copy_ip(&shadow_ray->direction, &world->light.point);
-	v_sub_ip(&shadow_ray->direction, &rec->point);
+    shadow_ray->origin = v_copy(&rec->point);
+    shadow_ray->direction = v_sub(&world->light.point, &rec->point);
 	v_normalize_ip(&shadow_ray->direction);
 }
 
@@ -33,8 +32,14 @@ static int	is_light_reach(t_world *world, t_hit_record *rec,
 		return (TRUE);
 	int_to_light = v_dist2(&rec->point, &world->light.point);
 	int_to_shadow_ray_int = v_dist2(&rec->point, &shadow_ray_rec.point);
-	if (int_to_light < int_to_shadow_ray_int)
-		return (TRUE);
+
+    // TODO: This is the troublesome part. Comparing 2 doubles like this is bad, if the two are almost equal (precision errors are what cause the acnes)
+	// if (int_to_light < int_to_shadow_ray_int)
+		// return (TRUE);
+
+    if (int_to_light - int_to_shadow_ray_int < -0.001)  // int_to_light must be "clearly shorter (more than 0.001 diff)" than int_to_shadow_ray_int
+        return (TRUE);
+
 	return (FALSE);
 }
 
