@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:49:07 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:46:00 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	render_image(mlx_image_t *img, t_world *world)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		ft_printf("\rRendering: y=%i", y);
 		x = 0;
 		while (x < WIDTH)
 		{
@@ -42,5 +41,4 @@ void	render_image(mlx_image_t *img, t_world *world)
 		v_sub_ip(&ray.direction, &world->camera.viewport_h);
 		v_add_ip(&ray.direction, &world->camera.pixel_delta_v);
 	}
-	ft_printf("\rFinish rendering!\n");
 }

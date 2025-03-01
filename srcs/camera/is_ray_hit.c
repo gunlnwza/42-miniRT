@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:49:37 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/25 16:26:54 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:33:44 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,16 @@ static int	is_hit_object(t_object *object, t_ray *ray, t_hit_record *temp_rec)
 
 int	is_ray_hit(t_world *world, t_ray *ray, t_hit_record *rec)
 {
-	int				hit_anything;
+	t_hit_record	temp_rec;
 	double			closest_so_far;
 	int				i;
-	t_hit_record	temp_rec;
 
-	hit_anything = FALSE;
 	closest_so_far = INF;
 	i = 0;
 	while (i < world->nb_objects)
 	{
 		if (is_hit_object(world->objects[i], ray, &temp_rec))
 		{
-			hit_anything = TRUE;
 			if (temp_rec.t < closest_so_far)
 			{
 				closest_so_far = temp_rec.t;
@@ -45,5 +42,5 @@ int	is_ray_hit(t_world *world, t_ray *ray, t_hit_record *rec)
 		}
 		i++;
 	}
-	return (hit_anything);
+	return (closest_so_far < INF);
 }

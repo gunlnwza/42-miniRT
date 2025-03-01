@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:18 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:50:04 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:39:07 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	get_a(int rgba);
 
 int	add_color(int color_a, int color_b);
 int	multiply_color(int color_a, int color_b);
+int	scale_color(int color, double scalar);
 
 #endif
