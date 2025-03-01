@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra 
+CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 LIBFT := ./libs/libft
@@ -19,8 +19,12 @@ HEADERS := includes/color.h \
 	includes/world_and_camera.h \
 
 SRCS := \
-	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c \
-	srcs/camera/ray.c srcs/camera/render_image.c srcs/camera/hit_record.c \
+	srcs/renderer/configure_camera.c \
+	srcs/renderer/is_ray_hit.c \
+	srcs/renderer/ray_color.c \
+	srcs/renderer/ray.c \
+	srcs/renderer/render_image.c \
+	srcs/renderer/hit_record.c \
 	\
 	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
 	srcs/object/object_create.c srcs/object/object_add.c \
