@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:57:43 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/27 09:47:50 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:37:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	save_to_record(t_hit_record *rec, double root,
 	rec->color = sphere->color;
 }
 
-// return bool
 int	hit_sphere(t_object *sphere, const t_ray *ray, t_hit_record *rec)
 {
 	double	coef[3];

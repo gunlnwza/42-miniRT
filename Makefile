@@ -26,8 +26,10 @@ SRCS := \
 	srcs/renderer/render_image.c \
 	srcs/renderer/hit_record.c \
 	\
-	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
-	srcs/object/object_create.c srcs/object/object_add.c \
+	srcs/object/hit_cylinder.c \
+	srcs/object/hit_plane.c \
+	srcs/object/hit_sphere.c \
+	srcs/object/add_object.c \
 	\
 	srcs/main.c srcs/display.c \
 	\
