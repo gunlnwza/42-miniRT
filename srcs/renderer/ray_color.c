@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:50:44 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/01 15:51:06 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:22:02 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	init_shadow_ray(t_world *world, t_hit_record *rec,
 				t_ray *shadow_ray)
 {
-    shadow_ray->origin = v_copy(&rec->point);
-    shadow_ray->direction = v_sub(&world->light.point, &rec->point);
+	shadow_ray->origin = v_copy(&rec->point);
+	shadow_ray->direction = v_sub(&world->light.point, &rec->point);
 	v_normalize_ip(&shadow_ray->direction);
 }
 
@@ -31,7 +31,7 @@ static int	is_light_reach(t_world *world, t_hit_record *rec,
 		return (TRUE);
 	int_to_light = v_dist2(&rec->point, &world->light.point);
 	int_to_shadow_ray_int = v_dist2(&rec->point, &shadow_ray_rec.point);
-    if (int_to_light - int_to_shadow_ray_int < -1e-3)
+	if (int_to_light - int_to_shadow_ray_int < -1e-3)
 		return (TRUE);
 	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 17:09:35 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:28:20 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ void	render_image(mlx_image_t *img, t_world *world)
 		y++;
 		v_sub_ip(&ray.direction, &world->camera.viewport_h);
 		v_add_ip(&ray.direction, &world->camera.pixel_delta_v);
+		ft_printf("\rRendering y=%i", y);
 	}
+	ft_printf("\rFinish rendering!\n");
 }

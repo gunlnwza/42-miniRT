@@ -7,6 +7,10 @@ RM := rm -rf
 LIBFT := ./libs/libft
 LIBMLX := ./libs/MLX42
 
+# Linux
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# Mac
+# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
 
 HEADERS := includes/color.h \
 	includes/constants.h \
@@ -23,7 +27,7 @@ SRCS := \
 	srcs/color/color_get.c \
 	srcs/color/color_operation.c \
 	\
-	srcs/display/ft_close.c \
+	srcs/display/closing.c \
 	srcs/display/init_display.c \
 	srcs/display/modify_camera.c \
 	\
@@ -56,14 +60,6 @@ SRCS := \
 	srcs/main.c
 
 OBJS := $(SRCS:%.c=%.o)
-
-LIBFT := ./libs/libft
-LIBMLX:= ./libs/MLX42
-
-# Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# Mac
-# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
 
 
 all: libft libmlx $(NAME)

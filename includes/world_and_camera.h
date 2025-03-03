@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world_and_camera.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:02 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:53:03 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:40:37 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_light
 
 typedef struct s_world
 {
-	t_object	*objects[10];
+	t_object	*objects[100];
 	int			nb_objects;
 	t_light		light;
 	int			ambient_light_color;

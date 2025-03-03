@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 16:57:53 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:41:55 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*sanitize_line(char *line);
 
 
 void    free_data(t_data *data);
-void	ft_close(void *data_);
 
 int		is_modify_camera_key(keys_t key);
 void	modify_camera(t_camera *camera, keys_t key);

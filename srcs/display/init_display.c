@@ -6,12 +6,21 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 17:11:48 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:42:11 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_rt.h"
 
+void	ft_close(void *data_)
+{
+	t_data	*data;
+
+	data = data_;
+	mlx_close_window(data->mlx);
+}
+
+// TODO: implement ft_dprintf
 void	ft_keypress(mlx_key_data_t keydata, void *data_)
 {
 	t_data		*data;
@@ -28,7 +37,7 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 		if (is_modify_camera_key(key))
 		{
 			modify_camera(camera, key);
-			dprintf(2, "\r                                                    ");
+			dprintf(2, "\r                                                  ");
 			dprintf(2, "\rC %.2f,%.2f,%.2f %.2f,%.2f,%.2f %i", \
 				camera->center.x, camera->center.y, camera->center.z, \
 				camera->normal.x, camera->normal.y, camera->normal.z, camera->deg_fov);
@@ -38,7 +47,7 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 			ft_putchar_fd('\n', 2);
 			render_image(data->img, &data->world);
 		}
-	} 
+	}
 }
 
 int	init_display(t_data *data)

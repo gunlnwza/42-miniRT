@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 17:09:05 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:41:05 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	render_image(data.img, &data.world);
 	mlx_loop(data.mlx);
-    free_data(&data);
+	free_data(&data);
 	return (EXIT_SUCCESS);
 }
