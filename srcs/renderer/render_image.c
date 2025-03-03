@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/01 15:46:00 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:09:35 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	render_image(mlx_image_t *img, t_world *world)
 	int		x;
 	int		y;
 
+	configure_camera(&world->camera);
 	init_ray(&ray, &world->camera);
 	y = 0;
 	while (y < HEIGHT)

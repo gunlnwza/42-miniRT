@@ -19,19 +19,18 @@ HEADERS := includes/color.h \
 	includes/world_and_camera.h \
 
 SRCS := \
-	srcs/renderer/configure_camera.c \
-	srcs/renderer/is_ray_hit.c \
-	srcs/renderer/ray_color.c \
-	srcs/renderer/ray.c \
-	srcs/renderer/render_image.c \
-	srcs/renderer/hit_record.c \
+	srcs/color/color_create.c \
+	srcs/color/color_get.c \
+	srcs/color/color_operation.c \
+	\
+	srcs/display/ft_close.c \
+	srcs/display/init_display.c \
+	srcs/display/modify_camera.c \
 	\
 	srcs/object/hit_cylinder.c \
 	srcs/object/hit_plane.c \
 	srcs/object/hit_sphere.c \
 	srcs/object/add_object.c \
-	\
-	srcs/main.c srcs/display.c \
 	\
 	srcs/parser/parsing.c \
     srcs/parser/parsing_obj.c \
@@ -41,14 +40,21 @@ SRCS := \
     srcs/parser/error.c \
 	srcs/parser/array.c \
 	\
+	srcs/renderer/configure_camera.c \
+	srcs/renderer/is_ray_hit.c \
+	srcs/renderer/ray_color.c \
+	srcs/renderer/ray.c \
+	srcs/renderer/render_image.c \
+	srcs/renderer/hit_record.c \
+	\
 	srcs/vector3/vector3_create.c \
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_mul.c \
 	srcs/vector3/vector3_dot.c srcs/vector3/vector3_dist.c \
 	srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
 	srcs/vector3/vector3_cross.c srcs/vector3/vector3_proj.c \
 	\
-	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
-	
+	srcs/main.c
+
 OBJS := $(SRCS:%.c=%.o)
 
 LIBFT := ./libs/libft
