@@ -48,11 +48,9 @@ int	parse_sphere(t_world *world, char **params)
 	while (params && params[++i])
 	{
 		if (i == 1 && parse_vector(params[i], &obj.point))
-			return (show_parsing_error(world, params,
-					"Invalid number of coordinates"));
-		if (i == 2 && parse_double(params[i], &obj.radius))
-			return (show_parsing_error(world, params,
-					"Not a double"));
+			return (show_parsing_error(world, params, "Invalid number of coordinates"));
+		if (i == 2 && parse_double(params[i], &obj.radius))  // TODO: actually need to be diameter?
+			return (show_parsing_error(world, params, "Not a double"));
 		if (i == 3 && parse_color(params[i], &obj.color))
 			return (show_parsing_error(world, params,
 					"Invalid number of colors"));

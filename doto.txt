@@ -1,7 +1,0 @@
-Render parts:
-	Add condition is_ray_in_obj in ray_color.
-
-
-
-Parsing parts:
-	sscanf atof strtod change into own func

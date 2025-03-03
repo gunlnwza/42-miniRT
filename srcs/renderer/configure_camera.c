@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   configure_camera.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:38:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/22 12:48:52 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:29:38 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/world_and_camera.h"
 
-// TODO: implement ft_fabs
 static void	configure_viewport_v_and_h(t_camera *camera)
 {
 	t_vector3	world_up;
@@ -47,17 +46,19 @@ static void	configure_pixel00_loc(t_camera *camera)
 	t_vector3	viewport_upper_left;
 	t_vector3	temp;
 
-	viewport_upper_left = v_add(&camera->center, \
-		v_normalize_ip(v_copy_ip(&temp, &camera->normal)));
-	v_sub_ip(&viewport_upper_left, \
-		v_scalar_mul_ip(v_copy_ip(&temp, &camera->viewport_h), 0.5));
-	v_sub_ip(&viewport_upper_left, \
-		v_scalar_mul_ip(v_copy_ip(&temp, &camera->viewport_v), 0.5));
+	viewport_upper_left = v_copy(&camera->center);
+	temp = v_normalize(&camera->normal);
+	v_add_ip(&viewport_upper_left, &temp);
+	temp = v_scalar_mul(&camera->viewport_h, 0.5);
+	v_sub_ip(&viewport_upper_left, &temp);
+	temp = v_scalar_mul(&camera->viewport_v, 0.5);
+	v_sub_ip(&viewport_upper_left, &temp);
 	\
-	camera->pixel00_loc = v_add(&viewport_upper_left,
-		v_scalar_mul_ip(v_copy_ip(&temp, &camera->pixel_delta_h), 0.5));
-	v_add_ip(&camera->pixel00_loc,
-		v_scalar_mul_ip(v_copy_ip(&temp, &camera->pixel_delta_v), 0.5));
+	camera->pixel00_loc = v_copy(&viewport_upper_left);
+	temp = v_scalar_mul(&camera->pixel_delta_h, 0.5);
+	v_add_ip(&camera->pixel00_loc, &temp);
+	temp = v_scalar_mul(&camera->pixel_delta_v, 0.5);
+	v_add_ip(&camera->pixel00_loc, &temp);
 }
 
 // assume camera.{center,deg_fov,normal} has already been set correctly

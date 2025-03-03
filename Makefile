@@ -1,12 +1,16 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra 
+CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 LIBFT := ./libs/libft
 LIBMLX := ./libs/MLX42
 
+# Linux
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# Mac
+# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
 
 HEADERS := includes/color.h \
 	includes/constants.h \
@@ -19,13 +23,18 @@ HEADERS := includes/color.h \
 	includes/world_and_camera.h \
 
 SRCS := \
-	srcs/camera/configure_camera.c srcs/camera/is_ray_hit.c srcs/camera/ray_color.c \
-	srcs/camera/ray.c srcs/camera/render_image.c srcs/camera/hit_record.c \
+	srcs/color/color_create.c \
+	srcs/color/color_get.c \
+	srcs/color/color_operation.c \
 	\
-	srcs/object/cylinder.c srcs/object/plane.c srcs/object/sphere.c \
-	srcs/object/object_create.c srcs/object/object_add.c \
+	srcs/display/closing.c \
+	srcs/display/init_display.c \
+	srcs/display/modify_camera.c \
 	\
-	srcs/main.c srcs/display.c \
+	srcs/object/hit_cylinder.c \
+	srcs/object/hit_plane.c \
+	srcs/object/hit_sphere.c \
+	srcs/object/add_object.c \
 	\
 	srcs/parser/parsing.c \
     srcs/parser/parsing_obj.c \
@@ -35,23 +44,22 @@ SRCS := \
     srcs/parser/error.c \
 	srcs/parser/array.c \
 	\
+	srcs/renderer/configure_camera.c \
+	srcs/renderer/is_ray_hit.c \
+	srcs/renderer/ray_color.c \
+	srcs/renderer/ray.c \
+	srcs/renderer/render_image.c \
+	srcs/renderer/hit_record.c \
+	\
 	srcs/vector3/vector3_create.c \
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_mul.c \
 	srcs/vector3/vector3_dot.c srcs/vector3/vector3_dist.c \
 	srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
 	srcs/vector3/vector3_cross.c srcs/vector3/vector3_proj.c \
 	\
-	srcs/color/color_create.c srcs/color/color_get.c srcs/color/color_operation.c \
-	
+	srcs/main.c
+
 OBJS := $(SRCS:%.c=%.o)
-
-LIBFT := ./libs/libft
-LIBMLX:= ./libs/MLX42
-
-# Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-# Mac
-# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
 
 
 all: libft libmlx $(NAME)

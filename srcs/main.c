@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/25 15:54:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:47:03 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ int	main(int argc, char **argv)
 	}
 	if (init_display(&data) == ERROR)
 		return (EXIT_FAILURE);
-	configure_camera(&data.world.camera);
 	render_image(data.img, &data.world);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
+	free_data(&data);
 	return (EXIT_SUCCESS);
 }

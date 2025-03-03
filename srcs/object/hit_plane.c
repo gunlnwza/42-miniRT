@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:43:18 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 17:57:15 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:37:54 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	hit_plane(t_object *plane, const t_ray *ray, t_hit_record *rec)
 	root = v_dot(&origin_to_point, &plane->normal) \
 			/ v_dot(&ray->direction, &plane->normal);
 	if (root <= RAY_T_MIN)
-		return (0);
+		return (FALSE);
 	save_to_record(rec, root, ray, plane);
-	return (1);
+	return (TRUE);
 }

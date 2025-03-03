@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:57:43 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 17:58:07 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:37:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	calculate_coef(t_object *sphere, const t_ray *ray, double coef[3])
 {
 	t_vector3	oc;
 
-	oc = v_copy(&sphere->point);
-	v_sub_ip(&oc, &ray->origin);
+	oc = v_sub(&sphere->point, &ray->origin);
 	\
 	coef[0] = v_norm2(&ray->direction);
 	coef[1] = v_dot(&ray->direction, &oc);
@@ -52,19 +51,16 @@ static void	save_to_record(t_hit_record *rec, double root,
 	rec->t = root;
 	rec->point = ray_at(ray, rec->t);
 	\
-	rec->normal = v_copy(&rec->point);
-	v_sub_ip(&rec->normal, &sphere->point);
+	rec->normal = v_sub(&rec->point, &sphere->point);
 	v_normalize_ip(&rec->normal);
 	\
-	origin_to_point = v_copy(&rec->point);
-	v_sub_ip(&origin_to_point, &ray->origin);
+	origin_to_point = v_sub(&rec->point, &ray->origin);
 	if (v_dot(&origin_to_point, &rec->normal) > 0)
 		v_scalar_mul_ip(&rec->normal, -1);
 	\
 	rec->color = sphere->color;
 }
 
-// return bool
 int	hit_sphere(t_object *sphere, const t_ray *ray, t_hit_record *rec)
 {
 	double	coef[3];

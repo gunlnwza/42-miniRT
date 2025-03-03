@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   closing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 18:49:18 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/01 15:39:07 by nteechar         ###   ########.fr       */
+/*   Created: 2025/03/03 16:56:57 by nteechar          #+#    #+#             */
+/*   Updated: 2025/03/03 18:41:48 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "../../includes/mini_rt.h"
 
-int	get_rgba(int r, int g, int b, int a);
+void	free_world(t_world *world)
+{
+	int	i;
 
-int	get_r(int rgba);
-int	get_g(int rgba);
-int	get_b(int rgba);
-int	get_a(int rgba);
+	i = 0;
+	while (i < world->nb_objects)
+	{
+		free(world->objects[i]);
+		i++;
+	}
+}
 
-int	add_color(int color_a, int color_b);
-int	multiply_color(int color_a, int color_b);
-int	scale_color(int color, double scalar);
-
-#endif
+void	free_data(t_data *data)
+{
+	free_world(&data->world);
+	mlx_delete_image(data->mlx, data->img);
+	mlx_terminate(data->mlx);
+}
