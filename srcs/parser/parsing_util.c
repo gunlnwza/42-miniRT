@@ -41,7 +41,7 @@ int	parse_vector(char *str, t_vector3 *vect)
 	i = 0;
 	while (i < 3)
 	{
-		if (!is_valid_number(nbrs[i]))
+		if (!is_valid_double(nbrs[i]))
 		{
 			free_array(nbrs);
 			return (1);
