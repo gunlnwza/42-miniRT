@@ -20,6 +20,11 @@ int	parse_plane(t_world *world, char **params)
 	i = 0;
 	ft_bzero(&obj, sizeof(t_object));
 	obj.type = PLANE;
+	if (array_length(params) !=  4)
+	{
+		free_array(params);
+		return (show_error("Invalid plane parameters"));
+	}
 	while (params && params[++i])
 	{
 		if (i == 1 && parse_vector(params[i], &obj.point))
@@ -45,6 +50,11 @@ int	parse_sphere(t_world *world, char **params)
 	i = 0;
 	ft_bzero(&obj, sizeof(t_object));
 	obj.type = SPHERE;
+	if (array_length(params) !=  4)
+	{
+		free_array(params);
+		return (show_error("Invalid sphere parameters"));
+	}
 	while (params && params[++i])
 	{
 		if (i == 1 && parse_vector(params[i], &obj.point))
@@ -67,6 +77,11 @@ int	parse_cylinder(t_world *world, char **params)
 	i = 0;
 	ft_bzero(&obj, sizeof(t_object));
 	obj.type = CYLINDER;
+	if (array_length(params) !=  6)
+	{
+		free_array(params);
+		return (show_error("Invalid cylinder parameters"));
+	}
 	while (params && params[++i])
 	{
 		if (i == 1 && parse_vector(params[i], &obj.point))
