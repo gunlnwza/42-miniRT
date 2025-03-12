@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 18:48:08 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:08:12 by ykai-yua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		parse_sphere(t_world *world, char **params);
 int		parse_plane(t_world *world, char **params);
 int		parse_cylinder(t_world *world, char **params);
 
+int		is_valid_number(const char *str);
+int		is_valid_double(const char *str);
 int		parse_vector(char *str, t_vector3 *vect);
 int		parse_color(char *str, int *color);
 int		parse_double(char *str, double *num);

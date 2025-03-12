@@ -12,15 +12,15 @@
 
 #include "../../includes/mini_rt.h"
 
-static int	is_valid_number(const char *str)
+int	is_valid_number(const char *str)
 {
-	if (*str == '\0') // Check for empty string
+	if (*str == '\0')
 		return (0);
-	if (*str == '-' || *str == '+') // Check for sign
+	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
 	{
-		if (!ft_isdigit(*str)) // Check if each character is a digit
+		if (!ft_isdigit(*str))
 			return (0);
 		str++;
 	}
@@ -61,6 +61,7 @@ int	parse_color(char *str, int *color)
 	int		r;
 	int		g;
 	int		b;
+	int		i;
 
 	rgb = ft_split(str, ',');
 	if (array_length(rgb) != 3)
@@ -68,9 +69,24 @@ int	parse_color(char *str, int *color)
 		free_array(rgb);
 		return (1);
 	}
+	i = 0;
+	while (i < 3)
+	{
+		if (!is_valid_number(rgb[i]))
+		{
+			free_array(rgb);
+			return (1);
+		}
+		i++;
+	}
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		free_array(rgb);
+		return (1);
+	}
 	*color = get_rgba(r, g, b, 255);
 	free_array(rgb);
 	return (0);
