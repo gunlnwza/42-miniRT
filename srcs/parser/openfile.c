@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:46:16 by ykai-yua          #+#    #+#             */
-/*   Updated: 2025/02/25 17:46:20 by ykai-yua         ###   ########.fr       */
+/*   Updated: 2025/03/12 21:49:21 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,23 @@ static int	is_rt_file(char *filename)
 	return (0);
 }
 
+char	*sanitize_line(char *line)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	tmp = line;
+	while (tmp && tmp[++i])
+	{
+		if (tmp[i] == '\t' || tmp[i] == '\n')
+			tmp[i] = ' ';
+	}
+	line = ft_strtrim(tmp, " ");
+	free(tmp);
+	return (line);
+}
+
 int	read_file(t_world *world, int fd)
 {
 	char	*line;
@@ -30,6 +47,12 @@ int	read_file(t_world *world, int fd)
 	while (line != NULL)
 	{
 		line = sanitize_line(line);
+		if (line[0] == '#')
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
 		if (parse_params(world, line) != 0)
 		{
 			free(line);
@@ -53,21 +76,4 @@ int	open_file(t_world *world, char *filename)
 	if (!read_file(world, fd))
 		return (0);
 	return (1);
-}
-
-char	*sanitize_line(char *line)
-{
-	int		i;
-	char	*tmp;
-
-	i = -1;
-	tmp = line;
-	while (tmp && tmp[++i])
-	{
-		if (tmp[i] == '\t' || tmp[i] == '\n')
-			tmp[i] = ' ';
-	}
-	line = ft_strtrim(tmp, " ");
-	free(tmp);
-	return (line);
 }
