@@ -10,7 +10,7 @@ MAX_FOV = 100
 
 MAX_LENGTH = 5
 
-ROUND_N_DIGITS = 1
+ROUND_N_DIGITS = 3
 
 
 # cast to int, if n_digits == 0
