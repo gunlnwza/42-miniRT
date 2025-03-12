@@ -19,11 +19,25 @@ int	parse_camera(t_world *world, char **params)
 		free_array(params);
 		return (show_error("Invalid camera parameters"));
 	}
-	\
 	parse_vector(params[1], &world->camera.center);
-	parse_vector(params[2], &world->camera.normal);
+	if (parse_vector(params[2], &world->camera.normal))
+	{
+		free_array(params);
+		return (show_error("fuck you"));
+	}
+	if (world->camera.normal.x < -1.0 || world->camera.normal.x > 1.0 ||
+	    world->camera.normal.y < -1.0 || world->camera.normal.y > 1.0 ||
+	    world->camera.normal.z < -1.0 || world->camera.normal.z > 1.0)
+	{
+		free_array(params);
+		return (show_error("Invalid camera normal vector"));
+	}
 	world->camera.deg_fov = ft_atoi(params[3]);
-	\
+	if (world->camera.deg_fov < 0 || world->camera.deg_fov > 180)
+	{
+		free_array(params);
+		return (show_error("Invalid field of view"));
+	}
 	free_array(params);
 	return (0);
 }
@@ -41,6 +55,8 @@ int	parse_ambient(t_world *world, char **params)
 		return (show_error("Invalid ambient parameters"));
 	}
 	brightness = ft_atof(params[1]);
+	if (brightness < 0.0 || brightness > 1.0)
+		return (show_error("Invalid ambient brightness"));
 	if (ft_sscanf(params[2], &r, &g, &b) != 3)
 	{
 		free_array(params);

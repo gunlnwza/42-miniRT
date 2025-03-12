@@ -12,16 +12,38 @@
 
 #include "../../includes/mini_rt.h"
 
-// receive vector_str and set the values of vect
+static int	is_valid_number(const char *str)
+{
+	if (*str == '\0') // Check for empty string
+		return (0);
+	if (*str == '-' || *str == '+') // Check for sign
+		str++;
+	while (*str)
+	{
+		printf ("asshole");
+		if (!ft_isdigit(*str)) // Check if each character is a digit
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	parse_vector(char *str, t_vector3 *vect)
 {
 	char	**nbrs;
+	int		i;
 
 	nbrs = ft_split(str, ',');
 	if (array_length(nbrs) != 3)
 	{
 		free_array(nbrs);
 		return (1);
+	}
+	i = 0;
+	while (!is_valid_number(nbrs[i]))
+	{
+		free_array(nbrs);
+		return(1);
 	}
 	vect->x = ft_atof(nbrs[0]);
 	vect->y = ft_atof(nbrs[1]);
@@ -67,20 +89,23 @@ int	ft_sscanf(const char *str, int *r, int *g, int *b)
 	char	*endptr;
 
 	count = 0;
-	*r = (int)ft_strtol(str, &endptr, 10);
-	if (endptr == str)
+	*r = (int)ft_strtol(str, &endptr);
+	if (*r < 0 || *r > 255)
 		return (count);
 	count++;
 	if (*endptr == ',')
 		endptr++;
-	*g = (int)ft_strtol(endptr, &endptr, 10);
-	if (endptr == str)
-		return (count);
-	count++;
+	if (*endptr != ',')
+	{
+		*g = (int)ft_strtol(endptr, &endptr);
+		if (*g < 0 || *g > 255)
+			return (count);
+		count++;
+	}
 	if (*endptr == ',')
 		endptr++;
-	*b = (int)ft_strtol(endptr, &endptr, 10);
-	if (endptr == str)
+	*b = (int)ft_strtol(endptr, &endptr);
+	if (*b < 0 || *b > 255)
 		return (count);
 	count++;
 	return (count);
