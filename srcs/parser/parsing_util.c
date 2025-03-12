@@ -20,7 +20,6 @@ static int	is_valid_number(const char *str)
 		str++;
 	while (*str)
 	{
-		printf ("asshole");
 		if (!ft_isdigit(*str)) // Check if each character is a digit
 			return (0);
 		str++;
@@ -40,10 +39,14 @@ int	parse_vector(char *str, t_vector3 *vect)
 		return (1);
 	}
 	i = 0;
-	while (!is_valid_number(nbrs[i]))
+	while (i < 3)
 	{
-		free_array(nbrs);
-		return(1);
+		if (!is_valid_number(nbrs[i]))
+		{
+			free_array(nbrs);
+			return (1);
+		}
+		i++;
 	}
 	vect->x = ft_atof(nbrs[0]);
 	vect->y = ft_atof(nbrs[1]);

@@ -23,7 +23,7 @@ int	parse_camera(t_world *world, char **params)
 	if (parse_vector(params[2], &world->camera.normal))
 	{
 		free_array(params);
-		return (show_error("fuck you"));
+		return (show_error("Invalid camera normal vector"));
 	}
 	if (world->camera.normal.x < -1.0 || world->camera.normal.x > 1.0 ||
 	    world->camera.normal.y < -1.0 || world->camera.normal.y > 1.0 ||
