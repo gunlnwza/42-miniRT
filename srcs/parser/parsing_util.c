@@ -97,7 +97,7 @@ int	parse_double(char *str, double *num)
 	char	*endptr;
 
 	*num = ft_strtod(str, &endptr);
-	if (*endptr == '\0')
+	if (*endptr == '\0' && *num > 0)
 		return (0);
 	return (1);
 }

@@ -61,7 +61,7 @@ int	parse_sphere(t_world *world, char **params)
 		if (i == 1 && parse_vector(params[i], &obj.point))
 			return (show_parsing_error(world, params, "Invalid number of coordinates"));
 		if (i == 2 && parse_double(params[i], &diameter))
-			return (show_parsing_error(world, params, "Not a double"));
+			return (show_parsing_error(world, params, "Not valid double"));
 		if (i == 3 && parse_color(params[i], &obj.color))
 			return (show_parsing_error(world, params,
 					"Invalid number of colors"));
@@ -94,9 +94,9 @@ int	parse_cylinder(t_world *world, char **params)
 			return (show_parsing_error(world, params,
 					"Invalid number of orientations"));
 		if (i == 3 && parse_double(params[i], &diameter))
-			return (show_parsing_error(world, params, "Not a double"));
+			return (show_parsing_error(world, params, "Not valid double"));
 		if (i == 4 && parse_double(params[i], &obj.height))
-			return (show_parsing_error(world, params, "Not a double"));
+			return (show_parsing_error(world, params, "Not valid double"));
 		if (i == 5 && parse_color(params[i], &obj.color))
 			return (show_parsing_error(world, params, "Invalid num"));
 	}
