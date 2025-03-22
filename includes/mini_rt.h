@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/22 09:23:12 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/22 16:29:20 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,12 @@
 # include "libs.h"
 # include "world_and_camera.h"
 
-typedef struct s_flags
-{
-	int	parse_only;
-}	t_flags;
-
 typedef struct s_data
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	t_world		world;
-	t_flags		flags;
+    int         mode;
 }	t_data;
 
 int		init_display(t_data *data);

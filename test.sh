@@ -24,7 +24,7 @@ while IFS="|" read -r filepath expected; do
         continue
     fi
 
-    output=$($BIN --parse-only "tests/$filepath" 2>&1)
+    output=$($BIN tests/"$filepath" --parse-only 2>&1)
     
     if echo "$output" | grep -q "$expected"; then
         echo -e "$i. $filepath ${GREEN}OK${NC}"
