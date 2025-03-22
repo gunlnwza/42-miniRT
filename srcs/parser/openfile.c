@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   openfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:46:16 by ykai-yua          #+#    #+#             */
-/*   Updated: 2025/03/12 21:49:21 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/22 11:53:54 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int	open_file(t_world *world, char *filename)
 {
 	int	fd;
 
+	if (!is_rt_file(filename))
+		return (show_error("Wrong file"));
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (show_error("Failed to open file"));
-	if (!is_rt_file(filename))
-		return (!show_error("Wrong file"));
 	if (!read_file(world, fd))
 		return (0);
 	return (1);

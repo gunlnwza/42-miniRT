@@ -1,16 +1,16 @@
 NAME := miniRT
 
 CC := cc
-# CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 LIBFT := ./libs/libft
 LIBMLX := ./libs/MLX42
 
 # Linux
-LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 # Mac
-# LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
+LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lglfw -pthread -lm -framework Cocoa -framework OpenGL -framework IOKit
 
 HEADERS := includes/color.h \
 	includes/constants.h \
