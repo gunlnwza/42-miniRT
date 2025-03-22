@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/22 16:37:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/22 22:43:14 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int  process_input(int argc, char **argv, t_data *data)
 {
     if (parse_option(argc, argv, data) != SUCCESS)
     {
-        ft_putendl_fd("Error: Wrong argument format", STDERR_FILENO);
+        ft_putendl_fd("Error: Wrong arguments format", STDERR_FILENO);
         ft_putendl_fd("Usage: ./miniRT *.rt [mode]", STDERR_FILENO);
         return (ERROR);
     }

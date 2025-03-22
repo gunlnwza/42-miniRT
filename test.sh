@@ -8,6 +8,8 @@ RED="\033[0;31m"
 NC="\033[0m"
 
 i=1
+OK=0
+KO=0
 
 while IFS="|" read -r filepath expected; do
     if [[ "$filepath" =~ ^# ]]; then
@@ -28,15 +30,20 @@ while IFS="|" read -r filepath expected; do
     
     if echo "$output" | grep -q "$expected"; then
         echo -e "$i. $filepath ${GREEN}OK${NC}"
+        (( OK++ ))
     else
         echo "------------------------------------------"
         echo -e "$i. $filepath ${RED}KO${NC}"
         echo -e "Expected:\n$expected"
         echo -e "Got:\n$output"
         echo "------------------------------------------"
+        (( KO++ ))
     fi
 
     (( i++ ))
 done < "$TEST_FILE"
 
+echo
+echo -e "${GREEN}OK${NC}: $OK"
+echo -e "${RED}KO${NC}: $KO"
 echo

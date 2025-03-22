@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/22 16:29:20 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/22 23:38:33 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ int		init_display(t_data *data);
 void	render_image(mlx_image_t *img, t_world *world);
 
 int		open_file(t_world *world, char *filename);
-int		parse_params(t_world *world, char *line);
-int		parse_ambient(t_world *world, char **params);
-int		parse_camera(t_world *world, char **params);
-int		parse_light(t_world *world, char **params);
-int		parse_sphere(t_world *world, char **params);
-int		parse_plane(t_world *world, char **params);
-int		parse_cylinder(t_world *world, char **params);
+// int		parse_params(t_world *world, char *line);
+// int		parse_ambient(t_world *world, char **params);
+// int		parse_camera(t_world *world, char **params);
+// int		parse_light(t_world *world, char **params);
+// int		parse_sphere(t_world *world, char **params);
+// int		parse_plane(t_world *world, char **params);
+// int		parse_cylinder(t_world *world, char **params);
 
 int		is_valid_number(const char *str);
 int		is_valid_double(const char *str);

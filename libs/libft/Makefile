@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+         #
+#    By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 13:18:31 by nteechar          #+#    #+#              #
-#    Updated: 2025/02/25 18:09:18 by ykai-yua         ###   ########.fr        #
+#    Updated: 2025/03/23 00:34:40 by nteechar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,8 @@ SRCS := \
 	ft_string/ft_strdup.c ft_string/ft_striteri.c ft_string/ft_strjoin_all.c \
 	ft_string/ft_strjoin.c ft_string/ft_strlcat.c ft_string/ft_strlcpy.c \
 	ft_string/ft_strlen.c ft_string/ft_strmapi.c ft_string/ft_strncmp.c \
-	ft_string/ft_strnstr.c ft_string/ft_strtok.c ft_string/ft_strtrim.c \
-	ft_string/ft_substr.c ft_string/ft_free_str_arr.c\
+	ft_string/ft_strnstr.c ft_string/ft_strrchr.c ft_string/ft_strtok.c \
+	ft_string/ft_strtrim.c ft_string/ft_substr.c ft_string/ft_free_str_arr.c \
 	\
 	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 	\

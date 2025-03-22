@@ -36,11 +36,7 @@ SRCS := \
 	srcs/object/hit_sphere.c \
 	srcs/object/add_object.c \
 	\
-	srcs/parser/parsing.c \
-    srcs/parser/parsing_obj.c \
-	srcs/parser/parsing_env.c \
-	srcs/parser/parsing_util.c \
-    srcs/parser/openfile.c \
+    srcs/parser/open_file.c \
     srcs/parser/error.c \
 	srcs/parser/array.c \
 	\
