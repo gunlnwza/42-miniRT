@@ -6,30 +6,24 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:49 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:30:50 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:10:51 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 
-int	validate_ambient(char **line)
+t_parse_result	validate_ambient(char **line)
 {
+	t_parse_result	ret;
+
+	ret = PARSE_OK;
 	if (array_length(line) != 3)
-	{
-		ft_putendl_fd("Invalid ambient parameters", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_NUMBER_OF_PARAMS;
 	if (!is_valid_ratio(line[1]))
-	{
-		ft_putendl_fd("Invalid ambient brightness", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_RATIO;
 	if (!is_valid_color(line[2]))
-	{
-		ft_putendl_fd("Invalid ambient color", STDERR_FILENO);
-		return (ERROR);
-	}
-	return (SUCCESS);
+		ret = BAD_COLOR;
+	return (ret);
 }
 
 int	parse_ambient(char **line, t_world *world)

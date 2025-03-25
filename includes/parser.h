@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:54 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:39:43 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:15:55 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ typedef enum e_scene_type
 	SCENE_INVALID
 }	t_scene_type;
 
+typedef enum e_parse_result
+{
+	PARSE_OK,
+	INVALID_OBJECT,
+	MORE_THAN_ONE_OBJECT,
+	BAD_NUMBER_OF_PARAMS,
+	BAD_RATIO,
+	BAD_COLOR,
+	BAD_POSITION,
+	BAD_NORMAL,
+	BAD_FOV,
+	BAD_DIAMETER,
+	BAD_HEIGHT,
+}	t_parse_result;
+
+typedef struct e_parse_status
+{
+	t_parse_result	result;
+	t_scene_type	error_object;
+}	t_parse_status;
+
 int				read_file_to_world(char *filename, t_world *world);
 
 char			**load_file_into_memory(int fd);
@@ -48,22 +69,22 @@ int				parse_vector(char *xyz_str, t_vector3 *dest);
 int				parse_normal_vector(char *normal_str, t_vector3 *dest);
 int				parse_fov(char *fov_str);
 
-int				validate_ambient(char **line);
+t_parse_result	validate_ambient(char **line);
 int				parse_ambient(char **line, t_world *world);
 
-int				validate_camera(char **line);
+t_parse_result	validate_camera(char **line);
 int				parse_camera(char **line, t_world *world);
 
-int				validate_light(char **line);
+t_parse_result	validate_light(char **line);
 int				parse_light(char **line, t_world *world);
 
-int				validate_sphere(char **line);
+t_parse_result	validate_sphere(char **line);
 int				parse_sphere(char **line, t_world *world);
 
-int				validate_plane(char **line);
+t_parse_result	validate_plane(char **line);
 int				parse_plane(char **line, t_world *world);
 
-int				validate_cylinder(char **line);
+t_parse_result	validate_cylinder(char **line);
 int				parse_cylinder(char **line, t_world *world);
 
 int				is_in_range(int min, int max, int x);

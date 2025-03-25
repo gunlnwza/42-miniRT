@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:23:32 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:33:53 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,13 @@ static int	process_input(int argc, char **argv, t_data *data)
 {
 	if (parse_option(argc, argv, data) != SUCCESS)
 	{
-		ft_putendl_fd("Error\nWrong arguments format", STDERR_FILENO);
-		ft_putendl_fd("Usage: ./miniRT *.rt [mode]", STDERR_FILENO);
+		printf("Error\n");
+		printf("Wrong arguments format\n");
+		printf("Usage: ./miniRT *.rt [mode]\n");
 		return (ERROR);
 	}
 	if (read_file_to_world(argv[1], &data->world) != SUCCESS)
-	{
-		ft_putendl_fd("Error: error opening file", STDERR_FILENO);
 		return (ERROR);
-	}
 	return (SUCCESS);
 }
 
@@ -60,7 +58,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (data.mode == MODE_PARSE_ONLY)
 	{
-		ft_putendl_fd("Parsing OK", STDOUT_FILENO);
+		printf("Parse OK\n");
 		return (EXIT_SUCCESS);
 	}
 	if (init_display(&data) != SUCCESS)

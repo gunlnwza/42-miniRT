@@ -6,35 +6,26 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:31:04 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:32:59 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:11:30 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 
-int	validate_plane(char **line)
+t_parse_result	validate_plane(char **line)
 {
+	t_parse_result	ret;
+
+	ret = PARSE_OK;
 	if (array_length(line) != 4)
-	{
-		ft_putendl_fd("Invalid plane parameters", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_NUMBER_OF_PARAMS;
 	if (!is_valid_pos(line[1]))
-	{
-		ft_putendl_fd("Invalid plane position", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_POSITION;
 	if (!is_valid_normal(line[2]))
-	{
-		ft_putendl_fd("Invalid plane normal vector", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_NORMAL;
 	if (!is_valid_color(line[3]))
-	{
-		ft_putendl_fd("Invalid plane color", STDERR_FILENO);
-		return (ERROR);
-	}
-	return (SUCCESS);
+		ret = BAD_COLOR;
+	return (ret);
 }
 
 int	parse_plane(char **line, t_world *world)

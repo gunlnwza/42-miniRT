@@ -6,45 +6,30 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:55 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:32:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:11:11 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 
-int	validate_cylinder(char **line)
+t_parse_result	validate_cylinder(char **line)
 {
+	t_parse_result	ret;
+
+	ret = PARSE_OK;
 	if (array_length(line) != 6)
-	{
-		ft_putendl_fd("Invalid cylinder parameters", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_NUMBER_OF_PARAMS;
 	if (!is_valid_pos(line[1]))
-	{
-		ft_putendl_fd("Invalid cylinder position", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_POSITION;
 	if (!is_valid_normal(line[2]))
-	{
-		ft_putendl_fd("Invalid cylinder normal vector", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_NORMAL;
 	if (!is_valid_length(line[3]))
-	{
-		ft_putendl_fd("Invalid cylinder diameter", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_DIAMETER;
 	if (!is_valid_length(line[4]))
-	{
-		ft_putendl_fd("Invalid cylinder height", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_HEIGHT;
 	if (!is_valid_color(line[5]))
-	{
-		ft_putendl_fd("Invalid cylinder color", STDERR_FILENO);
-		return (ERROR);
-	}
-	return (SUCCESS);
+		ret = BAD_COLOR;
+	return (ret);
 }
 
 int	parse_cylinder(char **line, t_world *world)

@@ -6,35 +6,26 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:31:07 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:32:49 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:11:37 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 
-int	validate_sphere(char **line)
+t_parse_result	validate_sphere(char **line)
 {
+	t_parse_result	ret;
+
+	ret = PARSE_OK;
 	if (array_length(line) != 4)
-	{
-		ft_putendl_fd("Invalid sphere parameters", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_NUMBER_OF_PARAMS;
 	if (!is_valid_pos(line[1]))
-	{
-		ft_putendl_fd("Invalid sphere position", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_POSITION;
 	if (!is_valid_length(line[2]))
-	{
-		ft_putendl_fd("Invalid sphere diameter", STDERR_FILENO);
-		return (ERROR);
-	}
+		ret = BAD_DIAMETER;
 	if (!is_valid_color(line[3]))
-	{
-		ft_putendl_fd("Invalid sphere color", STDERR_FILENO);
-		return (ERROR);
-	}
-	return (SUCCESS);
+		ret = BAD_COLOR;
+	return (ret);
 }
 
 int	parse_sphere(char **line, t_world *world)

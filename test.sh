@@ -7,6 +7,12 @@ GREEN="\033[0;32m"
 RED="\033[0;31m"
 NC="\033[0m"
 
+if [[ $1 == "--verbose" ]]; then
+    VERBOSE=1
+else
+    VERBOSE=0
+fi
+
 i=1
 OK=0
 KO=0
@@ -29,15 +35,18 @@ while IFS="|" read -r filepath expected; do
     output=$($BIN tests/"$filepath" --parse-only 2>&1)
     
     if echo "$output" | grep -q "$expected"; then
-        echo -e "$i. $filepath ${GREEN}OK${NC}"
         (( OK++ ))
+        echo -e "$i. $filepath ${GREEN}OK${NC}"
+        if [[ $VERBOSE -eq 1 ]]; then
+            echo -e "$output"
+            echo "------------------------------------------"
+        fi
     else
-        echo "------------------------------------------"
+        (( KO++ ))
         echo -e "$i. $filepath ${RED}KO${NC}"
         echo -e "Expected:\n$expected"
         echo -e "Got:\n$output"
         echo "------------------------------------------"
-        (( KO++ ))
     fi
 
     (( i++ ))

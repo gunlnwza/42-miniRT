@@ -1,53 +1,55 @@
 # ✅ VALID
-valid/1234.rt|Parsing OK
+valid/1234.rt|Parse OK
 
 # ❌ WRONG EXTENSION
 invalid_ext/.rt|Not a .rt file
 invalid_ext/1.1rt|Not a .rt file
 
 # ❌ 🌞 WRONG AMBIENT
-bad_ambient/A_ratio_high.rt|Invalid ambient brightness
-bad_ambient/A_ratio_low.rt|Invalid ambient brightness
-bad_ambient/A_ratio_nan.rt|Invalid ambient brightness
+bad_ambient/A_ratio_high.rt|Ambient light: Invalid brightness
+bad_ambient/A_ratio_low.rt|Ambient light: Invalid brightness
+bad_ambient/A_ratio_nan.rt|Ambient light: Invalid brightness
 
-bad_ambient/A_r_high.rt|Invalid ambient color
-bad_ambient/A_g_high.rt|Invalid ambient color
-bad_ambient/A_b_high.rt|Invalid ambient color
+bad_ambient/A_r_high.rt|Ambient light: Invalid color format
+bad_ambient/A_r_low.rt|Ambient light: Invalid color format
+bad_ambient/A_r_nan.rt|Ambient light: Invalid color format
 
-bad_ambient/A_r_low.rt|Invalid ambient color
-bad_ambient/A_g_low.rt|Invalid ambient color
-bad_ambient/A_b_low.rt|Invalid ambient color
+bad_ambient/A_g_high.rt|Ambient light: Invalid color format
+bad_ambient/A_g_low.rt|Ambient light: Invalid color format
+bad_ambient/A_g_nan.rt|Ambient light: Invalid color format
 
-bad_ambient/A_r_nan.rt|Invalid ambient color
-bad_ambient/A_g_nan.rt|Invalid ambient color
-bad_ambient/A_b_nan.rt|Invalid ambient color
+bad_ambient/A_b_high.rt|Ambient light: Invalid color format
+bad_ambient/A_b_low.rt|Ambient light: Invalid color format
+bad_ambient/A_b_nan.rt|Ambient light: Invalid color format
 
 # ❌ 📸 WRONG CAMERA
-bad_camera/C_pos.rt|Invalid camera position
-bad_camera/C_normal.rt|Invalid camera normal vector
-bad_camera/C_fov.rt|Invalid camera field of view
+bad_camera/C_pos.rt|Camera: Invalid position
+bad_camera/C_normal.rt|Camera: Invalid normal vector
+bad_camera/C_fov.rt|Camera: Invalid field of view
 
 # ❌ 💡 WRONG LIGHT
-bad_light/L_pos.rt|Invalid light position
-bad_light/L_ratio.rt|Invalid light brightness
-bad_light/L_rgb.rt|Invalid light color
+bad_light/L_pos.rt|Light: Invalid position
+bad_light/L_ratio.rt|Light: Invalid brightness
+bad_light/L_rgb.rt|Light: Invalid color
 
 # ❌ 🍊 WRONG SPHERE
-bad_sphere/sp_pos.rt|Invalid sphere position
-bad_sphere/sp_d.rt|Invalid sphere diameter
-bad_sphere/sp_rgb.rt|Invalid sphere color
+bad_sphere/sp_pos.rt|Sphere: Invalid position
+bad_sphere/sp_d.rt|Sphere: Invalid diameter
+bad_sphere/sp_rgb.rt|Sphere: Invalid color
 
 # ❌ 📄 WRONG PLANE
-bad_plane/pl_pos.rt|Invalid plane position
-bad_plane/pl_normal.rt|Invalid plane normal vector
-bad_plane/pl_rgb.rt|Invalid plane color
+bad_plane/pl_pos.rt|Plane: Invalid position
+bad_plane/pl_normal.rt|Plane: Invalid normal vector
+bad_plane/pl_rgb.rt|Plane: Invalid color
 
 # ❌ 🗿 WRONG CYLINDER
-bad_cylinder/cy_pos.rt|Invalid cylinder position
-bad_cylinder/cy_normal.rt|Invalid cylinder normal vector
-bad_cylinder/cy_d.rt|Invalid cylinder diameter
-bad_cylinder/cy_h.rt|Invalid cylinder height
-bad_cylinder/cy_rgb.rt|Invalid cylinder color
+bad_cylinder/cy_pos.rt|Cylinder: Invalid position
+bad_cylinder/cy_normal.rt|Cylinder: Invalid normal vector
+bad_cylinder/cy_d.rt|Cylinder: Invalid diameter
+bad_cylinder/cy_h.rt|Cylinder: Invalid height
+bad_cylinder/cy_rgb.rt|Cylinder: Invalid color format
 
 # ❌ ⚙️ OTHERS
 A_twice.rt|More than one ambient light
+C_twice.rt|More than one camera
+L_twice.rt|More than one light

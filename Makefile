@@ -38,15 +38,15 @@ SRCS := \
 	srcs/new_parser/read_file_to_world.c \
 	srcs/new_parser/array_utils.c \
 	srcs/new_parser/load_file_into_memory.c \
-	srcs/new_parser/identify_type.c \
+	srcs/new_parser/identify_scene_type.c \
 	srcs/new_parser/parse_ambient.c \
 	srcs/new_parser/parse_camera.c \
 	srcs/new_parser/parse_light.c \
 	srcs/new_parser/parse_cylinder.c \
 	srcs/new_parser/parse_plane.c \
 	srcs/new_parser/parse_sphere.c \
-	srcs/new_parser/parse_scene.c \
     srcs/new_parser/parse_utils.c \
+	srcs/new_parser/parse.c \
 	srcs/new_parser/validate_utils.c \
 	\
 	srcs/renderer/configure_camera.c \
