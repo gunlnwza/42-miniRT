@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array.c                                            :+:      :+:    :+:   */
+/*   array_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ykai-yua <ykai-yua@student.42bangkok.co    +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 17:46:00 by ykai-yua          #+#    #+#             */
-/*   Updated: 2025/02/25 17:46:00 by ykai-yua         ###   ########.fr       */
+/*   Created: 2025/03/25 10:35:00 by nteechar          #+#    #+#             */
+/*   Updated: 2025/03/25 10:35:00 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/mini_rt.h"
+#include <stdlib.h>
 
-void	free_array(char *arr[])
+void	free_array(char **arr)
 {
 	int	i;
 
 	i = 0;
-	if (arr)
+	while (arr[i])
 	{
-		while (arr[i])
-			free(arr[i++]);
-		free(arr);
+		free(arr[i]);
+		i++;
 	}
+	free(arr);
 }
 
-int	array_length(char *arr[])
+int	array_length(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (arr && arr[i])
+	while (arr[i])
 		i++;
 	return (i);
 }

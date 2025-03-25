@@ -2,8 +2,8 @@
 valid/1234.rt|Parsing OK
 
 # ❌ WRONG EXTENSION
-invalid_ext/.rt|Wrong file extension
-invalid_ext/1.1rt|Wrong file extension
+invalid_ext/.rt|Not a .rt file
+invalid_ext/1.1rt|Not a .rt file
 
 # ❌ 🌞 WRONG AMBIENT
 bad_ambient/A_ratio_high.rt|Invalid ambient brightness

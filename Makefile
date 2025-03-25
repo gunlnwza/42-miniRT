@@ -1,7 +1,7 @@
 NAME := miniRT
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror
 RM := rm -rf
 
 LIBFT := ./libs/libft
@@ -15,7 +15,6 @@ LIBS := $(LIBFT)/libft.a $(LIBMLX)/build/libmlx42.a -L/opt/homebrew/lib -ldl -lg
 HEADERS := includes/color.h \
 	includes/constants.h \
 	includes/hit_record.h \
-	includes/libs.h \
 	includes/mini_rt.h \
 	includes/object.h \
 	includes/ray.h \
@@ -36,9 +35,19 @@ SRCS := \
 	srcs/object/hit_sphere.c \
 	srcs/object/add_object.c \
 	\
-    srcs/parser/open_file.c \
-    srcs/parser/error.c \
-	srcs/parser/array.c \
+	srcs/new_parser/read_file_to_world.c \
+	srcs/new_parser/array_utils.c \
+	srcs/new_parser/load_file_into_memory.c \
+	srcs/new_parser/identify_type.c \
+	srcs/new_parser/parse_ambient.c \
+	srcs/new_parser/parse_camera.c \
+	srcs/new_parser/parse_light.c \
+	srcs/new_parser/parse_cylinder.c \
+	srcs/new_parser/parse_plane.c \
+	srcs/new_parser/parse_sphere.c \
+	srcs/new_parser/parse_scene.c \
+    srcs/new_parser/parse_utils.c \
+	srcs/new_parser/validate_utils.c \
 	\
 	srcs/renderer/configure_camera.c \
 	srcs/renderer/is_ray_hit.c \

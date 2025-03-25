@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   world_and_camera.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:02 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 18:40:37 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:28:21 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORLD_AND_CAMERA_H
 # define WORLD_AND_CAMERA_H
 
-# include "libs.h"
+# include "../libs/libft/libft.h"
+# include "../libs/MLX42/include/MLX42/MLX42.h"
 # include "object.h"
 # include "color.h"
 
