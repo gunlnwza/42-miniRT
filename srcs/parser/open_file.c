@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:46:16 by ykai-yua          #+#    #+#             */
-/*   Updated: 2025/03/23 01:03:56 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 08:16:41 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -480,7 +480,6 @@ int	validate_scene(int number_of_lines, char ***tokens)
 	while (i < number_of_lines)
 	{
 		line = tokens[i];
-		printf("Going to validate '%s'\n", line[0]);
 		type = identify_type(line[0]);
 		if ((type == SCENE_AMBIENT && validate_ambient(line) != SUCCESS)
 			|| (type == SCENE_CAMERA && validate_camera(line) != SUCCESS)
@@ -496,45 +495,171 @@ int	validate_scene(int number_of_lines, char ***tokens)
 }
 
 
+double	parse_ratio(char *ratio_str)
+{
+	double	ratio;
+
+	ratio = ft_strtod(ratio_str, NULL);
+	return (ratio);
+}
+
+int parse_color(char *rgb_str, int *color)
+{
+	char	**rgb;
+
+	rgb = ft_split(rgb_str, ',');
+	if (rgb == NULL)
+		return (ERROR);
+	*color = get_rgba(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+	free_array(rgb);
+	return (SUCCESS);
+}
+
+int	parse_vector(char *xyz_str, t_vector3 *dest)
+{
+	char	**xyz;
+
+	xyz = ft_split(xyz_str, ',');
+	if (xyz == NULL)
+		return (ERROR);
+	dest->x = ft_atof(xyz[0]);
+	dest->y = ft_atof(xyz[1]);
+	dest->z = ft_atof(xyz[2]);
+	free_array(xyz);
+	return (SUCCESS);
+}
+
+int	parse_normal_vector(char *normal_str, t_vector3 *dest)
+{
+	if (parse_vector(normal_str, dest) != SUCCESS)
+		return (ERROR);
+	v_normalize_ip(dest);
+	return (SUCCESS);
+}
+
+int	parse_fov(char *fov_str)
+{
+	return (ft_atoi(fov_str));
+}
+
 int	parse_ambient(char **line, t_world *world)
 {
-	(void) line;
-	(void) world;
+	int		color;
+	double	ratio;
+
+	ratio = parse_ratio(line[1]);
+	if (parse_color(line[2], &color) < 0)
+		return (ERROR);
+	world->ambient_light_color = scale_color(color, ratio);
 	return (SUCCESS);
 }
 
 int	parse_camera(char **line, t_world *world)
 {
-	(void) line;
-	(void) world;
+	int	ret;
+
+	ret = parse_vector(line[1], &world->camera.center);
+	if (ret < 0)
+		return (ERROR);
+	ret = parse_normal_vector(line[2], &world->camera.normal);
+	if (ret < 0)
+		return (ERROR);
+	world->camera.deg_fov = parse_fov(line[3]);
 	return (SUCCESS);
 }
 
 int	parse_light(char **line, t_world *world)
 {
-	(void) line;
-	(void) world;
+	int		ret;
+	int		color;
+	double	ratio;
+
+	ret = parse_vector(line[1], &world->light.point);
+	if (ret != SUCCESS)
+		return (ERROR);
+	ratio = parse_ratio(line[2]);
+	if (parse_color(line[3], &color) != SUCCESS)
+		return (ERROR);
+	world->light.color = scale_color(color, ratio);
 	return (SUCCESS);
 }
 
 int	parse_sphere(char **line, t_world *world)
 {
-	(void) line;
-	(void) world;
+	t_object	*object;
+
+	object = malloc(sizeof(t_object));
+	if (object == NULL)
+		return (ERROR);
+	object->type = SPHERE;
+	if (parse_vector(line[1], &object->point) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	object->radius = ft_atof(line[2]) / 2;
+	if (parse_color(line[3], &object->color) != SUCCESS)
+	{
+		free(object);
+		return (ERROR);
+	}
+	world->objects[world->nb_objects++] = object;
 	return (SUCCESS);
 }
 
 int	parse_plane(char **line, t_world *world)
 {
-	(void) line;
-	(void) world;
+	t_object	*object;
+
+	object = malloc(sizeof(t_object));
+	if (object == NULL)
+		return (ERROR);
+	object->type = PLANE;
+	if (parse_vector(line[1], &object->point) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	if (parse_normal_vector(line[2], &object->normal) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	if (parse_color(line[3], &object->color) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	world->objects[world->nb_objects++] = object;
 	return (SUCCESS);
 }
 
 int	parse_cylinder(char **line, t_world *world)
 {
-	(void) line;
-	(void) world;
+	t_object	*object;
+
+	object = malloc(sizeof(t_object));
+	if (object == NULL)
+		return (ERROR);
+	object->type = CYLINDER;
+	if (parse_vector(line[1], &object->point) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	if (parse_normal_vector(line[2], &object->normal) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	object->radius = ft_atof(line[3]) / 2;
+	object->height = ft_atof(line[4]);
+	if (parse_color(line[5], &object->color) < 0)
+	{
+		free(object);
+		return (ERROR);
+	}
+	world->objects[world->nb_objects++] = object;
 	return (SUCCESS);
 }
 
@@ -548,7 +673,6 @@ int	parse_scene(int number_of_lines, char ***tokens, t_world *world)
 	while (i < number_of_lines)
 	{
 		line = tokens[i];
-		printf("Going to parse '%s'\n", tokens[i][0]);
 		type = identify_type(line[0]);
 		if ((type == SCENE_AMBIENT && parse_ambient(line, world) != SUCCESS)
 			|| (type == SCENE_CAMERA && parse_camera(line, world) != SUCCESS)
@@ -591,14 +715,18 @@ int	open_file(t_world *world, char *filename)
 	free_array(lines);
 	if (tokens == NULL)
 	{
+		ft_putendl_fd("tokens", STDERR_FILENO);
 		return (ERROR);
 	}
 	if (validate_scene(number_of_lines, tokens) != SUCCESS)
 	{
-		show_error("Invalid scene");
+		show_error("vaidate_scene");
 		return (ERROR);
 	}
 	if (parse_scene(number_of_lines, tokens, world) != SUCCESS)
+	{
+		ft_putendl_fd("parse_scene", STDERR_FILENO);
 		return (ERROR);
+	}
 	return (SUCCESS);
 }

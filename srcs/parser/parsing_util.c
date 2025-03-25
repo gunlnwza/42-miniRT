@@ -27,33 +27,33 @@ int	is_valid_number(const char *str)
 	return (1);
 }
 
-int	parse_vector(char *str, t_vector3 *vect)
-{
-	char	**nbrs;
-	int		i;
+// int	parse_vector(char *str, t_vector3 *vect)
+// {
+// 	char	**nbrs;
+// 	int		i;
 
-	nbrs = ft_split(str, ',');
-	if (array_length(nbrs) != 3)
-	{
-		free_array(nbrs);
-		return (1);
-	}
-	i = 0;
-	while (i < 3)
-	{
-		if (!is_valid_double(nbrs[i]))
-		{
-			free_array(nbrs);
-			return (1);
-		}
-		i++;
-	}
-	vect->x = ft_atof(nbrs[0]);
-	vect->y = ft_atof(nbrs[1]);
-	vect->z = ft_atof(nbrs[2]);
-	free_array(nbrs);
-	return (0);
-}
+// 	nbrs = ft_split(str, ',');
+// 	if (array_length(nbrs) != 3)
+// 	{
+// 		free_array(nbrs);
+// 		return (1);
+// 	}
+// 	i = 0;
+// 	while (i < 3)
+// 	{
+// 		if (!is_valid_double(nbrs[i]))
+// 		{
+// 			free_array(nbrs);
+// 			return (1);
+// 		}
+// 		i++;
+// 	}
+// 	vect->x = ft_atof(nbrs[0]);
+// 	vect->y = ft_atof(nbrs[1]);
+// 	vect->z = ft_atof(nbrs[2]);
+// 	free_array(nbrs);
+// 	return (0);
+// }
 
 int	parse_color(char *str, int *color)
 {
