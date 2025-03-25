@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:30:13 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:40:16 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	ft_close(void *data_)
 
 	data = data_;
 	mlx_close_window(data->mlx);
+}
+
+static void	put_camera(t_camera *camera)
+{
+	printf("C ");
+	v_put(&camera->center);
+	printf(" ");
+	v_put(&camera->normal);
+	printf(" %i", camera->deg_fov);
 }
 
 void	ft_keypress(mlx_key_data_t keydata, void *data_)
@@ -36,10 +45,8 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 		if (is_modify_camera_key(key))
 		{
 			modify_camera(camera, key);
-			printf("\r                                                  ");
-			printf("\rC %.2f,%.2f,%.2f %.2f,%.2f,%.2f %i", \
-				camera->center.x, camera->center.y, camera->center.z, \
-				camera->normal.x, camera->normal.y, camera->normal.z, camera->deg_fov);
+			printf("\r                                                    \r");
+			put_camera(camera);
 		}
 		else if (key == MLX_KEY_ENTER)
 		{

@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:54 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:10:33 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:50:20 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,15 @@ void			print_error(t_parse_result ret, t_scene_type type);
 // validation
 int				is_in_range(int min, int max, int x);
 int				is_in_rangef(double min, double max, double x);
-int				is_same_after_ft_atoi(const char *nptr);
 int				is_valid_ratio(char *ratio);
 int				is_valid_color(char *rgb_str);
 int				is_valid_pos(char *pos_str);
 int				is_valid_normal(char *normal_str);
 int				is_valid_length(char *length_str);
 int				is_valid_fov(char *fov_str);
+
+int				parse_int_vector3(char *str, int values[3]);
+int				parse_vector3(char *str, double values[3]);
 
 int				validate_scene(int number_of_lines, char ***tokens);
 

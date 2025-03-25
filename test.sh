@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Courtesy of ChatGPT
+
 TEST_FILE="tests/test_list.txt"
 BIN="./miniRT"
 
@@ -8,7 +10,9 @@ RED="\033[0;31m"
 NC="\033[0m"
 
 VERBOSE=0
+ONLY_WRONG=0
 FILTER=""
+
 OK=0
 KO=0
 i=1
@@ -16,11 +20,13 @@ i=1
 # ──────── 🔧 Argument Handling ──────── #
 
 for arg in "$@"; do
-    if [[ "$arg" == "--verbose" || "$arg" == "-v" ]]; then
-        VERBOSE=1
-    elif [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
-        echo "Usage: ./test.sh {--verbose} {filter}"
+    if [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
+        echo "Usage: ./test.sh [-h | --help] [-v | --verbose] [-o | --only-wrong] filter"
         exit 0
+    elif [[ "$arg" == "--verbose" || "$arg" == "-v" ]]; then
+        VERBOSE=1
+    elif [[ "$arg" == "--only-wrong" || "$arg" == "-o" ]]; then
+        ONLY_WRONG=1
     else
         FILTER="$arg"  # Assume any other arg is a filter pattern
     fi
@@ -43,8 +49,8 @@ print_result() {
         fi
     else
         echo -e "$index. $path ${RED}KO${NC}"
-        echo -e "Expected:\n$expected"
-        echo -e "Got:\n$output"
+        echo -e "> Expected:\n$expected"
+        echo -e "> Got:\n$output"
         echo "------------------------------------------"
     fi
 }
@@ -58,7 +64,9 @@ run_test() {
 
     if echo "$output" | grep -q "$expected"; then
         ((OK++))
-        print_result "$i" "$filepath" "OK" "$expected" "$output"
+        if [[ $ONLY_WRONG -eq 0 ]]; then
+            print_result "$i" "$filepath" "OK" "$expected" "$output"
+        fi
     else
         ((KO++))
         print_result "$i" "$filepath" "KO" "$expected" "$output"
@@ -92,7 +100,7 @@ echo
 if [[ KO -eq 0 ]]; then
     echo -e "${GREEN}All $OK cases pass! OK! 😆${NC}"
 else
-    echo -e "${RED}Some tests failed. 🥲${NC}"
+    echo -e "${RED}Some test(s) failed. 🥲${NC}"
     echo
     echo -e "${GREEN}OK${NC}: $OK"
     echo -e "${RED}KO${NC}: $KO"

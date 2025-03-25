@@ -40,8 +40,11 @@ SRCS := \
 	srcs/parser/utils/array_utils.c \
 	srcs/parser/utils/identify_scene_type.c \
 	srcs/parser/utils/print_error.c \
-	srcs/parser/validation/validate_utils.c \
+	srcs/parser/validation/is_in_range.c \
+	srcs/parser/validation/parse_vector3.c \
+	srcs/parser/validation/validate_number.c \
 	srcs/parser/validation/validate_scene.c \
+	srcs/parser/validation/validate_triplet.c \
 	srcs/parser/load_file_into_memory.c \
 	srcs/parser/parse_scene.c \
 	srcs/parser/read_file_to_world.c \
@@ -56,7 +59,7 @@ SRCS := \
 	srcs/renderer/render_image.c \
 	srcs/renderer/hit_record.c \
 	\
-	srcs/vector3/vector3_create.c \
+	srcs/vector3/vector3_create.c srcs/vector3/vector3_put.c \
 	srcs/vector3/vector3_add.c srcs/vector3/vector3_mul.c \
 	srcs/vector3/vector3_dot.c srcs/vector3/vector3_dist.c \
 	srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \

@@ -36,6 +36,9 @@ bad_ambient/A_b_low.rt|Ambient light: Invalid color format
 bad_ambient/A_b_nan.rt|Ambient light: Invalid color format
 
 bad_ambient/A_color_weird.rt|Ambient light: Invalid color format
+bad_ambient/A_color_weird2.rt|Ambient light: Invalid color format
+bad_ambient/A_color_weird3.rt|Ambient light: Invalid color format
+bad_ambient/A_color_weird4.rt|Ambient light: Invalid color format
 
 # ❌ 📸 WRONG CAMERA
 bad_camera/C_pos_1.rt|Camera: Invalid position
@@ -69,7 +72,10 @@ bad_plane/pl_normal.rt|Plane: Invalid normal vector
 bad_plane/pl_rgb.rt|Plane: Invalid color format
 
 # ❌ 🗿 WRONG CYLINDER
-bad_cylinder/cy_pos.rt|Cylinder: Invalid position
+bad_cylinder/cy_pos_1.rt|Cylinder: Invalid position
+bad_cylinder/cy_pos_2.rt|Cylinder: Invalid position
+bad_cylinder/cy_pos_3.rt|Cylinder: Invalid position
+
 bad_cylinder/cy_normal.rt|Cylinder: Invalid normal vector
 bad_cylinder/cy_d.rt|Cylinder: Invalid diameter
 bad_cylinder/cy_h.rt|Cylinder: Invalid height

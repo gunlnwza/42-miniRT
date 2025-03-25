@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector3.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 15:58:18 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:37:05 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ t_vector3	v_cross(const t_vector3 *a, const t_vector3 *b);
 
 t_vector3	v_proj(const t_vector3 *vec, const t_vector3 *onto);
 t_vector3	v_rej(const t_vector3 *vec, const t_vector3 *onto);
+
+void		v_put(const t_vector3 *v);
 
 #endif
