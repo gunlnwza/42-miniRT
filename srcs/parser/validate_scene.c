@@ -6,11 +6,11 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:19:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:40:01 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:11:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parser.h"
+#include "../../includes/parser.h"
 
 #define COUNTS_BUFFER_SIZE 7
 

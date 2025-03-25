@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:42:39 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 00:44:53 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:07:08 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	is_valid_length(char *length_str)
 	char	*endptr;
 
 	decimal = ft_strtod(length_str, &endptr);
-	if (*endptr != '\0' || decimal > 0)
+	if (*endptr != '\0' || decimal <= 0)
 		return (FALSE);
 	return (TRUE);
 }

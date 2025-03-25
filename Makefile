@@ -43,11 +43,11 @@ SRCS := \
 	srcs/parser/validation/is_in_range.c \
 	srcs/parser/validation/parse_vector3.c \
 	srcs/parser/validation/validate_number.c \
-	srcs/parser/validation/validate_scene.c \
 	srcs/parser/validation/validate_triplet.c \
 	srcs/parser/load_file_into_memory.c \
 	srcs/parser/parse_scene.c \
 	srcs/parser/read_file_to_world.c \
+	srcs/parser/validate_scene.c \
 	\
 	srcs/renderer/objects/hit_cylinder.c \
 	srcs/renderer/objects/hit_plane.c \

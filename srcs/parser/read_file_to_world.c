@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 16:26:47 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:04:46 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ static int	open_file(char *filename)
 
 	if (!is_rt_file_extension(filename))
 	{
-		ft_putendl_fd("Error\nNot a .rt file", STDERR_FILENO);
+		printf("Error\nNot a .rt file");
 		return (ERROR);
 	}
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		printf("Error\nCannot open the file\n");
 		return (ERROR);
+	}
 	return (fd);
 }
 
