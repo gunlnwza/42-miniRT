@@ -6,11 +6,11 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:42:59 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:22:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:27:04 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
 int	is_in_range(int min, int max, int x)
 {

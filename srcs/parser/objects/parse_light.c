@@ -6,11 +6,11 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:57 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 16:11:22 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:26:45 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
 t_parse_result	validate_light(char **line)
 {

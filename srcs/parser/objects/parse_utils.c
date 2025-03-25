@@ -6,11 +6,11 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:52 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 11:23:02 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:26:55 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
 double	parse_ratio(char *ratio_str)
 {

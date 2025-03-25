@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sphere.c                                           :+:      :+:    :+:   */
+/*   hit_sphere.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:57:43 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 16:37:59 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:29:21 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/object.h"
-#include <stdio.h>
+#include "../../../includes/object.h"
 
 static void	calculate_coef(t_object *sphere, const t_ray *ray, double coef[3])
 {

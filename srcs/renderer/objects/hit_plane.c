@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   plane.c                                            :+:      :+:    :+:   */
+/*   hit_plane.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:43:18 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 16:37:54 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:29:11 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/object.h"
+#include "../../../includes/object.h"
 
 static void	save_to_record(t_hit_record *rec, double root,
 				const t_ray *ray, t_object *plane)

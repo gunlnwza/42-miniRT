@@ -6,11 +6,11 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:16:20 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 21:54:19 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:27:18 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
 static char	*get_object_str(t_scene_type type)
 {

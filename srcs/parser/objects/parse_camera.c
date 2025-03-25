@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_plane.c                                      :+:      :+:    :+:   */
+/*   parse_camera.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/25 11:31:04 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 16:11:30 by nteechar         ###   ########.fr       */
+/*   Created: 2025/03/25 11:30:53 by nteechar          #+#    #+#             */
+/*   Updated: 2025/03/25 22:26:39 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
-t_parse_result	validate_plane(char **line)
+t_parse_result	validate_camera(char **line)
 {
 	t_parse_result	ret;
 
@@ -23,34 +23,21 @@ t_parse_result	validate_plane(char **line)
 		ret = BAD_POSITION;
 	if (!is_valid_normal(line[2]))
 		ret = BAD_NORMAL;
-	if (!is_valid_color(line[3]))
-		ret = BAD_COLOR;
+	if (!is_valid_fov(line[3]))
+		ret = BAD_FOV;
 	return (ret);
 }
 
-int	parse_plane(char **line, t_world *world)
+int	parse_camera(char **line, t_world *world)
 {
-	t_object	*object;
+	int	ret;
 
-	object = malloc(sizeof(t_object));
-	if (object == NULL)
+	ret = parse_vector(line[1], &world->camera.center);
+	if (ret < 0)
 		return (ERROR);
-	object->type = PLANE;
-	if (parse_vector(line[1], &object->point) < 0)
-	{
-		free(object);
+	ret = parse_normal_vector(line[2], &world->camera.normal);
+	if (ret < 0)
 		return (ERROR);
-	}
-	if (parse_normal_vector(line[2], &object->normal) < 0)
-	{
-		free(object);
-		return (ERROR);
-	}
-	if (parse_color(line[3], &object->color) < 0)
-	{
-		free(object);
-		return (ERROR);
-	}
-	world->objects[world->nb_objects++] = object;
+	world->camera.deg_fov = parse_fov(line[3]);
 	return (SUCCESS);
 }

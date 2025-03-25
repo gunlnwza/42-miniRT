@@ -30,27 +30,25 @@ SRCS := \
 	srcs/display/init_display.c \
 	srcs/display/modify_camera.c \
 	\
-	srcs/object/hit_cylinder.c \
-	srcs/object/hit_plane.c \
-	srcs/object/hit_sphere.c \
-	srcs/object/add_object.c \
+	srcs/parser/objects/parse_ambient.c \
+	srcs/parser/objects/parse_camera.c \
+	srcs/parser/objects/parse_light.c \
+	srcs/parser/objects/parse_cylinder.c \
+	srcs/parser/objects/parse_plane.c \
+	srcs/parser/objects/parse_sphere.c \
+    srcs/parser/objects/parse_utils.c \
+	srcs/parser/utils/array_utils.c \
+	srcs/parser/utils/identify_scene_type.c \
+	srcs/parser/utils/print_error.c \
+	srcs/parser/validation/validate_utils.c \
+	srcs/parser/validation/validate_scene.c \
+	srcs/parser/load_file_into_memory.c \
+	srcs/parser/parse_scene.c \
+	srcs/parser/read_file_to_world.c \
 	\
-	srcs/new_parser/print_error.c \
-	srcs/new_parser/read_file_to_world.c \
-	srcs/new_parser/array_utils.c \
-	srcs/new_parser/load_file_into_memory.c \
-	srcs/new_parser/identify_scene_type.c \
-	srcs/new_parser/parse_ambient.c \
-	srcs/new_parser/parse_camera.c \
-	srcs/new_parser/parse_light.c \
-	srcs/new_parser/parse_cylinder.c \
-	srcs/new_parser/parse_plane.c \
-	srcs/new_parser/parse_sphere.c \
-    srcs/new_parser/parse_utils.c \
-	srcs/new_parser/parse.c \
-	srcs/new_parser/validate_utils.c \
-	srcs/new_parser/validate.c \
-	\
+	srcs/renderer/objects/hit_cylinder.c \
+	srcs/renderer/objects/hit_plane.c \
+	srcs/renderer/objects/hit_sphere.c \
 	srcs/renderer/configure_camera.c \
 	srcs/renderer/is_ray_hit.c \
 	srcs/renderer/ray_color.c \

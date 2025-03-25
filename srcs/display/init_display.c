@@ -6,11 +6,10 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 10:56:25 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:30:13 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../../includes/mini_rt.h"
 
 void	ft_close(void *data_)
@@ -55,7 +54,7 @@ int	init_display(t_data *data)
 	data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (data->mlx == NULL)
 	{
-		ft_putstr_fd("Error: ", STDERR_FILENO);
+		printf("Error: ", STDERR_FILENO);
 		ft_putendl_fd((char *) mlx_strerror(mlx_errno), STDERR_FILENO);
 		return (ERROR);
 	}

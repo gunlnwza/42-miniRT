@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   identify_type.c                                    :+:      :+:    :+:   */
+/*   identify_scene_type.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:46:13 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 15:26:36 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:27:16 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "../../../includes/parser.h"
 
 t_scene_type	identify_scene_type(char *id)
 {

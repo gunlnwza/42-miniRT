@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.c                                         :+:      :+:    :+:   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:42:01 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/25 15:06:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:29:16 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../../includes/object.h"
+#include "../../../includes/object.h"
 
 static void	calculate_coef(
 	t_object *cylinder, const t_ray *ray, double coef[3])

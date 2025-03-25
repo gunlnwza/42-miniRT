@@ -35,6 +35,8 @@ bad_ambient/A_b_high.rt|Ambient light: Invalid color format
 bad_ambient/A_b_low.rt|Ambient light: Invalid color format
 bad_ambient/A_b_nan.rt|Ambient light: Invalid color format
 
+bad_ambient/A_color_weird.rt|Ambient light: Invalid color format
+
 # ❌ 📸 WRONG CAMERA
 bad_camera/C_pos_1.rt|Camera: Invalid position
 bad_camera/C_pos_2.rt|Camera: Invalid position

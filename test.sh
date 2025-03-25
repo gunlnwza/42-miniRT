@@ -14,9 +14,13 @@ KO=0
 i=1
 
 # ──────── 🔧 Argument Handling ──────── #
+
 for arg in "$@"; do
-    if [[ "$arg" == "--verbose" ]]; then
+    if [[ "$arg" == "--verbose" || "$arg" == "-v" ]]; then
         VERBOSE=1
+    elif [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
+        echo "Usage: ./test.sh {--verbose} {filter}"
+        exit 0
     else
         FILTER="$arg"  # Assume any other arg is a filter pattern
     fi
@@ -86,8 +90,10 @@ done < "$TEST_FILE"
 
 echo
 if [[ KO -eq 0 ]]; then
-    echo -e "${GREEN}All $OK cases pass! OK!${NC}"
+    echo -e "${GREEN}All $OK cases pass! OK! 😆${NC}"
 else
+    echo -e "${RED}Some tests failed. 🥲${NC}"
+    echo
     echo -e "${GREEN}OK${NC}: $OK"
     echo -e "${RED}KO${NC}: $KO"
 fi
