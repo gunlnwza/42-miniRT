@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:54 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 16:15:55 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:10:33 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,13 @@ int				read_file_to_world(char *filename, t_world *world);
 
 char			**load_file_into_memory(int fd);
 
+// utils
 t_scene_type	identify_scene_type(char *id);
-int				validate_scene(int number_of_lines, char ***tokens);
-int				parse_scene(int number_of_lines, char ***tokens,
-					t_world *world);
-
 void			free_array(char **arr);
 int				array_length(char **arr);
+void			print_error(t_parse_result ret, t_scene_type type);
 
-double			parse_ratio(char *ratio_str);
-int				parse_color(char *rgb_str, int *color);
-int				parse_vector(char *xyz_str, t_vector3 *dest);
-int				parse_normal_vector(char *normal_str, t_vector3 *dest);
-int				parse_fov(char *fov_str);
-
-t_parse_result	validate_ambient(char **line);
-int				parse_ambient(char **line, t_world *world);
-
-t_parse_result	validate_camera(char **line);
-int				parse_camera(char **line, t_world *world);
-
-t_parse_result	validate_light(char **line);
-int				parse_light(char **line, t_world *world);
-
-t_parse_result	validate_sphere(char **line);
-int				parse_sphere(char **line, t_world *world);
-
-t_parse_result	validate_plane(char **line);
-int				parse_plane(char **line, t_world *world);
-
-t_parse_result	validate_cylinder(char **line);
-int				parse_cylinder(char **line, t_world *world);
-
+// validation
 int				is_in_range(int min, int max, int x);
 int				is_in_rangef(double min, double max, double x);
 int				is_same_after_ft_atoi(const char *nptr);
@@ -96,5 +71,31 @@ int				is_valid_pos(char *pos_str);
 int				is_valid_normal(char *normal_str);
 int				is_valid_length(char *length_str);
 int				is_valid_fov(char *fov_str);
+
+int				validate_scene(int number_of_lines, char ***tokens);
+
+t_parse_result	validate_ambient(char **line);
+t_parse_result	validate_camera(char **line);
+t_parse_result	validate_light(char **line);
+t_parse_result	validate_sphere(char **line);
+t_parse_result	validate_plane(char **line);
+t_parse_result	validate_cylinder(char **line);
+
+// parsing
+double			parse_ratio(char *ratio_str);
+int				parse_color(char *rgb_str, int *color);
+int				parse_vector(char *xyz_str, t_vector3 *dest);
+int				parse_normal_vector(char *normal_str, t_vector3 *dest);
+int				parse_fov(char *fov_str);
+
+int				parse_scene(int number_of_lines, char ***tokens,
+					t_world *world);
+
+int				parse_ambient(char **line, t_world *world);
+int				parse_camera(char **line, t_world *world);
+int				parse_light(char **line, t_world *world);
+int				parse_sphere(char **line, t_world *world);
+int				parse_plane(char **line, t_world *world);
+int				parse_cylinder(char **line, t_world *world);
 
 #endif

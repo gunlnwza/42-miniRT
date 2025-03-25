@@ -35,6 +35,7 @@ SRCS := \
 	srcs/object/hit_sphere.c \
 	srcs/object/add_object.c \
 	\
+	srcs/new_parser/print_error.c \
 	srcs/new_parser/read_file_to_world.c \
 	srcs/new_parser/array_utils.c \
 	srcs/new_parser/load_file_into_memory.c \
@@ -48,6 +49,7 @@ SRCS := \
     srcs/new_parser/parse_utils.c \
 	srcs/new_parser/parse.c \
 	srcs/new_parser/validate_utils.c \
+	srcs/new_parser/validate.c \
 	\
 	srcs/renderer/configure_camera.c \
 	srcs/renderer/is_ray_hit.c \

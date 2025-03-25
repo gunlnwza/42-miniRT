@@ -1,14 +1,27 @@
 # ✅ VALID
-valid/1234.rt|Parse OK
+valid/empty.rt|Parse OK
+valid/weird_name.rt.rt|Parse OK
 
 # ❌ WRONG EXTENSION
-invalid_ext/.rt|Not a .rt file
-invalid_ext/1.1rt|Not a .rt file
+not_rt/.rt|Not a .rt file
+not_rt/1.1rt|Not a .rt file
+not_rt/2.r1t|Not a .rt file
+not_rt/3.rt1|Not a .rt file
+not_rt/5.rtrt|Not a .rt file
+
+# ❌ WRONG ID
+bad_id/invalid_object.rt|Invalid object id
+
+# ❌ MORE THAN ONE SINGLETON
+not_unique/A_twice.rt|Ambient light: Unique object more than one
+not_unique/C_twice.rt|Camera: Unique object more than one
+not_unique/L_twice.rt|Light: Unique object more than one
 
 # ❌ 🌞 WRONG AMBIENT
 bad_ambient/A_ratio_high.rt|Ambient light: Invalid brightness
 bad_ambient/A_ratio_low.rt|Ambient light: Invalid brightness
 bad_ambient/A_ratio_nan.rt|Ambient light: Invalid brightness
+bad_ambient/A_ratio_nan2.rt|Ambient light: Invalid brightness
 
 bad_ambient/A_r_high.rt|Ambient light: Invalid color format
 bad_ambient/A_r_low.rt|Ambient light: Invalid color format
@@ -23,24 +36,35 @@ bad_ambient/A_b_low.rt|Ambient light: Invalid color format
 bad_ambient/A_b_nan.rt|Ambient light: Invalid color format
 
 # ❌ 📸 WRONG CAMERA
-bad_camera/C_pos.rt|Camera: Invalid position
-bad_camera/C_normal.rt|Camera: Invalid normal vector
-bad_camera/C_fov.rt|Camera: Invalid field of view
+bad_camera/C_pos_1.rt|Camera: Invalid position
+bad_camera/C_pos_2.rt|Camera: Invalid position
+bad_camera/C_pos_3.rt|Camera: Invalid position
+
+bad_camera/C_normal_1.rt|Camera: Invalid normal vector
+bad_camera/C_normal_2.rt|Camera: Invalid normal vector
+bad_camera/C_normal_3.rt|Camera: Invalid normal vector
+bad_camera/C_normal_zero.rt|Camera: Invalid normal vector
+
+bad_camera/C_fov_high.rt|Camera: Invalid field of view
+bad_camera/C_fov_low.rt|Camera: Invalid field of view
+bad_camera/C_fov_nan.rt|Camera: Invalid field of view
+bad_camera/C_fov_nan2.rt|Camera: Invalid field of view
+bad_camera/C_fov_nan3.rt|Camera: Invalid field of view
 
 # ❌ 💡 WRONG LIGHT
 bad_light/L_pos.rt|Light: Invalid position
 bad_light/L_ratio.rt|Light: Invalid brightness
-bad_light/L_rgb.rt|Light: Invalid color
+bad_light/L_rgb.rt|Light: Invalid color format
 
 # ❌ 🍊 WRONG SPHERE
 bad_sphere/sp_pos.rt|Sphere: Invalid position
 bad_sphere/sp_d.rt|Sphere: Invalid diameter
-bad_sphere/sp_rgb.rt|Sphere: Invalid color
+bad_sphere/sp_rgb.rt|Sphere: Invalid color format
 
 # ❌ 📄 WRONG PLANE
 bad_plane/pl_pos.rt|Plane: Invalid position
 bad_plane/pl_normal.rt|Plane: Invalid normal vector
-bad_plane/pl_rgb.rt|Plane: Invalid color
+bad_plane/pl_rgb.rt|Plane: Invalid color format
 
 # ❌ 🗿 WRONG CYLINDER
 bad_cylinder/cy_pos.rt|Cylinder: Invalid position
@@ -48,8 +72,3 @@ bad_cylinder/cy_normal.rt|Cylinder: Invalid normal vector
 bad_cylinder/cy_d.rt|Cylinder: Invalid diameter
 bad_cylinder/cy_h.rt|Cylinder: Invalid height
 bad_cylinder/cy_rgb.rt|Cylinder: Invalid color format
-
-# ❌ ⚙️ OTHERS
-A_twice.rt|More than one ambient light
-C_twice.rt|More than one camera
-L_twice.rt|More than one light

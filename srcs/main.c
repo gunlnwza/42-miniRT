@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 16:33:53 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 21:52:02 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ static int	process_input(int argc, char **argv, t_data *data)
 	}
 	if (read_file_to_world(argv[1], &data->world) != SUCCESS)
 		return (ERROR);
+	if (data->mode == MODE_PARSE_ONLY)
+	{
+		printf("Parse OK\n");
+		free_world(&data->world);
+		exit(EXIT_SUCCESS);
+	}
 	return (SUCCESS);
 }
 
@@ -56,11 +62,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&data, sizeof(t_data));
 	if (process_input(argc, argv, &data) != SUCCESS)
 		return (EXIT_FAILURE);
-	if (data.mode == MODE_PARSE_ONLY)
-	{
-		printf("Parse OK\n");
-		return (EXIT_SUCCESS);
-	}
 	if (init_display(&data) != SUCCESS)
 		return (EXIT_FAILURE);
 	render_image(data.img, &data.world);
