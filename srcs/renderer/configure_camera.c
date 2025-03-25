@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   configure_camera.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:38:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/01 15:29:38 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:34:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/world_and_camera.h"
+#include "../../includes/world.h"
 
 static void	configure_viewport_v_and_h(t_camera *camera)
 {

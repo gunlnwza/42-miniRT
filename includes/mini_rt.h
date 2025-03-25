@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 21:39:41 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:38:48 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,10 @@
 # define MINI_RT_H
 
 # include "parser.h"
-# include "world_and_camera.h"
-
-typedef struct s_data
-{
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	t_world		world;
-	int			mode;
-}	t_data;
+# include "t_data.h"
 
 int		init_display(t_data *data);
-void	render_image(mlx_image_t *img, t_world *world);
+void	render_image(t_data *data);
 
 int		is_modify_camera_key(keys_t key);
 void	modify_camera(t_camera *camera, keys_t key);

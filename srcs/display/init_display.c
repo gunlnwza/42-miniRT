@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 00:40:16 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:42:42 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,18 +40,17 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 	key = keydata.key;
 	if (key == MLX_KEY_ESCAPE)
 		exit(0);
-	if (keydata.action == MLX_PRESS)
+	if (data->mode == MODE_DEBUG && keydata.action == MLX_PRESS)
 	{
 		if (is_modify_camera_key(key))
 		{
 			modify_camera(camera, key);
-			printf("\r                                                    \r");
-			put_camera(camera);
 		}
 		else if (key == MLX_KEY_ENTER)
 		{
+			put_camera(camera);
 			printf("\n");
-			render_image(data->img, &data->world);
+			render_image(data);
 		}
 	}
 }

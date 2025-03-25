@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3_put.c                                      :+:      :+:    :+:   */
+/*   camera.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 00:35:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:41:43 by nteechar         ###   ########.fr       */
+/*   Created: 2025/03/26 01:32:25 by nteechar          #+#    #+#             */
+/*   Updated: 2025/03/26 01:34:07 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../../includes/vector3.h"
+#ifndef CAMERA_H
+# define CAMERA_H
 
-void	v_put(const t_vector3 *v)
+# include "vector3.h"
+
+typedef struct s_camera
 {
-	printf("%.2f,%.2f,%.2f", v->x, v->y, v->z);
-}
+	t_vector3	center;
+	int			deg_fov;
+	t_vector3	normal;
+	t_vector3	viewport_h;
+	t_vector3	viewport_v;
+	t_vector3	pixel_delta_h;
+	t_vector3	pixel_delta_v;
+	t_vector3	pixel00_loc;
+}	t_camera;
+
+void	configure_camera(t_camera *camera);
+
+#endif

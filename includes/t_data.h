@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector3_put.c                                      :+:      :+:    :+:   */
+/*   t_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 00:35:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:41:43 by nteechar         ###   ########.fr       */
+/*   Created: 2025/03/26 01:31:29 by nteechar          #+#    #+#             */
+/*   Updated: 2025/03/26 01:33:18 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "../../includes/vector3.h"
+#ifndef T_DATA_H
+# define T_DATA_H
 
-void	v_put(const t_vector3 *v)
+# include "world.h"
+
+typedef	enum e_mode
 {
-	printf("%.2f,%.2f,%.2f", v->x, v->y, v->z);
-}
+	MODE_DEFAULT,
+	MODE_PARSE_ONLY,
+	MODE_DEBUG
+}	t_mode;
+
+typedef struct s_data
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_world		world;
+	t_mode		mode;
+}	t_data;
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:54 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 00:50:20 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:33:09 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 
 # include "../libs/libft/libft.h"
-# include "world_and_camera.h"
+# include "world.h"
 
 typedef enum e_scene_type
 {

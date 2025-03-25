@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   is_ray_hit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:49:37 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 18:47:09 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:34:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/world_and_camera.h"
+#include "../../includes/world.h"
 
 static int	is_hit_object(t_object *object, t_ray *ray, t_hit_record *temp_rec)
 {

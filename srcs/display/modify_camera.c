@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:48:38 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 17:18:31 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:47:20 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,26 @@ static t_vector3	get_diff(t_camera *camera, keys_t key)
 	return (diff);
 }
 
+// rotate left
+// front_vect = (rotation_matrix? * front_vect)
+
 void	modify_camera(t_camera *camera, keys_t key)
 {
 	t_vector3	diff;
 
-	diff = get_diff(camera, key);
-	if (key == MLX_KEY_A || key == MLX_KEY_W || key == MLX_KEY_SPACE)
-		v_add_ip(&camera->center, &diff);
-	else if (key == MLX_KEY_D || key == MLX_KEY_S || key == MLX_KEY_LEFT_SHIFT)
-		v_sub_ip(&camera->center, &diff);
-	else if (key == MLX_KEY_UP || key == MLX_KEY_LEFT)
-		v_sub_ip(&camera->normal, &diff);
-	else if (key == MLX_KEY_DOWN || key == MLX_KEY_RIGHT)
-		v_add_ip(&camera->normal, &diff);
-	v_normalize_ip(&camera->normal);
+	// diff = get_diff(camera, key);
+	// if (key == MLX_KEY_A || key == MLX_KEY_W || key == MLX_KEY_SPACE)
+	// 	v_add_ip(&camera->center, &diff);
+	// else if (key == MLX_KEY_D || key == MLX_KEY_S || key == MLX_KEY_LEFT_SHIFT)
+	// 	v_sub_ip(&camera->center, &diff);
+	// else if (key == MLX_KEY_UP || key == MLX_KEY_LEFT)
+	// 	v_sub_ip(&camera->normal, &diff);
+	// else if (key == MLX_KEY_DOWN || key == MLX_KEY_RIGHT)
+	// 	v_add_ip(&camera->normal, &diff);
+	// v_normalize_ip(&camera->normal);
+
+
+	// A, D: rotate left, right with y-axis
+	// W, S: rotate up, down with xz-plane
+	// SPACE, SHIFT: increase, decrease y
 }
