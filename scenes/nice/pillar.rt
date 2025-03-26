@@ -1,0 +1,23 @@
+A		0.2		255,255,255
+C       8.66,0.0,9.84   -0.49,0.0,-0.86 100
+
+# Turning on/off the light!
+L		-5.68,0,8	0.8					255,255,255
+
+# pillar
+cy		0,-10,0			0,1,0	5 20		100,100,100
+
+# Left wall (facing +x)
+pl		-10,0,0		1,0,0		100,0,0
+# Right wall (facing -x)
+pl		10,0,0		-1,0,0		100,100,0
+
+# Floor (facing +y)
+pl		0,-10,0		0,1,0		0,100,0		
+# Ceiling (facing -y)
+pl		0,10,0		0,-1,0		0,100,100	
+
+# Back wall (facing +z)
+pl		0,0,-10		0,0,1		0,0,100		
+# Front wall (facing -z)
+pl		0,0,10		0,0,-1		100,0,100	
