@@ -2,12 +2,13 @@
 
 # Courtesy of ChatGPT
 
-TEST_FILE="tests/test_list.txt"
-BIN="./miniRT"
-
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 NC="\033[0m"
+
+TESTS="$(cd "$(dirname "$0")/../" && pwd)/tests"
+TEST_LIST="$TESTS/test_list.txt"
+BIN="$(cd "$(dirname "$0")/../" && pwd)/miniRT"
 
 VERBOSE=0
 ONLY_WRONG=0
@@ -21,7 +22,7 @@ i=1
 
 for arg in "$@"; do
     if [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
-        echo "Usage: ./test.sh [-h | --help] [-v | --verbose] [-o | --only-wrong] filter"
+        echo "Usage: ./test.sh [-h | --help] [-v | --verbose] [-o | --only-wrong] [filter]"
         exit 0
     elif [[ "$arg" == "--verbose" || "$arg" == "-v" ]]; then
         VERBOSE=1
@@ -60,7 +61,7 @@ run_test() {
     local expected=$2
     local output
 
-    output=$($BIN "tests/$filepath" --parse-only 2>&1)
+    output=$($BIN "$TESTS/$filepath" --parse-only 2>&1)
 
     if echo "$output" | grep -q "$expected"; then
         ((OK++))
@@ -86,13 +87,13 @@ while IFS="|" read -r filepath expected; do
     if [[ -n "$FILTER" && "$filepath" != *"$FILTER"* ]]; then
         continue  # Skip if filter doesn't match filepath
     fi
-    if [[ ! -f "tests/$filepath" ]]; then
+    if [[ ! -f "$TESTS/$filepath" ]]; then
         echo -e "$filepath ${RED}FILE NOT FOUND${NC}"
         continue
     fi
     run_test "$filepath" "$expected"
     ((i++))
-done < "$TEST_FILE"
+done < "$TEST_LIST"
 
 # ──────── 🧾 Summary ──────── #
 
