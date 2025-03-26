@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:02 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:29:24 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:50:44 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "color.h"
 # include "camera.h"
 
+# define MAX_OBJECTS 100
+
 typedef struct s_light
 {
 	int			color;
@@ -27,7 +29,7 @@ typedef struct s_light
 
 typedef struct s_world
 {
-	t_object	*objects[100];
+	t_object	*objects[MAX_OBJECTS];
 	int			nb_objects;
 	int			ambient_light_color;
 	t_camera	camera;
