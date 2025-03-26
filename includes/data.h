@@ -6,12 +6,12 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:31:29 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 18:02:55 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:26:27 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef T_DATA_H
-# define T_DATA_H
+#ifndef DATA_H
+# define DATA_H
 
 # include "world.h"
 
