@@ -6,13 +6,13 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:39:28 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:25:21 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/mini_rt.h"
 
-static int	parse_option(int argc, char **argv, t_data *data)
+static int	parse_arguments(int argc, char **argv, t_data *data)
 {
 	if (argc == 2)
 		return (SUCCESS);
@@ -39,7 +39,7 @@ static int	parse_option(int argc, char **argv, t_data *data)
 
 static int	process_input(int argc, char **argv, t_data *data)
 {
-	if (parse_option(argc, argv, data) != SUCCESS)
+	if (parse_arguments(argc, argv, data) != SUCCESS)
 		return (ERROR);
 	if (read_file_to_world(argv[1], &data->world) != SUCCESS)
 		return (ERROR);

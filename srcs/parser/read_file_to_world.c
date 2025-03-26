@@ -6,10 +6,12 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:24:00 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:29:53 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <string.h>
 #include "../../includes/parser.h"
 
 static int	is_rt_file_extension(char *filename)
@@ -43,7 +45,12 @@ static int	open_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error\nCannot open the file\n");
+		if (errno == ENOENT)
+			printf("Error\nFile does not exist\n");
+		else if (errno == EACCES)
+			printf("Error\nPermission denied\n");
+		else
+			printf("Error\nCannot open file (%s)\n", strerror(errno));
 		return (ERROR);
 	}
 	return (fd);

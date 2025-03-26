@@ -6,7 +6,7 @@
 #    By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 13:18:31 by nteechar          #+#    #+#              #
-#    Updated: 2025/03/23 00:34:40 by nteechar         ###   ########.fr        #
+#    Updated: 2025/03/26 09:56:20 by nteechar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS := \
 	ft_printf/ft_printf.c \
 	ft_printf/put_address.c ft_printf/put_char.c ft_printf/put_hex.c \
 	ft_printf/put_int.c ft_printf/put_str.c ft_printf/put_unsigned_int.c \
+	ft_printf/put_double.c \
 	\
 	ft_string/ft_split.c ft_string/ft_strchr.c ft_string/ft_strcmp.c \
 	ft_string/ft_strdup.c ft_string/ft_striteri.c ft_string/ft_strjoin_all.c \

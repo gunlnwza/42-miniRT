@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:57 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:26:45 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:20:26 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 t_parse_result	validate_light(char **line)
 {
-	t_parse_result	ret;
-
-	ret = PARSE_OK;
 	if (array_length(line) != 4)
-		ret = BAD_NUMBER_OF_PARAMS;
+		return (BAD_NUMBER_OF_PARAMS);
 	if (!is_valid_pos(line[1]))
-		ret = BAD_POSITION;
+		return (BAD_POSITION);
 	if (!is_valid_ratio(line[2]))
-		ret = BAD_RATIO;
+		return (BAD_RATIO);
 	if (!is_valid_color(line[3]))
-		ret = BAD_COLOR;
-	return (ret);
+		return (BAD_COLOR);
+	return (PARSE_OK);
 }
 
 int	parse_light(char **line, t_world *world)

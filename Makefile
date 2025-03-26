@@ -68,6 +68,7 @@ SRCS := \
 	srcs/vector3/vector3_dot.c srcs/vector3/vector3_dist.c \
 	srcs/vector3/vector3_norm.c srcs/vector3/vector3_normalize.c \
 	srcs/vector3/vector3_cross.c srcs/vector3/vector3_proj.c \
+	srcs/vector3/vector3_rotate.c \
 	\
 	srcs/main.c
 

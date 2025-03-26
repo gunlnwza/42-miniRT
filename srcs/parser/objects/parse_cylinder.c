@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:55 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:26:42 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:21:34 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,19 @@
 
 t_parse_result	validate_cylinder(char **line)
 {
-	t_parse_result	ret;
-
-	ret = PARSE_OK;
 	if (array_length(line) != 6)
-		ret = BAD_NUMBER_OF_PARAMS;
+		return (BAD_NUMBER_OF_PARAMS);
 	if (!is_valid_pos(line[1]))
-		ret = BAD_POSITION;
+		return (BAD_POSITION);
 	if (!is_valid_normal(line[2]))
-		ret = BAD_NORMAL;
+		return (BAD_NORMAL);
 	if (!is_valid_length(line[3]))
-		ret = BAD_DIAMETER;
+		return (BAD_DIAMETER);
 	if (!is_valid_length(line[4]))
-		ret = BAD_HEIGHT;
+		return (BAD_HEIGHT);
 	if (!is_valid_color(line[5]))
-		ret = BAD_COLOR;
-	return (ret);
+		return (BAD_COLOR);
+	return (PARSE_OK);
 }
 
 int	parse_cylinder(char **line, t_world *world)

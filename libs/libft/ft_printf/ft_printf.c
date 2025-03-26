@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:15:16 by nteechar          #+#    #+#             */
-/*   Updated: 2024/07/27 13:44:08 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 09:54:25 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static unsigned int	put_variable(char spec, va_list *arg_ptr_address)
 		return (put_hex(va_arg(*arg_ptr_address, unsigned int), 1));
 	else if (spec == '%')
 		return (put_char('%'));
+	else if (spec == 'f')
+		return (put_double(va_arg(*arg_ptr_address, double)));
 	return (0);
 }
 

@@ -6,11 +6,13 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:42:42 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 10:45:02 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_rt.h"
+
+#define DELIM "\t"
 
 void	ft_close(void *data_)
 {
@@ -22,11 +24,11 @@ void	ft_close(void *data_)
 
 static void	put_camera(t_camera *camera)
 {
-	printf("C ");
+	ft_printf("C%s", DELIM);
 	v_put(&camera->center);
-	printf(" ");
+	ft_printf("%s", DELIM);
 	v_put(&camera->normal);
-	printf(" %i", camera->deg_fov);
+	ft_printf("%s%i\n", DELIM, camera->deg_fov);
 }
 
 void	ft_keypress(mlx_key_data_t keydata, void *data_)
@@ -45,11 +47,10 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 		if (is_modify_camera_key(key))
 		{
 			modify_camera(camera, key);
+			put_camera(camera);
 		}
 		else if (key == MLX_KEY_ENTER)
 		{
-			put_camera(camera);
-			printf("\n");
 			render_image(data);
 		}
 	}

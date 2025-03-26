@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:41:09 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 00:46:18 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:11:34 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@ static int	is_valid_triplet(char *str)
 	i = 2;
 	while (i--)
 	{
+		
 		str = ft_strchr(str, ',');
-		if (str == NULL || *(str + 1) == ',')
+		if (str == NULL)
 			return (FALSE);
 		str++;
+		if (*str == ',' || *str == '\0')
+			return (FALSE);
 	}
-	if (*str == '\0')
-		return (FALSE);
-	return (ft_strchr(str, ',') == NULL);
+	str = ft_strchr(str, ',');
+	return (str == NULL);
 }
 
 int	parse_int_vector3(char *str, int values[3])

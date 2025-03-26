@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:53 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 23:14:56 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:19:41 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 t_parse_result	validate_camera(char **line)
 {
-	t_parse_result	ret;
-
-	ret = PARSE_OK;
 	if (array_length(line) != 4)
-		ret = BAD_NUMBER_OF_PARAMS;
+		return (BAD_NUMBER_OF_PARAMS);
 	if (!is_valid_pos(line[1]))
-		ret = BAD_POSITION;
+		return (BAD_POSITION);
 	if (!is_valid_normal(line[2]))
-		ret = BAD_NORMAL;
+		return (BAD_NORMAL);
 	if (!is_valid_fov(line[3]))
-		ret = BAD_FOV;
-	return (ret);
+		return (BAD_FOV);
+	return (PARSE_OK);
 }
 
 int	parse_camera(char **line, t_world *world)

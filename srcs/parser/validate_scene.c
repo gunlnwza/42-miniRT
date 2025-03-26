@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:19:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:11:59 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:26:12 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ int	validate_scene(int num_lines, char ***file_tokens)
 	if (counts[SCENE_INVALID] > 0)
 	{
 		print_error(INVALID_OBJECT, SCENE_INVALID);
+		return (ERROR);
+	}
+	if (counts[SCENE_CAMERA] == 0)
+	{
+		print_error(NO_ITEM, SCENE_CAMERA);
 		return (ERROR);
 	}
 	if (validate_uniqueness(counts) != SUCCESS
