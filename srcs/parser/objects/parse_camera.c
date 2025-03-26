@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 11:30:53 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 11:19:41 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:25:31 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	parse_camera(char **line, t_world *world)
 {
 	int	ret;
 
-	ret = parse_vector(line[1], &world->camera.center);
+	ret = parse_vector(line[1], &world->camera.point);
 	if (ret < 0)
 		return (ERROR);
 	ret = parse_normal_vector(line[2], &world->camera.normal);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   modify_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:48:38 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:39:48 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:26:23 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	look_up_down(t_vector3 *normal, double theta)
 	v_copy_ip(normal, &new_normal);
 }
 
-static void	move(t_camera *cam, double front_diff, double left_diff,
+static void	move(t_camera *camera, double front_diff, double left_diff,
 				double up_diff)
 {
 	t_vector3	world_up;
@@ -60,16 +60,16 @@ static void	move(t_camera *cam, double front_diff, double left_diff,
 	t_vector3	left;
 
 	world_up = v_create(0, 1, 0);
-	front = v_create(cam->normal.x, 0, cam->normal.z);
+	front = v_create(camera->normal.x, 0, camera->normal.z);
 	left = v_rotate(&front, &world_up, PI / 2);
 	\
 	v_scalar_mul_ip(&front, front_diff);
 	v_scalar_mul_ip(&left, left_diff);
 	v_scalar_mul_ip(&world_up, up_diff);
 	\
-	v_add_ip(&cam->center, &front);
-	v_add_ip(&cam->center, &left);
-	v_add_ip(&cam->center, &world_up);
+	v_add_ip(&camera->point, &front);
+	v_add_ip(&camera->point, &left);
+	v_add_ip(&camera->point, &world_up);
 }
 
 void	modify_camera(t_camera *camera, keys_t k)

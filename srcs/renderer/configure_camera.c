@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   configure_camera.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:38:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 17:04:32 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:39:10 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	configure_viewport_v_and_h(t_camera *camera)
 		world_up = v_create(0, 0, 1);
 	\
 	aspect_ratio = ((double) SCREEN_WIDTH) / SCREEN_HEIGHT;
-	rad_fov = (((double) camera->deg_fov) * PI) / 180;
+	rad_fov = (camera->deg_fov * PI) / 180;
 	vp_height = 2 * tan(rad_fov / 2);
 	vp_width = vp_height * aspect_ratio;
 	\
@@ -48,7 +48,7 @@ static void	configure_pixel00_loc(t_camera *camera)
 	t_vector3	viewport_upper_left;
 	t_vector3	temp;
 
-	viewport_upper_left = v_copy(&camera->center);
+	viewport_upper_left = v_copy(&camera->point);
 	temp = v_normalize(&camera->normal);
 	v_add_ip(&viewport_upper_left, &temp);
 	temp = v_scalar_mul(&camera->viewport_h, 0.5);

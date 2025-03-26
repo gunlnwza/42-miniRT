@@ -58,7 +58,7 @@ bad_camera/C_normal_zero.rt|Camera: Invalid normal vector
 
 bad_camera/C_fov_high.rt|Camera: Invalid field of view
 bad_camera/C_fov_low.rt|Camera: Invalid field of view
-bad_camera/C_fov_nan.rt|Camera: Invalid field of view
+bad_camera/C_fov_nan.rt|Parse OK
 bad_camera/C_fov_nan2.rt|Camera: Invalid field of view
 bad_camera/C_fov_nan3.rt|Camera: Invalid field of view
 

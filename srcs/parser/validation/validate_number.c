@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:42:39 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 11:41:31 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:31:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int	is_valid_fov(char *fov_str)
 {
-	int		integer;
+	double	decimal;
 	char	*endptr;
 
-	integer = ft_strtol(fov_str, &endptr);
-	if (*endptr != '\0' || !is_in_rangef(1, 179, integer))
+	decimal = ft_strtod(fov_str, &endptr);
+	if (*endptr != '\0'
+		|| !is_in_rangef(0.0 + EPSILON, 180.0 - EPSILON, decimal))
 		return (FALSE);
 	return (TRUE);
 }

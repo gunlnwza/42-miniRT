@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 10:43:52 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:26:55 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:33:03 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 double	parse_ratio(char *ratio_str)
 {
-	double	ratio;
-
-	ratio = ft_strtod(ratio_str, NULL);
-	return (ratio);
+	return (ft_atof(ratio_str));
 }
 
 int	parse_color(char *rgb_str, int *color)
@@ -56,5 +53,5 @@ int	parse_normal_vector(char *normal_str, t_vector3 *dest)
 
 int	parse_fov(char *fov_str)
 {
-	return (ft_atoi(fov_str));
+	return (ft_atof(fov_str));
 }

@@ -3,19 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   render_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 17:56:55 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:25:29 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../../includes/data.h"
 
 static void	init_ray(t_ray *ray, t_camera *camera)
 {
-	ray->origin = v_copy(&camera->center);
+	ray->origin = v_copy(&camera->point);
 	ray->direction = v_sub(&camera->pixel00_loc, &ray->origin);
 }
 
@@ -49,8 +48,8 @@ void	render_image(t_data *data)
 		v_sub_ip(&ray.direction, &data->world.camera.viewport_h);
 		v_add_ip(&ray.direction, &data->world.camera.pixel_delta_v);
 		if (data->mode == MODE_DEBUG)
-			printf("\rRendering y=%i", y);
+			ft_printf("\rRendering y=%i", y);
 	}
 	if (data->mode == MODE_DEBUG)
-		printf("\rFinish rendering!\n");
+		ft_printf("\rFinish rendering!\n");
 }

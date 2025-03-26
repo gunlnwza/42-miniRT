@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_display.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:47:12 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:40:08 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	ft_close(void *data_)
 static void	put_camera(t_camera *camera)
 {
 	ft_printf("C%s", DELIM);
-	v_put(&camera->center);
+	v_put(&camera->point);
 	ft_printf("%s", DELIM);
 	v_put(&camera->normal);
-	ft_printf("%s%i\n", DELIM, camera->deg_fov);
+	ft_printf("%s%f\n", DELIM, camera->deg_fov);
 }
 
 void	ft_keypress(mlx_key_data_t keydata, void *data_)

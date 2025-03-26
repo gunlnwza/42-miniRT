@@ -6,7 +6,7 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:32:25 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:34:07 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 22:27:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 typedef struct s_camera
 {
-	t_vector3	center;
-	int			deg_fov;
+	t_vector3	point;
+	double		deg_fov;
 	t_vector3	normal;
 	t_vector3	viewport_h;
 	t_vector3	viewport_v;
