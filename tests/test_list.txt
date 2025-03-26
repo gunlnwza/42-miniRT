@@ -1,5 +1,4 @@
 # ✅ VALID
-valid/empty.rt|Parse OK
 valid/weird_name.rt.rt|Parse OK
 
 # ❌ WRONG EXTENSION
@@ -18,6 +17,11 @@ not_unique/C_twice.rt|Camera: Unique object more than one
 not_unique/L_twice.rt|Light: Unique object more than one
 
 # ❌ 🌞 WRONG AMBIENT
+bad_ambient/A_length_1.rt|Ambient light: Invalid number of parameters
+bad_ambient/A_length_2.rt|Ambient light: Invalid number of parameters
+bad_ambient/A_length_3.rt|Parse OK
+bad_ambient/A_length_4.rt|Ambient light: Invalid number of parameters
+
 bad_ambient/A_ratio_high.rt|Ambient light: Invalid brightness
 bad_ambient/A_ratio_low.rt|Ambient light: Invalid brightness
 bad_ambient/A_ratio_nan.rt|Ambient light: Invalid brightness
@@ -41,6 +45,8 @@ bad_ambient/A_color_weird3.rt|Ambient light: Invalid color format
 bad_ambient/A_color_weird4.rt|Ambient light: Invalid color format
 
 # ❌ 📸 WRONG CAMERA
+bad_camera/empty.rt|Camera: Not given when needed
+
 bad_camera/C_pos_1.rt|Camera: Invalid position
 bad_camera/C_pos_2.rt|Camera: Invalid position
 bad_camera/C_pos_3.rt|Camera: Invalid position

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file_to_world.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 10:29:53 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:12:26 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,7 @@ static char	***split_lines(char **lines)
 	{
 		tokens[i] = ft_split(lines[i], ' ');
 		if (tokens[i] == NULL)
-		{
-			while (i > 0)
-				free_array(tokens[--i]);
-			free(tokens);
-		}
+			free_tokens(tokens);
 		i++;
 	}
 	tokens[number_of_lines] = NULL;
@@ -100,9 +96,12 @@ int	read_file_to_world(char *filename, t_world *world)
 	free_array(lines);
 	if (file_tokens == NULL)
 		return (ERROR);
-	if (validate_scene(number_of_lines, file_tokens) != SUCCESS)
+	if (validate_scene(number_of_lines, file_tokens) != SUCCESS
+		|| parse_scene(number_of_lines, file_tokens, world) != SUCCESS)
+	{
+		free_tokens(file_tokens);
 		return (ERROR);
-	if (parse_scene(number_of_lines, file_tokens, world) != SUCCESS)
-		return (ERROR);
+	}
+	free_tokens(file_tokens);
 	return (SUCCESS);
 }

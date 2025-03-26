@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:54 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 11:26:00 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:09:19 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char			**load_file_into_memory(int fd);
 // utils
 t_scene_type	identify_scene_type(char *id);
 void			free_array(char **arr);
+void			free_tokens(char ***tokens);
 int				array_length(char **arr);
 void			print_error(t_parse_result ret, t_scene_type type);
 

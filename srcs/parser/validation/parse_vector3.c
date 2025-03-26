@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_vector3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:41:09 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 11:11:34 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:25:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ int	parse_int_vector3(char *str, int values[3])
 	{
 		values[i] = ft_strtol(arr[i], &end_ptr);
 		if (*end_ptr != '\0')
+		{
+			free_array(arr);
 			return (ERROR);
+		}
 		i++;
 	}
 	free_array(arr);
@@ -74,7 +77,10 @@ int	parse_vector3(char *str, double values[3])
 	{
 		values[i] = ft_strtod(arr[i], &end_ptr);
 		if (*end_ptr != '\0')
+		{
+			free_array(arr);
 			return (ERROR);
+		}
 		i++;
 	}
 	free_array(arr);

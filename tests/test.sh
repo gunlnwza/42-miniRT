@@ -10,6 +10,7 @@ TESTS="$(cd "$(dirname "$0")/../" && pwd)/tests"
 TEST_LIST="$TESTS/test_list.txt"
 BIN="$(cd "$(dirname "$0")/../" && pwd)/miniRT"
 
+USE_VALGRIND=0
 VERBOSE=0
 ONLY_WRONG=0
 FILTER=""
@@ -22,12 +23,14 @@ i=1
 
 for arg in "$@"; do
     if [[ "$arg" == "--help" || "$arg" == "-h" ]]; then
-        echo "Usage: ./test.sh [-h | --help] [-v | --verbose] [-o | --only-wrong] [filter]"
+        echo "Usage: ./test.sh [-h | --help] [-v | --verbose] [-o | --only-wrong] [-g | --valgrind] [filter]"
         exit 0
     elif [[ "$arg" == "--verbose" || "$arg" == "-v" ]]; then
         VERBOSE=1
     elif [[ "$arg" == "--only-wrong" || "$arg" == "-o" ]]; then
         ONLY_WRONG=1
+    elif [[ "$arg" == "--valgrind" || "$arg" == "-g" ]]; then
+        USE_VALGRIND=1
     else
         FILTER="$arg"  # Assume any other arg is a filter pattern
     fi
@@ -61,8 +64,13 @@ run_test() {
     local expected=$2
     local output
 
-    output=$($BIN "$TESTS/$filepath" --parse-only 2>&1)
-
+    if [[ $USE_VALGRIND -eq 1 ]]; then
+        valgrind_output=$(valgrind --leak-check=full --error-exitcode=42 $BIN "$TESTS/$filepath" --parse-only 2>&1)
+        output="$valgrind_output"
+    else
+        output=$($BIN "$TESTS/$filepath" --parse-only 2>&1)
+    fi
+    
     if echo "$output" | grep -q "$expected"; then
         ((OK++))
         if [[ $ONLY_WRONG -eq 0 ]]; then

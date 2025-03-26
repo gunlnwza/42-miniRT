@@ -25,6 +25,19 @@ void	free_array(char **arr)
 	free(arr);
 }
 
+void	free_tokens(char ***tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens[i])
+	{
+		free_array(tokens[i]);
+		i++;
+	}
+	free(tokens);
+}
+
 int	array_length(char **arr)
 {
 	int	i;

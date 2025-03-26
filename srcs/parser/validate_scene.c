@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_scene.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:19:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 11:26:12 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:58:19 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ int	validate_scene(int num_lines, char ***file_tokens)
 		print_error(INVALID_OBJECT, SCENE_INVALID);
 		return (ERROR);
 	}
+	if (validate_uniqueness(counts) != SUCCESS
+		|| validate_individual_objects(num_lines, file_tokens) != SUCCESS)
+		return (ERROR);
 	if (counts[SCENE_CAMERA] == 0)
 	{
 		print_error(NO_ITEM, SCENE_CAMERA);
 		return (ERROR);
 	}
-	if (validate_uniqueness(counts) != SUCCESS
-		|| validate_individual_objects(num_lines, file_tokens) != SUCCESS)
-		return (ERROR);
 	return (SUCCESS);
 }
