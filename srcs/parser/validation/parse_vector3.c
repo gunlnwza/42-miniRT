@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 00:41:09 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:25:59 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:40:13 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	is_valid_triplet(char *str)
 	i = 2;
 	while (i--)
 	{
-		
 		str = ft_strchr(str, ',');
 		if (str == NULL)
 			return (FALSE);

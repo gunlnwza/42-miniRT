@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:02 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:34:04 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:29:24 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORLD_AND_CAMERA_H
-# define WORLD_AND_CAMERA_H
+#ifndef WORLD_H
+# define WORLD_H
 
 # include "../libs/libft/libft.h"
 # include "../libs/MLX42/include/MLX42/MLX42.h"

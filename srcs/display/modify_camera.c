@@ -3,43 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   modify_camera.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:48:38 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 10:33:28 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:39:48 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_rt.h"
 
 #define MOVE_DIFF 2
-
-// PI radians == 180 degrees
-#define ROTATE_THETA PI / 12
+#define ROTATE_THETA 0.25
 
 int	is_modify_camera_key(keys_t k)
 {
 	int	is_move;
 	int	is_look;
 
-	is_move = (k == MLX_KEY_SPACE || k == MLX_KEY_LEFT_SHIFT \
-		|| k == MLX_KEY_W || k == MLX_KEY_A \
-		|| k == MLX_KEY_S || k == MLX_KEY_D);
-	is_look = (k == MLX_KEY_UP || k == MLX_KEY_DOWN \
-		|| k == MLX_KEY_LEFT || k == MLX_KEY_RIGHT);
+	is_move = (k == MLX_KEY_SPACE || k == MLX_KEY_LEFT_SHIFT
+			|| k == MLX_KEY_W || k == MLX_KEY_A
+			|| k == MLX_KEY_S || k == MLX_KEY_D);
+	is_look = (k == MLX_KEY_UP || k == MLX_KEY_DOWN
+			|| k == MLX_KEY_LEFT || k == MLX_KEY_RIGHT);
 	return (is_move || is_look);
 }
 
 static void	look_left_right(t_vector3 *normal, double theta)
 {
 	t_vector3	world_up;
-	
+
 	world_up = v_create(0, 1, 0);
 	\
 	*normal = v_rotate(normal, &world_up, theta);
 }
 
-static void look_up_down(t_vector3 *normal, double theta)
+static void	look_up_down(t_vector3 *normal, double theta)
 {
 	t_vector3	world_up;
 	t_vector3	front;

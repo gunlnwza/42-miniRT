@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_data.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 01:31:29 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:33:18 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:29:55 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "world.h"
 
-typedef	enum e_mode
+typedef enum e_mode
 {
 	MODE_DEFAULT,
 	MODE_PARSE_ONLY,

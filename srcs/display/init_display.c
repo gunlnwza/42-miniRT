@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_display.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 10:45:02 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:47:12 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 
 int	init_display(t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	data->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT", true);
 	if (data->mlx == NULL)
 	{
 		printf("Error: ", STDERR_FILENO);
 		ft_putendl_fd((char *) mlx_strerror(mlx_errno), STDERR_FILENO);
 		return (ERROR);
 	}
-	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (data->img == NULL
 		|| (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 	{

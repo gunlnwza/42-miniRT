@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:16:20 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 11:27:26 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:40:03 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*get_issue_str(t_parse_result ret)
 	const t_parse_result	res[] = {
 		INVALID_OBJECT, MORE_THAN_ONE_OBJECT, NO_ITEM, BAD_NUMBER_OF_PARAMS,
 		BAD_RATIO, BAD_COLOR, BAD_POSITION, BAD_NORMAL,
-		BAD_FOV, BAD_DIAMETER, BAD_HEIGHT, 
+		BAD_FOV, BAD_DIAMETER, BAD_HEIGHT
 	};
 	const char				*strings[] = {
 		"Invalid object id", "Unique object more than one",
