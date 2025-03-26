@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:50:44 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 17:22:02 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 01:34:59 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/world_and_camera.h"
+#include "../../includes/world.h"
 
 static void	init_shadow_ray(t_world *world, t_hit_record *rec,
 				t_ray *shadow_ray)

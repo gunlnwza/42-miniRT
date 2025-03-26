@@ -6,11 +6,11 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:38:00 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/01 15:29:38 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:04:32 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/world_and_camera.h"
+#include "../../includes/world.h"
 
 static void	configure_viewport_v_and_h(t_camera *camera)
 {
@@ -24,7 +24,7 @@ static void	configure_viewport_v_and_h(t_camera *camera)
 	if (fabs(camera->normal.x) < 1e-6 && fabs(camera->normal.z) < 1e-6)
 		world_up = v_create(0, 0, 1);
 	\
-	aspect_ratio = ((double) WIDTH) / HEIGHT;
+	aspect_ratio = ((double) SCREEN_WIDTH) / SCREEN_HEIGHT;
 	rad_fov = (((double) camera->deg_fov) * PI) / 180;
 	vp_height = 2 * tan(rad_fov / 2);
 	vp_width = vp_height * aspect_ratio;
@@ -37,8 +37,10 @@ static void	configure_viewport_v_and_h(t_camera *camera)
 
 static void	configure_pixel_delta_v_and_h(t_camera *camera)
 {
-	camera->pixel_delta_h = v_scalar_mul(&camera->viewport_h, 1.0 / WIDTH);
-	camera->pixel_delta_v = v_scalar_mul(&camera->viewport_v, 1.0 / HEIGHT);
+	camera->pixel_delta_h = \
+		v_scalar_mul(&camera->viewport_h, 1.0 / SCREEN_WIDTH);
+	camera->pixel_delta_v = \
+		v_scalar_mul(&camera->viewport_v, 1.0 / SCREEN_HEIGHT);
 }
 
 static void	configure_pixel00_loc(t_camera *camera)

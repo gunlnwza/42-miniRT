@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_binary_tree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:11:49 by nteechar          #+#    #+#             */
-/*   Updated: 2025/02/10 18:14:08 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:29:39 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "ft_binary_tree.h"
 
 // STILL IN DEVELOPMENT

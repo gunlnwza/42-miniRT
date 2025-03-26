@@ -6,11 +6,13 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:20:50 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/03 18:42:11 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:47:12 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_rt.h"
+
+#define DELIM "\t"
 
 void	ft_close(void *data_)
 {
@@ -20,7 +22,15 @@ void	ft_close(void *data_)
 	mlx_close_window(data->mlx);
 }
 
-// TODO: implement ft_dprintf
+static void	put_camera(t_camera *camera)
+{
+	ft_printf("C%s", DELIM);
+	v_put(&camera->center);
+	ft_printf("%s", DELIM);
+	v_put(&camera->normal);
+	ft_printf("%s%i\n", DELIM, camera->deg_fov);
+}
+
 void	ft_keypress(mlx_key_data_t keydata, void *data_)
 {
 	t_data		*data;
@@ -32,34 +42,30 @@ void	ft_keypress(mlx_key_data_t keydata, void *data_)
 	key = keydata.key;
 	if (key == MLX_KEY_ESCAPE)
 		exit(0);
-	if (keydata.action == MLX_PRESS)
+	if (data->mode == MODE_DEBUG && keydata.action == MLX_PRESS)
 	{
 		if (is_modify_camera_key(key))
 		{
 			modify_camera(camera, key);
-			dprintf(2, "\r                                                  ");
-			dprintf(2, "\rC %.2f,%.2f,%.2f %.2f,%.2f,%.2f %i", \
-				camera->center.x, camera->center.y, camera->center.z, \
-				camera->normal.x, camera->normal.y, camera->normal.z, camera->deg_fov);
+			put_camera(camera);
 		}
-		if (key == MLX_KEY_ENTER)
+		else if (key == MLX_KEY_ENTER)
 		{
-			ft_putchar_fd('\n', 2);
-			render_image(data->img, &data->world);
+			render_image(data);
 		}
 	}
 }
 
 int	init_display(t_data *data)
 {
-	data->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
+	data->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT", true);
 	if (data->mlx == NULL)
 	{
-		ft_putstr_fd("Error: ", STDERR_FILENO);
+		printf("Error: ", STDERR_FILENO);
 		ft_putendl_fd((char *) mlx_strerror(mlx_errno), STDERR_FILENO);
 		return (ERROR);
 	}
-	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
+	data->img = mlx_new_image(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (data->img == NULL
 		|| (mlx_image_to_window(data->mlx, data->img, 0, 0) < 0))
 	{
