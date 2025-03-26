@@ -16,12 +16,12 @@ HEADERS := \
 	includes/camera.h \
 	includes/color.h \
 	includes/constants.h \
+	includes/data.h \
 	includes/hit_record.h \
 	includes/mini_rt.h \
 	includes/object.h \
 	includes/parser.h \
 	includes/ray.h \
-	includes/t_data.h \
 	includes/vector3.h \
 	includes/world.h \
 
@@ -59,7 +59,7 @@ SRCS := \
 	srcs/renderer/configure_camera.c \
 	srcs/renderer/is_ray_hit.c \
 	srcs/renderer/ray_color.c \
-	srcs/renderer/ray.c \
+	srcs/renderer/ray_at.c \
 	srcs/renderer/render_image.c \
 	srcs/renderer/hit_record.c \
 	\

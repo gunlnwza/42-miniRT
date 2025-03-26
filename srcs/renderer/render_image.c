@@ -6,12 +6,12 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:53:16 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:47:43 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:56:55 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../includes/t_data.h"
+#include "../../includes/data.h"
 
 static void	init_ray(t_ray *ray, t_camera *camera)
 {

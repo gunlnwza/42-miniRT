@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:50:28 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:50:41 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:10:21 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 600
 
-# define INF 4200000
+# define INF 999999999L
+# define EPSILON 1e-5
 
 # define PI 3.1415926535897932385
 

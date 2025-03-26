@@ -6,7 +6,7 @@
 /*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:48:01 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:03:08 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINI_RT_H
 
 # include "parser.h"
-# include "t_data.h"
+# include "data.h"
 
 int		init_display(t_data *data);
 void	render_image(t_data *data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:50:44 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 01:34:59 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:10:31 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	is_light_reach(t_world *world, t_hit_record *rec,
 		return (TRUE);
 	int_to_light = v_dist2(&rec->point, &world->light.point);
 	int_to_shadow_ray_int = v_dist2(&rec->point, &shadow_ray_rec.point);
-	if (int_to_light - int_to_shadow_ray_int < -1e-3)
+	if (int_to_light - int_to_shadow_ray_int <= EPSILON)
 		return (TRUE);
 	return (FALSE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hit_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:42:01 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/25 22:29:16 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:09:40 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ int	hit_cylinder(t_object *cylinder, const t_ray *ray, t_hit_record *rec)
 		intersection_point = ray_at(ray, root);
 		base_to_point = v_sub(&intersection_point, &cylinder->point);
 		height_pos = v_dot(&base_to_point, &cylinder->normal);
-		if (0 <= height_pos && height_pos <= cylinder->height)
+		if (0 + EPSILON <= height_pos
+			&& height_pos <= cylinder->height - EPSILON)
 			save_cylinder_body_to_record(rec, root, ray, cylinder);
 	}
 	hit_caps(cylinder, ray, rec);
