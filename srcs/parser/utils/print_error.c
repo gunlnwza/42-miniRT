@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:16:20 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:40:03 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:35:20 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static char	*get_object_str(t_scene_type type)
 static char	*get_issue_str(t_parse_result ret)
 {
 	const t_parse_result	res[] = {
-		INVALID_OBJECT, MORE_THAN_ONE_OBJECT, NO_ITEM, BAD_NUMBER_OF_PARAMS,
-		BAD_RATIO, BAD_COLOR, BAD_POSITION, BAD_NORMAL,
+		INVALID_OBJECT, TOO_MANY_OBJECTS, MORE_THAN_ONE_OBJECT, NO_ITEM,
+		BAD_NUMBER_OF_PARAMS, BAD_RATIO, BAD_COLOR, BAD_POSITION, BAD_NORMAL,
 		BAD_FOV, BAD_DIAMETER, BAD_HEIGHT
 	};
 	const char				*strings[] = {
-		"Invalid object id", "Unique object more than one",
+		"Invalid object id", "Too many objects", "Unique object more than one",
 		"Not given when needed", "Invalid number of parameters",
 		"Invalid brightness", "Invalid color format", "Invalid position",
 		"Invalid normal vector", "Invalid field of view",

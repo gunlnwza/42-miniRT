@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 09:48:54 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 16:09:19 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:34:35 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef enum e_parse_result
 {
 	PARSE_OK,
 	INVALID_OBJECT,
+	TOO_MANY_OBJECTS,
 	MORE_THAN_ONE_OBJECT,
 	NO_ITEM,
 	BAD_NUMBER_OF_PARAMS,

@@ -1,6 +1,9 @@
 # ✅ VALID
 valid/weird_name.rt.rt|Parse OK
 
+# ❌ INVALID
+invalid/too_many_objects.rt|Too many objects
+
 # ❌ WRONG EXTENSION
 not_rt/.rt|Not a .rt file
 not_rt/1.1rt|Not a .rt file

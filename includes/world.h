@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   world.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:02 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 17:50:44 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:49:07 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "color.h"
 # include "camera.h"
 
-# define MAX_OBJECTS 100
+# define MAX_OBJECTS 42
 
 typedef struct s_light
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 17:03:55 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:31:47 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	ft_bzero(&data, sizeof(t_data));
 	if (process_input(argc, argv, &data) != SUCCESS)
 		return (EXIT_FAILURE);
 	if (init_display(&data) != SUCCESS)

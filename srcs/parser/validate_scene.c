@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_scene.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 17:19:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 15:58:19 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 22:34:38 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,12 @@ int	validate_scene(int num_lines, char ***file_tokens)
 	if (counts[SCENE_INVALID] > 0)
 	{
 		print_error(INVALID_OBJECT, SCENE_INVALID);
+		return (ERROR);
+	}
+	if (counts[SCENE_SPHERE] + counts[SCENE_PLANE] + counts[SCENE_CYLINDER]
+		> MAX_OBJECTS)
+	{
+		print_error(TOO_MANY_OBJECTS, SCENE_INVALID);
 		return (ERROR);
 	}
 	if (validate_uniqueness(counts) != SUCCESS
