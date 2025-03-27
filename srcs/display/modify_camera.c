@@ -6,14 +6,16 @@
 /*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 16:48:38 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 22:26:23 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 23:43:33 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/mini_rt.h"
 
 #define MOVE_DIFF 2
-#define ROTATE_THETA 0.25
+#define ROTATE_THETA 0.2
+
+#define PITCH_LIMIT 1
 
 int	is_modify_camera_key(keys_t k)
 {
@@ -42,14 +44,15 @@ static void	look_up_down(t_vector3 *normal, double theta)
 	t_vector3	world_up;
 	t_vector3	front;
 	t_vector3	left;
-	t_vector3	new_normal;
+	double		pitch;
 
 	world_up = v_create(0, 1, 0);
 	front = v_create(normal->x, 0, normal->z);
 	left = v_rotate(&front, &world_up, -PI / 2);
-	\
-	new_normal = v_rotate(normal, &left, theta);
-	v_copy_ip(normal, &new_normal);
+	pitch = asin(normal->y);
+	if ((theta > 0 && pitch + theta <= PITCH_LIMIT)
+		|| (theta < 0 && pitch + theta >= -PITCH_LIMIT))
+		*normal = v_rotate(normal, &left, theta);
 }
 
 static void	move(t_camera *camera, double front_diff, double left_diff,
