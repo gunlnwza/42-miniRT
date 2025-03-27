@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_rt.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <techazuza@gmail.com>             +#+  +:+       +#+        */
+/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 12:53:15 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/26 18:03:08 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/03/27 23:05:53 by nteechar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	render_image(t_data *data);
 int		is_modify_camera_key(keys_t key);
 void	modify_camera(t_camera *camera, keys_t key);
 
-void	free_world(t_world *world);
 void	free_data(t_data *data);
 
 #endif
