@@ -61,7 +61,7 @@ int	init_display(t_data *data)
 	data->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "miniRT", true);
 	if (data->mlx == NULL)
 	{
-		printf("Error: ", STDERR_FILENO);
+		ft_printf("Error: ", STDERR_FILENO);
 		ft_putendl_fd((char *) mlx_strerror(mlx_errno), STDERR_FILENO);
 		return (ERROR);
 	}
