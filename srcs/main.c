@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nteechar <nteechar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ykai-yua <ykai-yua@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 18:49:26 by nteechar          #+#    #+#             */
-/*   Updated: 2025/03/27 22:31:47 by nteechar         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:01:42 by ykai-yua         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	parse_arguments(int argc, char **argv, t_data *data)
 		printf("Usage: ./miniRT *.rt [--default, --parse-only, --debug]\n");
 		return (ERROR);
 	}
+	data->mode = MODE_DEFAULT;
 	if (ft_strcmp(argv[2], "--default") == 0)
 		data->mode = MODE_DEFAULT;
 	else if (ft_strcmp(argv[2], "--parse-only") == 0)
@@ -56,6 +57,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
+	ft_bzero(&data, sizeof(data));
 	if (process_input(argc, argv, &data) != SUCCESS)
 		return (EXIT_FAILURE);
 	if (init_display(&data) != SUCCESS)
